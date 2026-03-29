@@ -1,0 +1,7 @@
+fastapi[standard]==0.135.2
+strawberry-graphql[fastapi]==0.312.2
+SQLAlchemy==2.0.48
+mutagen==1.47.0
+python-multipart==0.0.22
+python-magic==0.4.27
+Pillow==12.1.1

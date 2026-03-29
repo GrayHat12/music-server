@@ -1,0 +1,43 @@
+from pydantic import BaseModel, Field
+from datetime import datetime
+from typing import Any
+
+
+class DeletedResponse(BaseModel):
+    deleted: bool = Field(default_factory=lambda: True)
+
+
+class ArtistResponse(BaseModel):
+    id: int = Field(...)
+    name: str = Field(...)
+    image: int | None = Field(default_factory=lambda: None)
+    last_updated: datetime = Field(...)
+
+
+class AlbumResponse(BaseModel):
+    id: int = Field(...)
+    name: str = Field(...)
+    image: int | None = Field(default_factory=lambda: None)
+    last_updated: datetime = Field(...)
+    artist: int = Field(...)
+
+
+class SongResponse(BaseModel):
+    id: int = Field(...)
+    title: str = Field(...)
+    release: int | None = Field(default_factory=lambda: None)
+    trackno: int | None = Field(default_factory=lambda: None)
+    metatags: dict[str, Any] = Field(...)
+    last_updated: datetime = Field(...)
+    genre: str | None = Field(default_factory=lambda: None)
+    artist: int | None = Field(default_factory=lambda: None)
+    album: int | None = Field(default_factory=lambda: None)
+    cover: int | None = Field(default_factory=lambda: None)
+
+
+class PlaylistResponse(BaseModel):
+    id: int = Field(...)
+    name: str = Field(...)
+    image: int | None = Field(default_factory=lambda: None)
+    last_updated: datetime = Field(...)
+    # songs: list[int] = Field(default_factory=lambda: [])
