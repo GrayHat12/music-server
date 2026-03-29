@@ -1,4 +1,4 @@
-# AudioServer.ImageApi
+# .ImageApi
 
 All URIs are relative to *http://localhost*
 
@@ -9,39 +9,40 @@ Method | HTTP request | Description
 [**getImageApiV1ImageIdGet**](ImageApi.md#getImageApiV1ImageIdGet) | **GET** /api/v1/image/{id} | Get Image
 
 
+# **addImageApiV1ImagePost**
+> number addImageApiV1ImagePost()
 
-## addImageApiV1ImagePost
-
-> Number addImageApiV1ImagePost(file)
-
-Add Image
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.ImageApi();
-let file = "file_example"; // String | 
-apiInstance.addImageApiV1ImagePost(file, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, ImageApi } from '';
+import type { ImageApiAddImageApiV1ImagePostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new ImageApi(configuration);
+
+const request: ImageApiAddImageApiV1ImagePostRequest = {
+  
+  file: "file_example",
+};
+
+const data = await apiInstance.addImageApiV1ImagePost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | **String**|  | 
+ **file** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-**Number**
+**number**
 
 ### Authorization
 
@@ -49,42 +50,53 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
 
 
-## deleteImageApiV1ImageIdDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Image already exists. |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deleteImageApiV1ImageIdDelete(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Image
+# **deleteImageApiV1ImageIdDelete**
+> DeletedResponse deleteImageApiV1ImageIdDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.ImageApi();
-let id = 56; // Number | 
-apiInstance.deleteImageApiV1ImageIdDelete(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, ImageApi } from '';
+import type { ImageApiDeleteImageApiV1ImageIdDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new ImageApi(configuration);
+
+const request: ImageApiDeleteImageApiV1ImageIdDeleteRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.deleteImageApiV1ImageIdDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -92,42 +104,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getImageApiV1ImageIdGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> getImageApiV1ImageIdGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Image
+# **getImageApiV1ImageIdGet**
+> void getImageApiV1ImageIdGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.ImageApi();
-let id = 56; // Number | 
-apiInstance.getImageApiV1ImageIdGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-});
+```typescript
+import { createConfiguration, ImageApi } from '';
+import type { ImageApiGetImageApiV1ImageIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new ImageApi(configuration);
+
+const request: ImageApiGetImageApiV1ImageIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getImageApiV1ImageIdGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-null (empty response body)
+**void**
 
 ### Authorization
 
@@ -135,6 +157,16 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 

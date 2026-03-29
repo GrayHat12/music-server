@@ -1,4 +1,4 @@
-# AudioServer.DefaultApi
+# .DefaultApi
 
 All URIs are relative to *http://localhost*
 
@@ -9,35 +9,33 @@ Method | HTTP request | Description
 [**playlistsUiPlaylistsGet**](DefaultApi.md#playlistsUiPlaylistsGet) | **GET** /ui/playlists | Playlists
 
 
+# **albumsUiAlbumsGet**
+> string albumsUiAlbumsGet()
 
-## albumsUiAlbumsGet
-
-> String albumsUiAlbumsGet()
-
-Albums
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.DefaultApi();
-apiInstance.albumsUiAlbumsGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, DefaultApi } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new DefaultApi(configuration);
+
+const request = {};
+
+const data = await apiInstance.albumsUiAlbumsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
+
 
 ### Return type
 
-**String**
+**string**
 
 ### Authorization
 
@@ -45,38 +43,44 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/html
+ - **Content-Type**: Not defined
+ - **Accept**: text/html
 
 
-## artistsUiArtistsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
-> String artistsUiArtistsGet()
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Artists
+# **artistsUiArtistsGet**
+> string artistsUiArtistsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.DefaultApi();
-apiInstance.artistsUiArtistsGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, DefaultApi } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new DefaultApi(configuration);
+
+const request = {};
+
+const data = await apiInstance.artistsUiArtistsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
+
 
 ### Return type
 
-**String**
+**string**
 
 ### Authorization
 
@@ -84,38 +88,44 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/html
+ - **Content-Type**: Not defined
+ - **Accept**: text/html
 
 
-## playlistsUiPlaylistsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
-> String playlistsUiPlaylistsGet()
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Playlists
+# **playlistsUiPlaylistsGet**
+> string playlistsUiPlaylistsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.DefaultApi();
-apiInstance.playlistsUiPlaylistsGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, DefaultApi } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new DefaultApi(configuration);
+
+const request = {};
+
+const data = await apiInstance.playlistsUiPlaylistsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
+
 
 ### Return type
 
-**String**
+**string**
 
 ### Authorization
 
@@ -123,6 +133,15 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/html
+ - **Content-Type**: Not defined
+ - **Accept**: text/html
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 

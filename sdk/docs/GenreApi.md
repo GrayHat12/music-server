@@ -1,4 +1,4 @@
-# AudioServer.GenreApi
+# .GenreApi
 
 All URIs are relative to *http://localhost*
 
@@ -14,39 +14,42 @@ Method | HTTP request | Description
 [**updateGenreApiV1GenrePatch**](GenreApi.md#updateGenreApiV1GenrePatch) | **PATCH** /api/v1/genre | Update Genre
 
 
+# **createGenreApiV1GenrePost**
+> string createGenreApiV1GenrePost(genreCreateRequest)
 
-## createGenreApiV1GenrePost
-
-> String createGenreApiV1GenrePost(genreCreateRequest)
-
-Create Genre
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-let genreCreateRequest = new AudioServer.GenreCreateRequest(); // GenreCreateRequest | 
-apiInstance.createGenreApiV1GenrePost(genreCreateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiCreateGenreApiV1GenrePostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiCreateGenreApiV1GenrePostRequest = {
+  
+  genreCreateRequest: {
+    name: "name_example",
+  },
+};
+
+const data = await apiInstance.createGenreApiV1GenrePost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **genreCreateRequest** | [**GenreCreateRequest**](GenreCreateRequest.md)|  | 
+ **genreCreateRequest** | **GenreCreateRequest**|  |
+
 
 ### Return type
 
-**String**
+**string**
 
 ### Authorization
 
@@ -54,42 +57,53 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## deleteGenreApiV1GenreDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Genre already exists. |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deleteGenreApiV1GenreDelete(name)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Genre
+# **deleteGenreApiV1GenreDelete**
+> DeletedResponse deleteGenreApiV1GenreDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-let name = "name_example"; // String | 
-apiInstance.deleteGenreApiV1GenreDelete(name, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiDeleteGenreApiV1GenreDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiDeleteGenreApiV1GenreDeleteRequest = {
+  
+  name: "name_example",
+};
+
+const data = await apiInstance.deleteGenreApiV1GenreDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **String**|  | 
+ **name** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -97,42 +111,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getGenresFromAlbumApiV1AlbumIdGenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [String] getGenresFromAlbumApiV1AlbumIdGenresGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Genres From Album
+# **getGenresFromAlbumApiV1AlbumIdGenresGet**
+> Array<string> getGenresFromAlbumApiV1AlbumIdGenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-let id = 56; // Number | 
-apiInstance.getGenresFromAlbumApiV1AlbumIdGenresGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenresFromAlbumApiV1AlbumIdGenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -140,42 +164,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getGenresFromArtistApiV1ArtistIdGenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [String] getGenresFromArtistApiV1ArtistIdGenresGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Genres From Artist
+# **getGenresFromArtistApiV1ArtistIdGenresGet**
+> Array<string> getGenresFromArtistApiV1ArtistIdGenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-let id = 56; // Number | 
-apiInstance.getGenresFromArtistApiV1ArtistIdGenresGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiGetGenresFromArtistApiV1ArtistIdGenresGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiGetGenresFromArtistApiV1ArtistIdGenresGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenresFromArtistApiV1ArtistIdGenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -183,42 +217,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getGenresFromPlaylistApiV1PlaylistIdGenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [String] getGenresFromPlaylistApiV1PlaylistIdGenresGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Genres From Playlist
+# **getGenresFromPlaylistApiV1PlaylistIdGenresGet**
+> Array<string> getGenresFromPlaylistApiV1PlaylistIdGenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-let id = 56; // Number | 
-apiInstance.getGenresFromPlaylistApiV1PlaylistIdGenresGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiGetGenresFromPlaylistApiV1PlaylistIdGenresGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiGetGenresFromPlaylistApiV1PlaylistIdGenresGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenresFromPlaylistApiV1PlaylistIdGenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -226,42 +270,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getSongsFromGenreApiV1GenreSongsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getSongsFromGenreApiV1GenreSongsGet(name)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Songs From Genre
+# **getSongsFromGenreApiV1GenreSongsGet**
+> Array<number> getSongsFromGenreApiV1GenreSongsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-let name = "name_example"; // String | 
-apiInstance.getSongsFromGenreApiV1GenreSongsGet(name, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiGetSongsFromGenreApiV1GenreSongsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiGetSongsFromGenreApiV1GenreSongsGetRequest = {
+  
+  name: "name_example",
+};
+
+const data = await apiInstance.getSongsFromGenreApiV1GenreSongsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **String**|  | 
+ **name** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -269,38 +323,45 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## listAllGenresApiV1GenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [String] listAllGenresApiV1GenresGet()
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-List All Genres
+# **listAllGenresApiV1GenresGet**
+> Array<string> listAllGenresApiV1GenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-apiInstance.listAllGenresApiV1GenresGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request = {};
+
+const data = await apiInstance.listAllGenresApiV1GenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
 
+
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -308,42 +369,54 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## updateGenreApiV1GenrePatch
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
-> String updateGenreApiV1GenrePatch(genreUpdateRequest)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Update Genre
+# **updateGenreApiV1GenrePatch**
+> string updateGenreApiV1GenrePatch(genreUpdateRequest)
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.GenreApi();
-let genreUpdateRequest = new AudioServer.GenreUpdateRequest(); // GenreUpdateRequest | 
-apiInstance.updateGenreApiV1GenrePatch(genreUpdateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiUpdateGenreApiV1GenrePatchRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiUpdateGenreApiV1GenrePatchRequest = {
+  
+  genreUpdateRequest: {
+    oldname: "oldname_example",
+    newname: "newname_example",
+  },
+};
+
+const data = await apiInstance.updateGenreApiV1GenrePatch(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **genreUpdateRequest** | [**GenreUpdateRequest**](GenreUpdateRequest.md)|  | 
+ **genreUpdateRequest** | **GenreUpdateRequest**|  |
+
 
 ### Return type
 
-**String**
+**string**
 
 ### Authorization
 
@@ -351,6 +424,17 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Genre with same name already exists. |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 

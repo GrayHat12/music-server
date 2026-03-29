@@ -1,4 +1,4 @@
-# AudioServer.V1Api
+# .V1Api
 
 All URIs are relative to *http://localhost*
 
@@ -49,39 +49,40 @@ Method | HTTP request | Description
 [**uploadSongApiV1SongPost**](V1Api.md#uploadSongApiV1SongPost) | **POST** /api/v1/song | Upload Song
 
 
+# **addImageApiV1ImagePost**
+> number addImageApiV1ImagePost()
 
-## addImageApiV1ImagePost
-
-> Number addImageApiV1ImagePost(file)
-
-Add Image
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let file = "file_example"; // String | 
-apiInstance.addImageApiV1ImagePost(file, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiAddImageApiV1ImagePostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiAddImageApiV1ImagePostRequest = {
+  
+  file: "file_example",
+};
+
+const data = await apiInstance.addImageApiV1ImagePost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | **String**|  | 
+ **file** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-**Number**
+**number**
 
 ### Authorization
 
@@ -89,42 +90,57 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
 
 
-## createAlbumApiV1AlbumPost
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Image already exists. |  -  |
+**422** | Validation Error |  -  |
 
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createAlbumApiV1AlbumPost**
 > AlbumResponse createAlbumApiV1AlbumPost(albumCreateRequest)
 
-Create Album
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let albumCreateRequest = new AudioServer.AlbumCreateRequest(); // AlbumCreateRequest | 
-apiInstance.createAlbumApiV1AlbumPost(albumCreateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiCreateAlbumApiV1AlbumPostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiCreateAlbumApiV1AlbumPostRequest = {
+  
+  albumCreateRequest: {
+    name: "name_example",
+    image: 1,
+    artist: 1,
+  },
+};
+
+const data = await apiInstance.createAlbumApiV1AlbumPost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **albumCreateRequest** | [**AlbumCreateRequest**](AlbumCreateRequest.md)|  | 
+ **albumCreateRequest** | **AlbumCreateRequest**|  |
+
 
 ### Return type
 
-[**AlbumResponse**](AlbumResponse.md)
+**AlbumResponse**
 
 ### Authorization
 
@@ -132,42 +148,56 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## createArtistApiV1ArtistPost
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Album already exists. |  -  |
+**422** | Validation Error |  -  |
 
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createArtistApiV1ArtistPost**
 > ArtistResponse createArtistApiV1ArtistPost(artistCreateRequest)
 
-Create Artist
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let artistCreateRequest = new AudioServer.ArtistCreateRequest(); // ArtistCreateRequest | 
-apiInstance.createArtistApiV1ArtistPost(artistCreateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiCreateArtistApiV1ArtistPostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiCreateArtistApiV1ArtistPostRequest = {
+  
+  artistCreateRequest: {
+    name: "name_example",
+    image: 1,
+  },
+};
+
+const data = await apiInstance.createArtistApiV1ArtistPost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **artistCreateRequest** | [**ArtistCreateRequest**](ArtistCreateRequest.md)|  | 
+ **artistCreateRequest** | **ArtistCreateRequest**|  |
+
 
 ### Return type
 
-[**ArtistResponse**](ArtistResponse.md)
+**ArtistResponse**
 
 ### Authorization
 
@@ -175,42 +205,55 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## createGenreApiV1GenrePost
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Artist already exists. |  -  |
+**422** | Validation Error |  -  |
 
-> String createGenreApiV1GenrePost(genreCreateRequest)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Create Genre
+# **createGenreApiV1GenrePost**
+> string createGenreApiV1GenrePost(genreCreateRequest)
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let genreCreateRequest = new AudioServer.GenreCreateRequest(); // GenreCreateRequest | 
-apiInstance.createGenreApiV1GenrePost(genreCreateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiCreateGenreApiV1GenrePostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiCreateGenreApiV1GenrePostRequest = {
+  
+  genreCreateRequest: {
+    name: "name_example",
+  },
+};
+
+const data = await apiInstance.createGenreApiV1GenrePost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **genreCreateRequest** | [**GenreCreateRequest**](GenreCreateRequest.md)|  | 
+ **genreCreateRequest** | **GenreCreateRequest**|  |
+
 
 ### Return type
 
-**String**
+**string**
 
 ### Authorization
 
@@ -218,42 +261,59 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## createPlaylistApiV1PlaylistPost
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Genre already exists. |  -  |
+**422** | Validation Error |  -  |
 
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createPlaylistApiV1PlaylistPost**
 > PlaylistResponse createPlaylistApiV1PlaylistPost(playlistCreateRequest)
 
-Create Playlist
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let playlistCreateRequest = new AudioServer.PlaylistCreateRequest(); // PlaylistCreateRequest | 
-apiInstance.createPlaylistApiV1PlaylistPost(playlistCreateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiCreatePlaylistApiV1PlaylistPostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiCreatePlaylistApiV1PlaylistPostRequest = {
+  
+  playlistCreateRequest: {
+    name: "name_example",
+    image: 1,
+    songs: [
+      1,
+    ],
+  },
+};
+
+const data = await apiInstance.createPlaylistApiV1PlaylistPost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **playlistCreateRequest** | [**PlaylistCreateRequest**](PlaylistCreateRequest.md)|  | 
+ **playlistCreateRequest** | **PlaylistCreateRequest**|  |
+
 
 ### Return type
 
-[**PlaylistResponse**](PlaylistResponse.md)
+**PlaylistResponse**
 
 ### Authorization
 
@@ -261,42 +321,53 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## deleteAlbumApiV1AlbumIdDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Artist already exists. |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deleteAlbumApiV1AlbumIdDelete(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Album
+# **deleteAlbumApiV1AlbumIdDelete**
+> DeletedResponse deleteAlbumApiV1AlbumIdDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.deleteAlbumApiV1AlbumIdDelete(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiDeleteAlbumApiV1AlbumIdDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiDeleteAlbumApiV1AlbumIdDeleteRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.deleteAlbumApiV1AlbumIdDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -304,42 +375,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## deleteArtistApiV1ArtistIdDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deleteArtistApiV1ArtistIdDelete(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Artist
+# **deleteArtistApiV1ArtistIdDelete**
+> DeletedResponse deleteArtistApiV1ArtistIdDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.deleteArtistApiV1ArtistIdDelete(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiDeleteArtistApiV1ArtistIdDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiDeleteArtistApiV1ArtistIdDeleteRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.deleteArtistApiV1ArtistIdDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -347,42 +428,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## deleteGenreApiV1GenreDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deleteGenreApiV1GenreDelete(name)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Genre
+# **deleteGenreApiV1GenreDelete**
+> DeletedResponse deleteGenreApiV1GenreDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let name = "name_example"; // String | 
-apiInstance.deleteGenreApiV1GenreDelete(name, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiDeleteGenreApiV1GenreDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiDeleteGenreApiV1GenreDeleteRequest = {
+  
+  name: "name_example",
+};
+
+const data = await apiInstance.deleteGenreApiV1GenreDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **String**|  | 
+ **name** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -390,42 +481,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## deleteImageApiV1ImageIdDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deleteImageApiV1ImageIdDelete(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Image
+# **deleteImageApiV1ImageIdDelete**
+> DeletedResponse deleteImageApiV1ImageIdDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.deleteImageApiV1ImageIdDelete(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiDeleteImageApiV1ImageIdDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiDeleteImageApiV1ImageIdDeleteRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.deleteImageApiV1ImageIdDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -433,42 +534,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## deletePlaylistApiV1PlaylistIdDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deletePlaylistApiV1PlaylistIdDelete(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Playlist
+# **deletePlaylistApiV1PlaylistIdDelete**
+> DeletedResponse deletePlaylistApiV1PlaylistIdDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.deletePlaylistApiV1PlaylistIdDelete(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiDeletePlaylistApiV1PlaylistIdDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiDeletePlaylistApiV1PlaylistIdDeleteRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.deletePlaylistApiV1PlaylistIdDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -476,42 +587,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## deleteSongApiV1SongIdDelete
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> DeletedResponse deleteSongApiV1SongIdDelete(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Delete Song
+# **deleteSongApiV1SongIdDelete**
+> DeletedResponse deleteSongApiV1SongIdDelete()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.deleteSongApiV1SongIdDelete(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiDeleteSongApiV1SongIdDeleteRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiDeleteSongApiV1SongIdDeleteRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.deleteSongApiV1SongIdDelete(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**DeletedResponse**](DeletedResponse.md)
+**DeletedResponse**
 
 ### Authorization
 
@@ -519,42 +640,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getAlbumApiV1AlbumIdGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> AlbumResponse getAlbumApiV1AlbumIdGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Album
+# **getAlbumApiV1AlbumIdGet**
+> AlbumResponse getAlbumApiV1AlbumIdGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getAlbumApiV1AlbumIdGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetAlbumApiV1AlbumIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetAlbumApiV1AlbumIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getAlbumApiV1AlbumIdGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**AlbumResponse**](AlbumResponse.md)
+**AlbumResponse**
 
 ### Authorization
 
@@ -562,42 +693,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Albums From Playlist
+# **getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet**
+> Array<number> getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetAlbumsFromPlaylistApiV1PlaylistIdAlbumsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetAlbumsFromPlaylistApiV1PlaylistIdAlbumsGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -605,42 +746,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getArtistApiV1ArtistIdGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> ArtistResponse getArtistApiV1ArtistIdGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Artist
+# **getArtistApiV1ArtistIdGet**
+> ArtistResponse getArtistApiV1ArtistIdGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getArtistApiV1ArtistIdGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetArtistApiV1ArtistIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetArtistApiV1ArtistIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getArtistApiV1ArtistIdGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**ArtistResponse**](ArtistResponse.md)
+**ArtistResponse**
 
 ### Authorization
 
@@ -648,42 +799,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getArtistsFromPlaylistApiV1PlaylistIdArtistsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getArtistsFromPlaylistApiV1PlaylistIdArtistsGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Artists From Playlist
+# **getArtistsFromPlaylistApiV1PlaylistIdArtistsGet**
+> Array<number> getArtistsFromPlaylistApiV1PlaylistIdArtistsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getArtistsFromPlaylistApiV1PlaylistIdArtistsGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetArtistsFromPlaylistApiV1PlaylistIdArtistsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetArtistsFromPlaylistApiV1PlaylistIdArtistsGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getArtistsFromPlaylistApiV1PlaylistIdArtistsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -691,42 +852,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getCollaborationsFromArtistApiV1ArtistIdCollaborationsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getCollaborationsFromArtistApiV1ArtistIdCollaborationsGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Collaborations From Artist
+# **getCollaborationsFromArtistApiV1ArtistIdCollaborationsGet**
+> Array<number> getCollaborationsFromArtistApiV1ArtistIdCollaborationsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getCollaborationsFromArtistApiV1ArtistIdCollaborationsGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetCollaborationsFromArtistApiV1ArtistIdCollaborationsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetCollaborationsFromArtistApiV1ArtistIdCollaborationsGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getCollaborationsFromArtistApiV1ArtistIdCollaborationsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -734,42 +905,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getFeaturesFromAlbumApiV1AlbumIdFeaturesGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getFeaturesFromAlbumApiV1AlbumIdFeaturesGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Features From Album
+# **getFeaturesFromAlbumApiV1AlbumIdFeaturesGet**
+> Array<number> getFeaturesFromAlbumApiV1AlbumIdFeaturesGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getFeaturesFromAlbumApiV1AlbumIdFeaturesGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetFeaturesFromAlbumApiV1AlbumIdFeaturesGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetFeaturesFromAlbumApiV1AlbumIdFeaturesGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getFeaturesFromAlbumApiV1AlbumIdFeaturesGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -777,42 +958,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getFeaturesFromArtistApiV1ArtistIdFeaturesGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getFeaturesFromArtistApiV1ArtistIdFeaturesGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Features From Artist
+# **getFeaturesFromArtistApiV1ArtistIdFeaturesGet**
+> Array<number> getFeaturesFromArtistApiV1ArtistIdFeaturesGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getFeaturesFromArtistApiV1ArtistIdFeaturesGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetFeaturesFromArtistApiV1ArtistIdFeaturesGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetFeaturesFromArtistApiV1ArtistIdFeaturesGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getFeaturesFromArtistApiV1ArtistIdFeaturesGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -820,42 +1011,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getFeaturesFromSongApiV1SongIdFeaturesGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getFeaturesFromSongApiV1SongIdFeaturesGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Features From Song
+# **getFeaturesFromSongApiV1SongIdFeaturesGet**
+> Array<number> getFeaturesFromSongApiV1SongIdFeaturesGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getFeaturesFromSongApiV1SongIdFeaturesGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetFeaturesFromSongApiV1SongIdFeaturesGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetFeaturesFromSongApiV1SongIdFeaturesGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getFeaturesFromSongApiV1SongIdFeaturesGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -863,42 +1064,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getGenresFromAlbumApiV1AlbumIdGenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [String] getGenresFromAlbumApiV1AlbumIdGenresGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Genres From Album
+# **getGenresFromAlbumApiV1AlbumIdGenresGet**
+> Array<string> getGenresFromAlbumApiV1AlbumIdGenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getGenresFromAlbumApiV1AlbumIdGenresGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenresFromAlbumApiV1AlbumIdGenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -906,42 +1117,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getGenresFromArtistApiV1ArtistIdGenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [String] getGenresFromArtistApiV1ArtistIdGenresGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Genres From Artist
+# **getGenresFromArtistApiV1ArtistIdGenresGet**
+> Array<string> getGenresFromArtistApiV1ArtistIdGenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getGenresFromArtistApiV1ArtistIdGenresGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetGenresFromArtistApiV1ArtistIdGenresGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetGenresFromArtistApiV1ArtistIdGenresGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenresFromArtistApiV1ArtistIdGenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -949,42 +1170,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getGenresFromPlaylistApiV1PlaylistIdGenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [String] getGenresFromPlaylistApiV1PlaylistIdGenresGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Genres From Playlist
+# **getGenresFromPlaylistApiV1PlaylistIdGenresGet**
+> Array<string> getGenresFromPlaylistApiV1PlaylistIdGenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getGenresFromPlaylistApiV1PlaylistIdGenresGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetGenresFromPlaylistApiV1PlaylistIdGenresGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetGenresFromPlaylistApiV1PlaylistIdGenresGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenresFromPlaylistApiV1PlaylistIdGenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -992,42 +1223,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getImageApiV1ImageIdGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> getImageApiV1ImageIdGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Image
+# **getImageApiV1ImageIdGet**
+> void getImageApiV1ImageIdGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getImageApiV1ImageIdGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetImageApiV1ImageIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetImageApiV1ImageIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getImageApiV1ImageIdGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-null (empty response body)
+**void**
 
 ### Authorization
 
@@ -1035,42 +1276,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getPlaylistApiV1PlaylistIdGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> PlaylistResponse getPlaylistApiV1PlaylistIdGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Playlist
+# **getPlaylistApiV1PlaylistIdGet**
+> PlaylistResponse getPlaylistApiV1PlaylistIdGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getPlaylistApiV1PlaylistIdGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetPlaylistApiV1PlaylistIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetPlaylistApiV1PlaylistIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getPlaylistApiV1PlaylistIdGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**PlaylistResponse**](PlaylistResponse.md)
+**PlaylistResponse**
 
 ### Authorization
 
@@ -1078,42 +1329,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Playlists Song Is Part Of
+# **getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet**
+> Array<number> getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetPlaylistsSongIsPartOfApiV1SongIdPlaylistsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetPlaylistsSongIsPartOfApiV1SongIdPlaylistsGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -1121,42 +1382,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getSongApiV1SongIdGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> SongResponse getSongApiV1SongIdGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Song
+# **getSongApiV1SongIdGet**
+> SongResponse getSongApiV1SongIdGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getSongApiV1SongIdGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetSongApiV1SongIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetSongApiV1SongIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getSongApiV1SongIdGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**SongResponse**](SongResponse.md)
+**SongResponse**
 
 ### Authorization
 
@@ -1164,42 +1435,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getSongsFromAlbumApiV1AlbumIdSongsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getSongsFromAlbumApiV1AlbumIdSongsGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Songs From Album
+# **getSongsFromAlbumApiV1AlbumIdSongsGet**
+> Array<number> getSongsFromAlbumApiV1AlbumIdSongsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getSongsFromAlbumApiV1AlbumIdSongsGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetSongsFromAlbumApiV1AlbumIdSongsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetSongsFromAlbumApiV1AlbumIdSongsGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getSongsFromAlbumApiV1AlbumIdSongsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -1207,42 +1488,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getSongsFromArtistApiV1ArtistIdSongsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getSongsFromArtistApiV1ArtistIdSongsGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Songs From Artist
+# **getSongsFromArtistApiV1ArtistIdSongsGet**
+> Array<number> getSongsFromArtistApiV1ArtistIdSongsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getSongsFromArtistApiV1ArtistIdSongsGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetSongsFromArtistApiV1ArtistIdSongsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetSongsFromArtistApiV1ArtistIdSongsGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getSongsFromArtistApiV1ArtistIdSongsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -1250,42 +1541,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getSongsFromGenreApiV1GenreSongsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getSongsFromGenreApiV1GenreSongsGet(name)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Songs From Genre
+# **getSongsFromGenreApiV1GenreSongsGet**
+> Array<number> getSongsFromGenreApiV1GenreSongsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let name = "name_example"; // String | 
-apiInstance.getSongsFromGenreApiV1GenreSongsGet(name, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetSongsFromGenreApiV1GenreSongsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetSongsFromGenreApiV1GenreSongsGetRequest = {
+  
+  name: "name_example",
+};
+
+const data = await apiInstance.getSongsFromGenreApiV1GenreSongsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **String**|  | 
+ **name** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -1293,42 +1594,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## getSongsFromPlaylistApiV1PlaylistIdSongsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [Number] getSongsFromPlaylistApiV1PlaylistIdSongsGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Get Songs From Playlist
+# **getSongsFromPlaylistApiV1PlaylistIdSongsGet**
+> Array<number> getSongsFromPlaylistApiV1PlaylistIdSongsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.getSongsFromPlaylistApiV1PlaylistIdSongsGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getSongsFromPlaylistApiV1PlaylistIdSongsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-**[Number]**
+**Array<number>**
 
 ### Authorization
 
@@ -1336,38 +1647,45 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## listAllAlbumsApiV1AlbumsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> [AlbumResponse] listAllAlbumsApiV1AlbumsGet()
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-List All Albums
+# **listAllAlbumsApiV1AlbumsGet**
+> Array<AlbumResponse> listAllAlbumsApiV1AlbumsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-apiInstance.listAllAlbumsApiV1AlbumsGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request = {};
+
+const data = await apiInstance.listAllAlbumsApiV1AlbumsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
 
+
 ### Return type
 
-[**[AlbumResponse]**](AlbumResponse.md)
+**Array<AlbumResponse>**
 
 ### Authorization
 
@@ -1375,38 +1693,44 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## listAllArtistApiV1ArtistsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
-> [ArtistResponse] listAllArtistApiV1ArtistsGet()
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-List All Artist
+# **listAllArtistApiV1ArtistsGet**
+> Array<ArtistResponse> listAllArtistApiV1ArtistsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-apiInstance.listAllArtistApiV1ArtistsGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request = {};
+
+const data = await apiInstance.listAllArtistApiV1ArtistsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
+
 
 ### Return type
 
-[**[ArtistResponse]**](ArtistResponse.md)
+**Array<ArtistResponse>**
 
 ### Authorization
 
@@ -1414,38 +1738,44 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## listAllGenresApiV1GenresGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
-> [String] listAllGenresApiV1GenresGet()
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-List All Genres
+# **listAllGenresApiV1GenresGet**
+> Array<string> listAllGenresApiV1GenresGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-apiInstance.listAllGenresApiV1GenresGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request = {};
+
+const data = await apiInstance.listAllGenresApiV1GenresGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
+
 
 ### Return type
 
-**[String]**
+**Array<string>**
 
 ### Authorization
 
@@ -1453,38 +1783,44 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## listAllPlaylistsApiV1PlaylistsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **listAllPlaylistsApiV1PlaylistsGet**
 > PlaylistResponse listAllPlaylistsApiV1PlaylistsGet()
 
-List All Playlists
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-apiInstance.listAllPlaylistsApiV1PlaylistsGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request = {};
+
+const data = await apiInstance.listAllPlaylistsApiV1PlaylistsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
 
+
 ### Return type
 
-[**PlaylistResponse**](PlaylistResponse.md)
+**PlaylistResponse**
 
 ### Authorization
 
@@ -1492,38 +1828,44 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## listAllSongApiV1SongsGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
-> [SongResponse] listAllSongApiV1SongsGet()
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-List All Song
+# **listAllSongApiV1SongsGet**
+> Array<SongResponse> listAllSongApiV1SongsGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-apiInstance.listAllSongApiV1SongsGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request = {};
+
+const data = await apiInstance.listAllSongApiV1SongsGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
 
-### Parameters
 
+### Parameters
 This endpoint does not need any parameter.
 
+
 ### Return type
 
-[**[SongResponse]**](SongResponse.md)
+**Array<SongResponse>**
 
 ### Authorization
 
@@ -1531,42 +1873,51 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## setDatabaseApiV1DbPatch
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
-> Boolean setDatabaseApiV1DbPatch(path)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Set Database
+# **setDatabaseApiV1DbPatch**
+> boolean setDatabaseApiV1DbPatch()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let path = "path_example"; // String | 
-apiInstance.setDatabaseApiV1DbPatch(path, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiSetDatabaseApiV1DbPatchRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiSetDatabaseApiV1DbPatchRequest = {
+  
+  path: "path_example",
+};
+
+const data = await apiInstance.setDatabaseApiV1DbPatch(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **path** | **String**|  | 
+ **path** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-**Boolean**
+**boolean**
 
 ### Authorization
 
@@ -1574,42 +1925,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## streamSongApiV1SongIdStreamGet
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> streamSongApiV1SongIdStreamGet(id)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Stream Song
+# **streamSongApiV1SongIdStreamGet**
+> void streamSongApiV1SongIdStreamGet()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-apiInstance.streamSongApiV1SongIdStreamGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiStreamSongApiV1SongIdStreamGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiStreamSongApiV1SongIdStreamGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.streamSongApiV1SongIdStreamGet(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-null (empty response body)
+**void**
 
 ### Authorization
 
@@ -1617,44 +1978,58 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
-## updateAlbumApiV1AlbumIdPatch
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> AlbumResponse updateAlbumApiV1AlbumIdPatch(id, albumUpdateRequest)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Update Album
+# **updateAlbumApiV1AlbumIdPatch**
+> AlbumResponse updateAlbumApiV1AlbumIdPatch(albumUpdateRequest)
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-let albumUpdateRequest = new AudioServer.AlbumUpdateRequest(); // AlbumUpdateRequest | 
-apiInstance.updateAlbumApiV1AlbumIdPatch(id, albumUpdateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiUpdateAlbumApiV1AlbumIdPatchRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiUpdateAlbumApiV1AlbumIdPatchRequest = {
+  
+  id: 1,
+  
+  albumUpdateRequest: {
+    name: "name_example",
+    image: 1,
+  },
+};
+
+const data = await apiInstance.updateAlbumApiV1AlbumIdPatch(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
- **albumUpdateRequest** | [**AlbumUpdateRequest**](AlbumUpdateRequest.md)|  | 
+ **albumUpdateRequest** | **AlbumUpdateRequest**|  |
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**AlbumResponse**](AlbumResponse.md)
+**AlbumResponse**
 
 ### Authorization
 
@@ -1662,44 +2037,58 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## updateArtistApiV1ArtistIdPatch
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> ArtistResponse updateArtistApiV1ArtistIdPatch(id, artistUpdateRequest)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Update Artist
+# **updateArtistApiV1ArtistIdPatch**
+> ArtistResponse updateArtistApiV1ArtistIdPatch(artistUpdateRequest)
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-let artistUpdateRequest = new AudioServer.ArtistUpdateRequest(); // ArtistUpdateRequest | 
-apiInstance.updateArtistApiV1ArtistIdPatch(id, artistUpdateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiUpdateArtistApiV1ArtistIdPatchRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiUpdateArtistApiV1ArtistIdPatchRequest = {
+  
+  id: 1,
+  
+  artistUpdateRequest: {
+    name: "name_example",
+    image: 1,
+  },
+};
+
+const data = await apiInstance.updateArtistApiV1ArtistIdPatch(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
- **artistUpdateRequest** | [**ArtistUpdateRequest**](ArtistUpdateRequest.md)|  | 
+ **artistUpdateRequest** | **ArtistUpdateRequest**|  |
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**ArtistResponse**](ArtistResponse.md)
+**ArtistResponse**
 
 ### Authorization
 
@@ -1707,42 +2096,55 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## updateGenreApiV1GenrePatch
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> String updateGenreApiV1GenrePatch(genreUpdateRequest)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Update Genre
+# **updateGenreApiV1GenrePatch**
+> string updateGenreApiV1GenrePatch(genreUpdateRequest)
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let genreUpdateRequest = new AudioServer.GenreUpdateRequest(); // GenreUpdateRequest | 
-apiInstance.updateGenreApiV1GenrePatch(genreUpdateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiUpdateGenreApiV1GenrePatchRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiUpdateGenreApiV1GenrePatchRequest = {
+  
+  genreUpdateRequest: {
+    oldname: "oldname_example",
+    newname: "newname_example",
+  },
+};
+
+const data = await apiInstance.updateGenreApiV1GenrePatch(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **genreUpdateRequest** | [**GenreUpdateRequest**](GenreUpdateRequest.md)|  | 
+ **genreUpdateRequest** | **GenreUpdateRequest**|  |
+
 
 ### Return type
 
-**String**
+**string**
 
 ### Authorization
 
@@ -1750,44 +2152,59 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## updatePlaylistApiV1PlaylistIdPatch
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Genre with same name already exists. |  -  |
+**422** | Validation Error |  -  |
 
-> PlaylistResponse updatePlaylistApiV1PlaylistIdPatch(id, playlistUpdateRequest)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Update Playlist
+# **updatePlaylistApiV1PlaylistIdPatch**
+> PlaylistResponse updatePlaylistApiV1PlaylistIdPatch(playlistUpdateRequest)
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-let playlistUpdateRequest = new AudioServer.PlaylistUpdateRequest(); // PlaylistUpdateRequest | 
-apiInstance.updatePlaylistApiV1PlaylistIdPatch(id, playlistUpdateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiUpdatePlaylistApiV1PlaylistIdPatchRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiUpdatePlaylistApiV1PlaylistIdPatchRequest = {
+  
+  id: 1,
+  
+  playlistUpdateRequest: {
+    name: "name_example",
+    image: 1,
+  },
+};
+
+const data = await apiInstance.updatePlaylistApiV1PlaylistIdPatch(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
- **playlistUpdateRequest** | [**PlaylistUpdateRequest**](PlaylistUpdateRequest.md)|  | 
+ **playlistUpdateRequest** | **PlaylistUpdateRequest**|  |
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**PlaylistResponse**](PlaylistResponse.md)
+**PlaylistResponse**
 
 ### Authorization
 
@@ -1795,44 +2212,64 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## updateSongApiV1SongIdPatch
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> SongResponse updateSongApiV1SongIdPatch(id, songUpdateRequest)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Update Song
+# **updateSongApiV1SongIdPatch**
+> SongResponse updateSongApiV1SongIdPatch(songUpdateRequest)
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let id = 56; // Number | 
-let songUpdateRequest = new AudioServer.SongUpdateRequest(); // SongUpdateRequest | 
-apiInstance.updateSongApiV1SongIdPatch(id, songUpdateRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiUpdateSongApiV1SongIdPatchRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiUpdateSongApiV1SongIdPatchRequest = {
+  
+  id: 1,
+  
+  songUpdateRequest: {
+    genre: "genre_example",
+    artist: 1,
+    album: 1,
+    cover: 1,
+    title: "title_example",
+    release: 1,
+    trackno: 1.0,
+    metatags: "metatags_example",
+  },
+};
+
+const data = await apiInstance.updateSongApiV1SongIdPatch(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
- **songUpdateRequest** | [**SongUpdateRequest**](SongUpdateRequest.md)|  | 
+ **songUpdateRequest** | **SongUpdateRequest**|  |
+ **id** | [**number**] |  | defaults to undefined
+
 
 ### Return type
 
-[**SongResponse**](SongResponse.md)
+**SongResponse**
 
 ### Authorization
 
@@ -1840,42 +2277,52 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 
-## uploadSongApiV1SongPost
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
-> SongResponse uploadSongApiV1SongPost(file)
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-Upload Song
+# **uploadSongApiV1SongPost**
+> SongResponse uploadSongApiV1SongPost()
+
 
 ### Example
 
-```javascript
-import AudioServer from 'audio_server';
 
-let apiInstance = new AudioServer.V1Api();
-let file = "file_example"; // String | 
-apiInstance.uploadSongApiV1SongPost(file, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiUploadSongApiV1SongPostRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiUploadSongApiV1SongPostRequest = {
+  
+  file: "file_example",
+};
+
+const data = await apiInstance.uploadSongApiV1SongPost(request);
+console.log('API called successfully. Returned data:', data);
 ```
+
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | **String**|  | 
+ **file** | [**string**] |  | defaults to undefined
+
 
 ### Return type
 
-[**SongResponse**](SongResponse.md)
+**SongResponse**
 
 ### Authorization
 
@@ -1883,6 +2330,17 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**409** | Conflict! Song already exists. |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 
