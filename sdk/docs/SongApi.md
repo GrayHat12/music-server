@@ -1,58 +1,71 @@
-# .SongApi
+# SongApi
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**deleteSongApiV1SongIdDelete**](SongApi.md#deleteSongApiV1SongIdDelete) | **DELETE** /api/v1/song/{id} | Delete Song
-[**getFeaturesFromArtistApiV1ArtistIdFeaturesGet**](SongApi.md#getFeaturesFromArtistApiV1ArtistIdFeaturesGet) | **GET** /api/v1/artist/{id}/features | Get Features From Artist
-[**getFeaturesFromSongApiV1SongIdFeaturesGet**](SongApi.md#getFeaturesFromSongApiV1SongIdFeaturesGet) | **GET** /api/v1/song/{id}/features | Get Features From Song
-[**getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet**](SongApi.md#getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet) | **GET** /api/v1/song/{id}/playlists | Get Playlists Song Is Part Of
-[**getSongApiV1SongIdGet**](SongApi.md#getSongApiV1SongIdGet) | **GET** /api/v1/song/{id} | Get Song
-[**getSongsFromAlbumApiV1AlbumIdSongsGet**](SongApi.md#getSongsFromAlbumApiV1AlbumIdSongsGet) | **GET** /api/v1/album/{id}/songs | Get Songs From Album
-[**getSongsFromArtistApiV1ArtistIdSongsGet**](SongApi.md#getSongsFromArtistApiV1ArtistIdSongsGet) | **GET** /api/v1/artist/{id}/songs | Get Songs From Artist
-[**getSongsFromGenreApiV1GenreIdSongsGet**](SongApi.md#getSongsFromGenreApiV1GenreIdSongsGet) | **GET** /api/v1/genre/{id}/songs | Get Songs From Genre
-[**getSongsFromPlaylistApiV1PlaylistIdSongsGet**](SongApi.md#getSongsFromPlaylistApiV1PlaylistIdSongsGet) | **GET** /api/v1/playlist/{id}/songs | Get Songs From Playlist
-[**listAllSongApiV1SongsGet**](SongApi.md#listAllSongApiV1SongsGet) | **GET** /api/v1/songs | List All Song
-[**streamSongApiV1SongIdStreamGet**](SongApi.md#streamSongApiV1SongIdStreamGet) | **GET** /api/v1/song/{id}/stream | Stream Song
-[**updateSongApiV1SongIdPatch**](SongApi.md#updateSongApiV1SongIdPatch) | **PATCH** /api/v1/song/{id} | Update Song
-[**uploadSongApiV1SongPost**](SongApi.md#uploadSongApiV1SongPost) | **POST** /api/v1/song | Upload Song
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**deleteSongApiV1SongIdDelete**](SongApi.md#deletesongapiv1songiddelete) | **DELETE** /api/v1/song/{id} | Delete Song |
+| [**getFeaturesFromArtistApiV1ArtistIdFeaturesGet**](SongApi.md#getfeaturesfromartistapiv1artistidfeaturesget) | **GET** /api/v1/artist/{id}/features | Get Features From Artist |
+| [**getFeaturesFromSongApiV1SongIdFeaturesGet**](SongApi.md#getfeaturesfromsongapiv1songidfeaturesget) | **GET** /api/v1/song/{id}/features | Get Features From Song |
+| [**getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet**](SongApi.md#getplaylistssongispartofapiv1songidplaylistsget) | **GET** /api/v1/song/{id}/playlists | Get Playlists Song Is Part Of |
+| [**getSongApiV1SongIdGet**](SongApi.md#getsongapiv1songidget) | **GET** /api/v1/song/{id} | Get Song |
+| [**getSongsFromAlbumApiV1AlbumIdSongsGet**](SongApi.md#getsongsfromalbumapiv1albumidsongsget) | **GET** /api/v1/album/{id}/songs | Get Songs From Album |
+| [**getSongsFromArtistApiV1ArtistIdSongsGet**](SongApi.md#getsongsfromartistapiv1artistidsongsget) | **GET** /api/v1/artist/{id}/songs | Get Songs From Artist |
+| [**getSongsFromGenreApiV1GenreIdSongsGet**](SongApi.md#getsongsfromgenreapiv1genreidsongsget) | **GET** /api/v1/genre/{id}/songs | Get Songs From Genre |
+| [**getSongsFromPlaylistApiV1PlaylistIdSongsGet**](SongApi.md#getsongsfromplaylistapiv1playlistidsongsget) | **GET** /api/v1/playlist/{id}/songs | Get Songs From Playlist |
+| [**listAllSongApiV1SongsGet**](SongApi.md#listallsongapiv1songsget) | **GET** /api/v1/songs | List All Song |
+| [**streamSongApiV1SongIdStreamGet**](SongApi.md#streamsongapiv1songidstreamget) | **GET** /api/v1/song/{id}/stream | Stream Song |
+| [**updateSongApiV1SongIdPatch**](SongApi.md#updatesongapiv1songidpatch) | **PATCH** /api/v1/song/{id} | Update Song |
+| [**uploadSongApiV1SongPost**](SongApi.md#uploadsongapiv1songpost) | **POST** /api/v1/song | Upload Song |
 
 
-# **deleteSongApiV1SongIdDelete**
-> DeletedResponse deleteSongApiV1SongIdDelete()
 
+## deleteSongApiV1SongIdDelete
+
+> DeletedResponse deleteSongApiV1SongIdDelete(id)
+
+Delete Song
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { DeleteSongApiV1SongIdDeleteRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiDeleteSongApiV1SongIdDeleteRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies DeleteSongApiV1SongIdDeleteRequest;
 
-const request: SongApiDeleteSongApiV1SongIdDeleteRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.deleteSongApiV1SongIdDelete(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.deleteSongApiV1SongIdDelete(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
-**DeletedResponse**
+[**DeletedResponse**](DeletedResponse.md)
 
 ### Authorization
 
@@ -60,101 +73,61 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getFeaturesFromArtistApiV1ArtistIdFeaturesGet**
-> Array<number> getFeaturesFromArtistApiV1ArtistIdFeaturesGet()
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-### Example
+## getFeaturesFromArtistApiV1ArtistIdFeaturesGet
 
+> Array&lt;number&gt; getFeaturesFromArtistApiV1ArtistIdFeaturesGet(id)
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetFeaturesFromArtistApiV1ArtistIdFeaturesGetRequest } from '';
-
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
-
-const request: SongApiGetFeaturesFromArtistApiV1ArtistIdFeaturesGetRequest = {
-  
-  id: 1,
-};
-
-const data = await apiInstance.getFeaturesFromArtistApiV1ArtistIdFeaturesGet(request);
-console.log('API called successfully. Returned data:', data);
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
-
-
-### Return type
-
-**Array<number>**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getFeaturesFromSongApiV1SongIdFeaturesGet**
-> Array<number> getFeaturesFromSongApiV1SongIdFeaturesGet()
-
+Get Features From Artist
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetFeaturesFromArtistApiV1ArtistIdFeaturesGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetFeaturesFromSongApiV1SongIdFeaturesGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetFeaturesFromArtistApiV1ArtistIdFeaturesGetRequest;
 
-const request: SongApiGetFeaturesFromSongApiV1SongIdFeaturesGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getFeaturesFromArtistApiV1ArtistIdFeaturesGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getFeaturesFromSongApiV1SongIdFeaturesGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -166,48 +139,61 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet**
-> Array<number> getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet()
 
+## getFeaturesFromSongApiV1SongIdFeaturesGet
+
+> Array&lt;number&gt; getFeaturesFromSongApiV1SongIdFeaturesGet(id)
+
+Get Features From Song
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetFeaturesFromSongApiV1SongIdFeaturesGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetPlaylistsSongIsPartOfApiV1SongIdPlaylistsGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetFeaturesFromSongApiV1SongIdFeaturesGetRequest;
 
-const request: SongApiGetPlaylistsSongIsPartOfApiV1SongIdPlaylistsGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getFeaturesFromSongApiV1SongIdFeaturesGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -219,101 +205,61 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getSongApiV1SongIdGet**
-> SongResponse getSongApiV1SongIdGet()
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-### Example
+## getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet
 
+> Array&lt;number&gt; getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet(id)
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetSongApiV1SongIdGetRequest } from '';
-
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
-
-const request: SongApiGetSongApiV1SongIdGetRequest = {
-  
-  id: 1,
-};
-
-const data = await apiInstance.getSongApiV1SongIdGet(request);
-console.log('API called successfully. Returned data:', data);
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
-
-
-### Return type
-
-**SongResponse**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getSongsFromAlbumApiV1AlbumIdSongsGet**
-> Array<number> getSongsFromAlbumApiV1AlbumIdSongsGet()
-
+Get Playlists Song Is Part Of
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetPlaylistsSongIsPartOfApiV1SongIdPlaylistsGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetSongsFromAlbumApiV1AlbumIdSongsGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetPlaylistsSongIsPartOfApiV1SongIdPlaylistsGetRequest;
 
-const request: SongApiGetSongsFromAlbumApiV1AlbumIdSongsGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getPlaylistsSongIsPartOfApiV1SongIdPlaylistsGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getSongsFromAlbumApiV1AlbumIdSongsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -325,48 +271,127 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **getSongsFromArtistApiV1ArtistIdSongsGet**
-> Array<number> getSongsFromArtistApiV1ArtistIdSongsGet()
 
+## getSongApiV1SongIdGet
+
+> SongResponse getSongApiV1SongIdGet(id)
+
+Get Song
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetSongApiV1SongIdGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetSongsFromArtistApiV1ArtistIdSongsGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetSongApiV1SongIdGetRequest;
 
-const request: SongApiGetSongsFromArtistApiV1ArtistIdSongsGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getSongApiV1SongIdGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getSongsFromArtistApiV1ArtistIdSongsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**SongResponse**](SongResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getSongsFromAlbumApiV1AlbumIdSongsGet
+
+> Array&lt;number&gt; getSongsFromAlbumApiV1AlbumIdSongsGet(id)
+
+Get Songs From Album
+
+### Example
+
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetSongsFromAlbumApiV1AlbumIdSongsGetRequest } from 'audio-server';
+
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
+
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetSongsFromAlbumApiV1AlbumIdSongsGetRequest;
+
+  try {
+    const data = await api.getSongsFromAlbumApiV1AlbumIdSongsGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -378,48 +403,61 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **getSongsFromGenreApiV1GenreIdSongsGet**
-> Array<number> getSongsFromGenreApiV1GenreIdSongsGet()
 
+## getSongsFromArtistApiV1ArtistIdSongsGet
+
+> Array&lt;number&gt; getSongsFromArtistApiV1ArtistIdSongsGet(id)
+
+Get Songs From Artist
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetSongsFromArtistApiV1ArtistIdSongsGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetSongsFromGenreApiV1GenreIdSongsGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetSongsFromArtistApiV1ArtistIdSongsGetRequest;
 
-const request: SongApiGetSongsFromGenreApiV1GenreIdSongsGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getSongsFromArtistApiV1ArtistIdSongsGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getSongsFromGenreApiV1GenreIdSongsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -431,48 +469,61 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **getSongsFromPlaylistApiV1PlaylistIdSongsGet**
-> Array<number> getSongsFromPlaylistApiV1PlaylistIdSongsGet()
 
+## getSongsFromGenreApiV1GenreIdSongsGet
+
+> Array&lt;number&gt; getSongsFromGenreApiV1GenreIdSongsGet(id)
+
+Get Songs From Genre
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetSongsFromGenreApiV1GenreIdSongsGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiGetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetSongsFromGenreApiV1GenreIdSongsGetRequest;
 
-const request: SongApiGetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getSongsFromGenreApiV1GenreIdSongsGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getSongsFromPlaylistApiV1PlaylistIdSongsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -484,45 +535,123 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **listAllSongApiV1SongsGet**
-> Array<SongResponse> listAllSongApiV1SongsGet()
 
+## getSongsFromPlaylistApiV1PlaylistIdSongsGet
+
+> Array&lt;number&gt; getSongsFromPlaylistApiV1PlaylistIdSongsGet(id)
+
+Get Songs From Playlist
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { GetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest;
 
-const request = {};
+  try {
+    const data = await api.getSongsFromPlaylistApiV1PlaylistIdSongsGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.listAllSongApiV1SongsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
 
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
+
+### Return type
+
+**Array<number>**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listAllSongApiV1SongsGet
+
+> Array&lt;SongResponse&gt; listAllSongApiV1SongsGet()
+
+List All Song
+
+### Example
+
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { ListAllSongApiV1SongsGetRequest } from 'audio-server';
+
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
+
+  try {
+    const data = await api.listAllSongApiV1SongsGet();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
-
 ### Return type
 
-**Array<SongResponse>**
+[**Array&lt;SongResponse&gt;**](SongResponse.md)
 
 ### Authorization
 
@@ -530,51 +659,64 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+| **200** | Successful Response |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **streamSongApiV1SongIdStreamGet**
-> void streamSongApiV1SongIdStreamGet()
 
+## streamSongApiV1SongIdStreamGet
+
+> streamSongApiV1SongIdStreamGet(id)
+
+Stream Song
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { StreamSongApiV1SongIdStreamGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiStreamSongApiV1SongIdStreamGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies StreamSongApiV1SongIdStreamGetRequest;
 
-const request: SongApiStreamSongApiV1SongIdStreamGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.streamSongApiV1SongIdStreamGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.streamSongApiV1SongIdStreamGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
-**void**
+`void` (Empty response body)
 
 ### Authorization
 
@@ -582,64 +724,68 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **updateSongApiV1SongIdPatch**
-> SongResponse updateSongApiV1SongIdPatch(songUpdateRequest)
 
+## updateSongApiV1SongIdPatch
+
+> SongResponse updateSongApiV1SongIdPatch(id, songUpdateRequest)
+
+Update Song
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { UpdateSongApiV1SongIdPatchRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiUpdateSongApiV1SongIdPatchRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // number
+    id: 56,
+    // SongUpdateRequest
+    songUpdateRequest: ...,
+  } satisfies UpdateSongApiV1SongIdPatchRequest;
 
-const request: SongApiUpdateSongApiV1SongIdPatchRequest = {
-  
-  id: 1,
-  
-  songUpdateRequest: {
-    genre: "genre_example",
-    artist: 1,
-    album: 1,
-    cover: 1,
-    title: "title_example",
-    release: 1,
-    trackno: 1.0,
-    metatags: "metatags_example",
-  },
-};
+  try {
+    const data = await api.updateSongApiV1SongIdPatch(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.updateSongApiV1SongIdPatch(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **songUpdateRequest** | **SongUpdateRequest**|  |
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
+| **songUpdateRequest** | [SongUpdateRequest](SongUpdateRequest.md) |  | |
 
 ### Return type
 
-**SongResponse**
+[**SongResponse**](SongResponse.md)
 
 ### Authorization
 
@@ -647,52 +793,65 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **uploadSongApiV1SongPost**
-> SongResponse uploadSongApiV1SongPost()
 
+## uploadSongApiV1SongPost
+
+> SongResponse uploadSongApiV1SongPost(file)
+
+Upload Song
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  SongApi,
+} from 'audio-server';
+import type { UploadSongApiV1SongPostRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, SongApi } from '';
-import type { SongApiUploadSongApiV1SongPostRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new SongApi();
 
-const configuration = createConfiguration();
-const apiInstance = new SongApi(configuration);
+  const body = {
+    // string
+    file: file_example,
+  } satisfies UploadSongApiV1SongPostRequest;
 
-const request: SongApiUploadSongApiV1SongPostRequest = {
-  
-  file: "file_example",
-};
+  try {
+    const data = await api.uploadSongApiV1SongPost(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.uploadSongApiV1SongPost(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file** | [**string**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **file** | `string` |  | [Defaults to `undefined`] |
 
 ### Return type
 
-**SongResponse**
+[**SongResponse**](SongResponse.md)
 
 ### Authorization
 
@@ -700,17 +859,16 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: `multipart/form-data`
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**409** | Conflict! Song already exists. |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **409** | Conflict! Song already exists. |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

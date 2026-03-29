@@ -1,58 +1,67 @@
-# .AlbumApi
+# AlbumApi
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createAlbumApiV1AlbumPost**](AlbumApi.md#createAlbumApiV1AlbumPost) | **POST** /api/v1/album | Create Album
-[**deleteAlbumApiV1AlbumIdDelete**](AlbumApi.md#deleteAlbumApiV1AlbumIdDelete) | **DELETE** /api/v1/album/{id} | Delete Album
-[**getAlbumApiV1AlbumIdGet**](AlbumApi.md#getAlbumApiV1AlbumIdGet) | **GET** /api/v1/album/{id} | Get Album
-[**getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet**](AlbumApi.md#getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet) | **GET** /api/v1/playlist/{id}/albums | Get Albums From Playlist
-[**getFeaturesFromAlbumApiV1AlbumIdFeaturesGet**](AlbumApi.md#getFeaturesFromAlbumApiV1AlbumIdFeaturesGet) | **GET** /api/v1/album/{id}/features | Get Features From Album
-[**getGenresFromAlbumApiV1AlbumIdGenresGet**](AlbumApi.md#getGenresFromAlbumApiV1AlbumIdGenresGet) | **GET** /api/v1/album/{id}/genres | Get Genres From Album
-[**getSongsFromAlbumApiV1AlbumIdSongsGet**](AlbumApi.md#getSongsFromAlbumApiV1AlbumIdSongsGet) | **GET** /api/v1/album/{id}/songs | Get Songs From Album
-[**listAllAlbumsApiV1AlbumsGet**](AlbumApi.md#listAllAlbumsApiV1AlbumsGet) | **GET** /api/v1/albums | List All Albums
-[**updateAlbumApiV1AlbumIdPatch**](AlbumApi.md#updateAlbumApiV1AlbumIdPatch) | **PATCH** /api/v1/album/{id} | Update Album
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createAlbumApiV1AlbumPost**](AlbumApi.md#createalbumapiv1albumpost) | **POST** /api/v1/album | Create Album |
+| [**deleteAlbumApiV1AlbumIdDelete**](AlbumApi.md#deletealbumapiv1albumiddelete) | **DELETE** /api/v1/album/{id} | Delete Album |
+| [**getAlbumApiV1AlbumIdGet**](AlbumApi.md#getalbumapiv1albumidget) | **GET** /api/v1/album/{id} | Get Album |
+| [**getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet**](AlbumApi.md#getalbumsfromplaylistapiv1playlistidalbumsget) | **GET** /api/v1/playlist/{id}/albums | Get Albums From Playlist |
+| [**getFeaturesFromAlbumApiV1AlbumIdFeaturesGet**](AlbumApi.md#getfeaturesfromalbumapiv1albumidfeaturesget) | **GET** /api/v1/album/{id}/features | Get Features From Album |
+| [**getGenresFromAlbumApiV1AlbumIdGenresGet**](AlbumApi.md#getgenresfromalbumapiv1albumidgenresget) | **GET** /api/v1/album/{id}/genres | Get Genres From Album |
+| [**getSongsFromAlbumApiV1AlbumIdSongsGet**](AlbumApi.md#getsongsfromalbumapiv1albumidsongsget) | **GET** /api/v1/album/{id}/songs | Get Songs From Album |
+| [**listAllAlbumsApiV1AlbumsGet**](AlbumApi.md#listallalbumsapiv1albumsget) | **GET** /api/v1/albums | List All Albums |
+| [**updateAlbumApiV1AlbumIdPatch**](AlbumApi.md#updatealbumapiv1albumidpatch) | **PATCH** /api/v1/album/{id} | Update Album |
 
 
-# **createAlbumApiV1AlbumPost**
+
+## createAlbumApiV1AlbumPost
+
 > AlbumResponse createAlbumApiV1AlbumPost(albumCreateRequest)
 
+Create Album
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { CreateAlbumApiV1AlbumPostRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiCreateAlbumApiV1AlbumPostRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  const body = {
+    // AlbumCreateRequest
+    albumCreateRequest: ...,
+  } satisfies CreateAlbumApiV1AlbumPostRequest;
 
-const request: AlbumApiCreateAlbumApiV1AlbumPostRequest = {
-  
-  albumCreateRequest: {
-    name: "name_example",
-    image: 1,
-    artist: 1,
-  },
-};
+  try {
+    const data = await api.createAlbumApiV1AlbumPost(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.createAlbumApiV1AlbumPost(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albumCreateRequest** | **AlbumCreateRequest**|  |
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **albumCreateRequest** | [AlbumCreateRequest](AlbumCreateRequest.md) |  | |
 
 ### Return type
 
-**AlbumResponse**
+[**AlbumResponse**](AlbumResponse.md)
 
 ### Authorization
 
@@ -60,53 +69,66 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**409** | Conflict! Album already exists. |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **409** | Conflict! Album already exists. |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **deleteAlbumApiV1AlbumIdDelete**
-> DeletedResponse deleteAlbumApiV1AlbumIdDelete()
 
+## deleteAlbumApiV1AlbumIdDelete
+
+> DeletedResponse deleteAlbumApiV1AlbumIdDelete(id)
+
+Delete Album
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { DeleteAlbumApiV1AlbumIdDeleteRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiDeleteAlbumApiV1AlbumIdDeleteRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies DeleteAlbumApiV1AlbumIdDeleteRequest;
 
-const request: AlbumApiDeleteAlbumApiV1AlbumIdDeleteRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.deleteAlbumApiV1AlbumIdDelete(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.deleteAlbumApiV1AlbumIdDelete(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
-**DeletedResponse**
+[**DeletedResponse**](DeletedResponse.md)
 
 ### Authorization
 
@@ -114,52 +136,65 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **getAlbumApiV1AlbumIdGet**
-> AlbumResponse getAlbumApiV1AlbumIdGet()
 
+## getAlbumApiV1AlbumIdGet
+
+> AlbumResponse getAlbumApiV1AlbumIdGet(id)
+
+Get Album
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { GetAlbumApiV1AlbumIdGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiGetAlbumApiV1AlbumIdGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetAlbumApiV1AlbumIdGetRequest;
 
-const request: AlbumApiGetAlbumApiV1AlbumIdGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getAlbumApiV1AlbumIdGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getAlbumApiV1AlbumIdGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
-**AlbumResponse**
+[**AlbumResponse**](AlbumResponse.md)
 
 ### Authorization
 
@@ -167,101 +202,61 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet**
-> Array<number> getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet()
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-### Example
+## getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet
 
+> Array&lt;number&gt; getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet(id)
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiGetAlbumsFromPlaylistApiV1PlaylistIdAlbumsGetRequest } from '';
-
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
-
-const request: AlbumApiGetAlbumsFromPlaylistApiV1PlaylistIdAlbumsGetRequest = {
-  
-  id: 1,
-};
-
-const data = await apiInstance.getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet(request);
-console.log('API called successfully. Returned data:', data);
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
-
-
-### Return type
-
-**Array<number>**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getFeaturesFromAlbumApiV1AlbumIdFeaturesGet**
-> Array<number> getFeaturesFromAlbumApiV1AlbumIdFeaturesGet()
-
+Get Albums From Playlist
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { GetAlbumsFromPlaylistApiV1PlaylistIdAlbumsGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiGetFeaturesFromAlbumApiV1AlbumIdFeaturesGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetAlbumsFromPlaylistApiV1PlaylistIdAlbumsGetRequest;
 
-const request: AlbumApiGetFeaturesFromAlbumApiV1AlbumIdFeaturesGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getAlbumsFromPlaylistApiV1PlaylistIdAlbumsGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getFeaturesFromAlbumApiV1AlbumIdFeaturesGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -273,48 +268,127 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **getGenresFromAlbumApiV1AlbumIdGenresGet**
-> Array<string> getGenresFromAlbumApiV1AlbumIdGenresGet()
 
+## getFeaturesFromAlbumApiV1AlbumIdFeaturesGet
+
+> Array&lt;number&gt; getFeaturesFromAlbumApiV1AlbumIdFeaturesGet(id)
+
+Get Features From Album
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { GetFeaturesFromAlbumApiV1AlbumIdFeaturesGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetFeaturesFromAlbumApiV1AlbumIdFeaturesGetRequest;
 
-const request: AlbumApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getFeaturesFromAlbumApiV1AlbumIdFeaturesGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getGenresFromAlbumApiV1AlbumIdGenresGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
+
+### Return type
+
+**Array<number>**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getGenresFromAlbumApiV1AlbumIdGenresGet
+
+> Array&lt;string&gt; getGenresFromAlbumApiV1AlbumIdGenresGet(id)
+
+Get Genres From Album
+
+### Example
+
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { GetGenresFromAlbumApiV1AlbumIdGenresGetRequest } from 'audio-server';
+
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
+
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetGenresFromAlbumApiV1AlbumIdGenresGetRequest;
+
+  try {
+    const data = await api.getGenresFromAlbumApiV1AlbumIdGenresGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -326,48 +400,61 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **getSongsFromAlbumApiV1AlbumIdSongsGet**
-> Array<number> getSongsFromAlbumApiV1AlbumIdSongsGet()
 
+## getSongsFromAlbumApiV1AlbumIdSongsGet
+
+> Array&lt;number&gt; getSongsFromAlbumApiV1AlbumIdSongsGet(id)
+
+Get Songs From Album
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { GetSongsFromAlbumApiV1AlbumIdSongsGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiGetSongsFromAlbumApiV1AlbumIdSongsGetRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  const body = {
+    // number
+    id: 56,
+  } satisfies GetSongsFromAlbumApiV1AlbumIdSongsGetRequest;
 
-const request: AlbumApiGetSongsFromAlbumApiV1AlbumIdSongsGetRequest = {
-  
-  id: 1,
-};
+  try {
+    const data = await api.getSongsFromAlbumApiV1AlbumIdSongsGet(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.getSongsFromAlbumApiV1AlbumIdSongsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -379,45 +466,57 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **listAllAlbumsApiV1AlbumsGet**
-> Array<AlbumResponse> listAllAlbumsApiV1AlbumsGet()
 
+## listAllAlbumsApiV1AlbumsGet
+
+> Array&lt;AlbumResponse&gt; listAllAlbumsApiV1AlbumsGet()
+
+List All Albums
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { ListAllAlbumsApiV1AlbumsGetRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  try {
+    const data = await api.listAllAlbumsApiV1AlbumsGet();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const request = {};
-
-const data = await apiInstance.listAllAlbumsApiV1AlbumsGet(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
 
-
 ### Parameters
+
 This endpoint does not need any parameter.
 
-
 ### Return type
 
-**Array<AlbumResponse>**
+[**Array&lt;AlbumResponse&gt;**](AlbumResponse.md)
 
 ### Authorization
 
@@ -425,57 +524,67 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+| **200** | Successful Response |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
-# **updateAlbumApiV1AlbumIdPatch**
-> AlbumResponse updateAlbumApiV1AlbumIdPatch(albumUpdateRequest)
 
+## updateAlbumApiV1AlbumIdPatch
+
+> AlbumResponse updateAlbumApiV1AlbumIdPatch(id, albumUpdateRequest)
+
+Update Album
 
 ### Example
 
+```ts
+import {
+  Configuration,
+  AlbumApi,
+} from 'audio-server';
+import type { UpdateAlbumApiV1AlbumIdPatchRequest } from 'audio-server';
 
-```typescript
-import { createConfiguration, AlbumApi } from '';
-import type { AlbumApiUpdateAlbumApiV1AlbumIdPatchRequest } from '';
+async function example() {
+  console.log("🚀 Testing audio-server SDK...");
+  const api = new AlbumApi();
 
-const configuration = createConfiguration();
-const apiInstance = new AlbumApi(configuration);
+  const body = {
+    // number
+    id: 56,
+    // AlbumUpdateRequest
+    albumUpdateRequest: ...,
+  } satisfies UpdateAlbumApiV1AlbumIdPatchRequest;
 
-const request: AlbumApiUpdateAlbumApiV1AlbumIdPatchRequest = {
-  
-  id: 1,
-  
-  albumUpdateRequest: {
-    name: "name_example",
-    image: 1,
-  },
-};
+  try {
+    const data = await api.updateAlbumApiV1AlbumIdPatch(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-const data = await apiInstance.updateAlbumApiV1AlbumIdPatch(request);
-console.log('API called successfully. Returned data:', data);
+// Run the test
+example().catch(console.error);
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albumUpdateRequest** | **AlbumUpdateRequest**|  |
- **id** | [**number**] |  | defaults to undefined
 
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `number` |  | [Defaults to `undefined`] |
+| **albumUpdateRequest** | [AlbumUpdateRequest](AlbumUpdateRequest.md) |  | |
 
 ### Return type
 
-**AlbumResponse**
+[**AlbumResponse**](AlbumResponse.md)
 
 ### Authorization
 
@@ -483,16 +592,15 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

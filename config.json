@@ -1,4 +1,5 @@
 {
     "npmName": "audio-server",
-    "npmVersion": "1.0.0"
+    "npmVersion": "1.0.1",
+    "supportsES6": true
 }
