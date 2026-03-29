@@ -18,6 +18,8 @@ export class AlbumResponse {
     'image'?: number | null;
     'lastUpdated': Date;
     'artist': number;
+    'streamCount': number;
+    'lastStreamed'?: Date | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,7 +46,7 @@ export class AlbumResponse {
         },
         {
             "name": "lastUpdated",
-            "baseName": "last_updated",
+            "baseName": "lastUpdated",
             "type": "Date",
             "format": "date-time"
         },
@@ -53,6 +55,18 @@ export class AlbumResponse {
             "baseName": "artist",
             "type": "number",
             "format": ""
+        },
+        {
+            "name": "streamCount",
+            "baseName": "streamCount",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "lastStreamed",
+            "baseName": "lastStreamed",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

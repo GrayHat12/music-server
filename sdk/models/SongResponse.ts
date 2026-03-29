@@ -23,6 +23,8 @@ export class SongResponse {
     'artist'?: number | null;
     'album'?: number | null;
     'cover'?: number | null;
+    'streamCount': number;
+    'lastStreamed'?: Date | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -61,7 +63,7 @@ export class SongResponse {
         },
         {
             "name": "lastUpdated",
-            "baseName": "last_updated",
+            "baseName": "lastUpdated",
             "type": "Date",
             "format": "date-time"
         },
@@ -88,6 +90,18 @@ export class SongResponse {
             "baseName": "cover",
             "type": "number",
             "format": ""
+        },
+        {
+            "name": "streamCount",
+            "baseName": "streamCount",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "lastStreamed",
+            "baseName": "lastStreamed",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

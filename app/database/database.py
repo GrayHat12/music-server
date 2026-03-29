@@ -54,7 +54,7 @@ def set_sqlite_pragma(dbapi_connection, connection_record):
 
 
 def get_session_local():
-    return sessionmaker(autocommit=False, autoflush=False, bind=get_engine())
+    return sessionmaker(autocommit=False, autoflush=False, bind=get_engine(), expire_on_commit=False)
 
 
 Base = declarative_base()

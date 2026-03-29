@@ -11,6 +11,7 @@ import { ArtistResponse } from '../models/ArtistResponse';
 import { ArtistUpdateRequest } from '../models/ArtistUpdateRequest';
 import { DeletedResponse } from '../models/DeletedResponse';
 import { GenreCreateRequest } from '../models/GenreCreateRequest';
+import { GenreResponse } from '../models/GenreResponse';
 import { GenreUpdateRequest } from '../models/GenreUpdateRequest';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { LocationInner } from '../models/LocationInner';
@@ -779,114 +780,6 @@ export class ObservableDatabaseApi {
 
 }
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
-    }
-
-    /**
-     * Albums
-     */
-    public albumsUiAlbumsGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<string>> {
-        const _config = mergeConfiguration(this.configuration, _options);
-
-        const requestContextPromise = this.requestFactory.albumsUiAlbumsGet(_config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of _config.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of _config.middleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.albumsUiAlbumsGetWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Albums
-     */
-    public albumsUiAlbumsGet(_options?: ConfigurationOptions): Observable<string> {
-        return this.albumsUiAlbumsGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
-    }
-
-    /**
-     * Artists
-     */
-    public artistsUiArtistsGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<string>> {
-        const _config = mergeConfiguration(this.configuration, _options);
-
-        const requestContextPromise = this.requestFactory.artistsUiArtistsGet(_config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of _config.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of _config.middleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.artistsUiArtistsGetWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Artists
-     */
-    public artistsUiArtistsGet(_options?: ConfigurationOptions): Observable<string> {
-        return this.artistsUiArtistsGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
-    }
-
-    /**
-     * Playlists
-     */
-    public playlistsUiPlaylistsGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<string>> {
-        const _config = mergeConfiguration(this.configuration, _options);
-
-        const requestContextPromise = this.requestFactory.playlistsUiPlaylistsGet(_config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of _config.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of _config.middleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.playlistsUiPlaylistsGetWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Playlists
-     */
-    public playlistsUiPlaylistsGet(_options?: ConfigurationOptions): Observable<string> {
-        return this.playlistsUiPlaylistsGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
-    }
-
-}
-
 import { GenreApiRequestFactory, GenreApiResponseProcessor} from "../apis/GenreApi";
 export class ObservableGenreApi {
     private requestFactory: GenreApiRequestFactory;
@@ -907,7 +800,7 @@ export class ObservableGenreApi {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<string>> {
+    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<GenreResponse>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
         const requestContextPromise = this.requestFactory.createGenreApiV1GenrePost(genreCreateRequest, _config);
@@ -931,18 +824,18 @@ export class ObservableGenreApi {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<string> {
-        return this.createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest, _options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
+    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<GenreResponse> {
+        return this.createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest, _options).pipe(map((apiResponse: HttpInfo<GenreResponse>) => apiResponse.data));
     }
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDeleteWithHttpInfo(name: string, _options?: ConfigurationOptions): Observable<HttpInfo<DeletedResponse>> {
+    public deleteGenreApiV1GenreIdDeleteWithHttpInfo(id: number, _options?: ConfigurationOptions): Observable<HttpInfo<DeletedResponse>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
-        const requestContextPromise = this.requestFactory.deleteGenreApiV1GenreDelete(name, _config);
+        const requestContextPromise = this.requestFactory.deleteGenreApiV1GenreIdDelete(id, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of _config.middleware) {
@@ -955,16 +848,48 @@ export class ObservableGenreApi {
                 for (const middleware of _config.middleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteGenreApiV1GenreDeleteWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteGenreApiV1GenreIdDeleteWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDelete(name: string, _options?: ConfigurationOptions): Observable<DeletedResponse> {
-        return this.deleteGenreApiV1GenreDeleteWithHttpInfo(name, _options).pipe(map((apiResponse: HttpInfo<DeletedResponse>) => apiResponse.data));
+    public deleteGenreApiV1GenreIdDelete(id: number, _options?: ConfigurationOptions): Observable<DeletedResponse> {
+        return this.deleteGenreApiV1GenreIdDeleteWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<DeletedResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGetWithHttpInfo(id: number, _options?: ConfigurationOptions): Observable<HttpInfo<GenreResponse>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.getGenreApiV1GenreIdGet(id, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getGenreApiV1GenreIdGetWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGet(id: number, _options?: ConfigurationOptions): Observable<GenreResponse> {
+        return this.getGenreApiV1GenreIdGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<GenreResponse>) => apiResponse.data));
     }
 
     /**
@@ -1065,12 +990,12 @@ export class ObservableGenreApi {
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name: string, _options?: ConfigurationOptions): Observable<HttpInfo<Array<number>>> {
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id: number, _options?: ConfigurationOptions): Observable<HttpInfo<Array<number>>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
-        const requestContextPromise = this.requestFactory.getSongsFromGenreApiV1GenreSongsGet(name, _config);
+        const requestContextPromise = this.requestFactory.getSongsFromGenreApiV1GenreIdSongsGet(id, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of _config.middleware) {
@@ -1083,22 +1008,22 @@ export class ObservableGenreApi {
                 for (const middleware of _config.middleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGet(name: string, _options?: ConfigurationOptions): Observable<Array<number>> {
-        return this.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name, _options).pipe(map((apiResponse: HttpInfo<Array<number>>) => apiResponse.data));
+    public getSongsFromGenreApiV1GenreIdSongsGet(id: number, _options?: ConfigurationOptions): Observable<Array<number>> {
+        return this.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<Array<number>>) => apiResponse.data));
     }
 
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<Array<string>>> {
+    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<Array<GenreResponse>>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
         const requestContextPromise = this.requestFactory.listAllGenresApiV1GenresGet(_config);
@@ -1121,18 +1046,19 @@ export class ObservableGenreApi {
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGet(_options?: ConfigurationOptions): Observable<Array<string>> {
-        return this.listAllGenresApiV1GenresGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Array<string>>) => apiResponse.data));
+    public listAllGenresApiV1GenresGet(_options?: ConfigurationOptions): Observable<Array<GenreResponse>> {
+        return this.listAllGenresApiV1GenresGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Array<GenreResponse>>) => apiResponse.data));
     }
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<string>> {
+    public updateGenreApiV1GenreIdPatchWithHttpInfo(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<GenreResponse>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
-        const requestContextPromise = this.requestFactory.updateGenreApiV1GenrePatch(genreUpdateRequest, _config);
+        const requestContextPromise = this.requestFactory.updateGenreApiV1GenreIdPatch(id, genreUpdateRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of _config.middleware) {
@@ -1145,16 +1071,17 @@ export class ObservableGenreApi {
                 for (const middleware of _config.middleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateGenreApiV1GenrePatchWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateGenreApiV1GenreIdPatchWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatch(genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<string> {
-        return this.updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
+    public updateGenreApiV1GenreIdPatch(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<GenreResponse> {
+        return this.updateGenreApiV1GenreIdPatchWithHttpInfo(id, genreUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<GenreResponse>) => apiResponse.data));
     }
 
 }
@@ -1853,12 +1780,12 @@ export class ObservableSongApi {
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name: string, _options?: ConfigurationOptions): Observable<HttpInfo<Array<number>>> {
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id: number, _options?: ConfigurationOptions): Observable<HttpInfo<Array<number>>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
-        const requestContextPromise = this.requestFactory.getSongsFromGenreApiV1GenreSongsGet(name, _config);
+        const requestContextPromise = this.requestFactory.getSongsFromGenreApiV1GenreIdSongsGet(id, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of _config.middleware) {
@@ -1871,16 +1798,16 @@ export class ObservableSongApi {
                 for (const middleware of _config.middleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGet(name: string, _options?: ConfigurationOptions): Observable<Array<number>> {
-        return this.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name, _options).pipe(map((apiResponse: HttpInfo<Array<number>>) => apiResponse.data));
+    public getSongsFromGenreApiV1GenreIdSongsGet(id: number, _options?: ConfigurationOptions): Observable<Array<number>> {
+        return this.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<Array<number>>) => apiResponse.data));
     }
 
     /**
@@ -2161,7 +2088,7 @@ export class ObservableV1Api {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<string>> {
+    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<GenreResponse>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
         const requestContextPromise = this.requestFactory.createGenreApiV1GenrePost(genreCreateRequest, _config);
@@ -2185,8 +2112,8 @@ export class ObservableV1Api {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<string> {
-        return this.createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest, _options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
+    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: ConfigurationOptions): Observable<GenreResponse> {
+        return this.createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest, _options).pipe(map((apiResponse: HttpInfo<GenreResponse>) => apiResponse.data));
     }
 
     /**
@@ -2287,12 +2214,12 @@ export class ObservableV1Api {
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDeleteWithHttpInfo(name: string, _options?: ConfigurationOptions): Observable<HttpInfo<DeletedResponse>> {
+    public deleteGenreApiV1GenreIdDeleteWithHttpInfo(id: number, _options?: ConfigurationOptions): Observable<HttpInfo<DeletedResponse>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
-        const requestContextPromise = this.requestFactory.deleteGenreApiV1GenreDelete(name, _config);
+        const requestContextPromise = this.requestFactory.deleteGenreApiV1GenreIdDelete(id, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of _config.middleware) {
@@ -2305,16 +2232,16 @@ export class ObservableV1Api {
                 for (const middleware of _config.middleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteGenreApiV1GenreDeleteWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteGenreApiV1GenreIdDeleteWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDelete(name: string, _options?: ConfigurationOptions): Observable<DeletedResponse> {
-        return this.deleteGenreApiV1GenreDeleteWithHttpInfo(name, _options).pipe(map((apiResponse: HttpInfo<DeletedResponse>) => apiResponse.data));
+    public deleteGenreApiV1GenreIdDelete(id: number, _options?: ConfigurationOptions): Observable<DeletedResponse> {
+        return this.deleteGenreApiV1GenreIdDeleteWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<DeletedResponse>) => apiResponse.data));
     }
 
     /**
@@ -2670,6 +2597,38 @@ export class ObservableV1Api {
     }
 
     /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGetWithHttpInfo(id: number, _options?: ConfigurationOptions): Observable<HttpInfo<GenreResponse>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.getGenreApiV1GenreIdGet(id, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getGenreApiV1GenreIdGetWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGet(id: number, _options?: ConfigurationOptions): Observable<GenreResponse> {
+        return this.getGenreApiV1GenreIdGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<GenreResponse>) => apiResponse.data));
+    }
+
+    /**
      * Get Genres From Album
      * @param id
      */
@@ -2959,12 +2918,12 @@ export class ObservableV1Api {
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name: string, _options?: ConfigurationOptions): Observable<HttpInfo<Array<number>>> {
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id: number, _options?: ConfigurationOptions): Observable<HttpInfo<Array<number>>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
-        const requestContextPromise = this.requestFactory.getSongsFromGenreApiV1GenreSongsGet(name, _config);
+        const requestContextPromise = this.requestFactory.getSongsFromGenreApiV1GenreIdSongsGet(id, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of _config.middleware) {
@@ -2977,16 +2936,16 @@ export class ObservableV1Api {
                 for (const middleware of _config.middleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGet(name: string, _options?: ConfigurationOptions): Observable<Array<number>> {
-        return this.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name, _options).pipe(map((apiResponse: HttpInfo<Array<number>>) => apiResponse.data));
+    public getSongsFromGenreApiV1GenreIdSongsGet(id: number, _options?: ConfigurationOptions): Observable<Array<number>> {
+        return this.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<Array<number>>) => apiResponse.data));
     }
 
     /**
@@ -3084,7 +3043,7 @@ export class ObservableV1Api {
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<Array<string>>> {
+    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<Array<GenreResponse>>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
         const requestContextPromise = this.requestFactory.listAllGenresApiV1GenresGet(_config);
@@ -3107,8 +3066,8 @@ export class ObservableV1Api {
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGet(_options?: ConfigurationOptions): Observable<Array<string>> {
-        return this.listAllGenresApiV1GenresGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Array<string>>) => apiResponse.data));
+    public listAllGenresApiV1GenresGet(_options?: ConfigurationOptions): Observable<Array<GenreResponse>> {
+        return this.listAllGenresApiV1GenresGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Array<GenreResponse>>) => apiResponse.data));
     }
 
     /**
@@ -3305,12 +3264,13 @@ export class ObservableV1Api {
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<string>> {
+    public updateGenreApiV1GenreIdPatchWithHttpInfo(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<GenreResponse>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
-        const requestContextPromise = this.requestFactory.updateGenreApiV1GenrePatch(genreUpdateRequest, _config);
+        const requestContextPromise = this.requestFactory.updateGenreApiV1GenreIdPatch(id, genreUpdateRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of _config.middleware) {
@@ -3323,16 +3283,17 @@ export class ObservableV1Api {
                 for (const middleware of _config.middleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateGenreApiV1GenrePatchWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateGenreApiV1GenreIdPatchWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatch(genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<string> {
-        return this.updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
+    public updateGenreApiV1GenreIdPatch(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: ConfigurationOptions): Observable<GenreResponse> {
+        return this.updateGenreApiV1GenreIdPatchWithHttpInfo(id, genreUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<GenreResponse>) => apiResponse.data));
     }
 
     /**

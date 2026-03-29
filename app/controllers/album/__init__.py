@@ -19,8 +19,10 @@ def list_all_albums(db: Session = Depends(get_db)):
         id=album.id,
         name=album.name,
         image=album.image_id or album.artist.image_id,
-        last_updated=album.last_updated,
-        artist=album.artist_id
+        lastUpdated=album.last_updated,
+        artist=album.artist_id,
+        streamCount=album.stream_count,
+        lastStreamed=album.last_streamed
     ) for album in albums]
 
 
@@ -33,8 +35,10 @@ def get_album(id: int = Path(...), db: Session = Depends(get_db)):
         id=album.id,
         name=album.name,
         image=album.image_id or album.artist.image_id,
-        last_updated=album.last_updated,
-        artist=album.artist_id
+        lastUpdated=album.last_updated,
+        artist=album.artist_id,
+        streamCount=album.stream_count,
+        lastStreamed=album.last_streamed
     )
 
 

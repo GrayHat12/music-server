@@ -12,8 +12,12 @@
 
 import { HttpFile } from '../http/http';
 
-export class GenreUpdateRequest {
+export class GenreResponse {
+    'id': number;
     'name': string;
+    'lastUpdated': Date;
+    'streamCount': number;
+    'lastStreamed'?: Date | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,14 +25,38 @@ export class GenreUpdateRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": ""
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "lastUpdated",
+            "baseName": "lastUpdated",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "streamCount",
+            "baseName": "streamCount",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "lastStreamed",
+            "baseName": "lastStreamed",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
-        return GenreUpdateRequest.attributeTypeMap;
+        return GenreResponse.attributeTypeMap;
     }
 
     public constructor() {

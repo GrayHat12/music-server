@@ -5,17 +5,18 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createGenreApiV1GenrePost**](GenreApi.md#createGenreApiV1GenrePost) | **POST** /api/v1/genre | Create Genre
-[**deleteGenreApiV1GenreDelete**](GenreApi.md#deleteGenreApiV1GenreDelete) | **DELETE** /api/v1/genre | Delete Genre
+[**deleteGenreApiV1GenreIdDelete**](GenreApi.md#deleteGenreApiV1GenreIdDelete) | **DELETE** /api/v1/genre/{id} | Delete Genre
+[**getGenreApiV1GenreIdGet**](GenreApi.md#getGenreApiV1GenreIdGet) | **GET** /api/v1/genre/{id} | Get Genre
 [**getGenresFromAlbumApiV1AlbumIdGenresGet**](GenreApi.md#getGenresFromAlbumApiV1AlbumIdGenresGet) | **GET** /api/v1/album/{id}/genres | Get Genres From Album
 [**getGenresFromArtistApiV1ArtistIdGenresGet**](GenreApi.md#getGenresFromArtistApiV1ArtistIdGenresGet) | **GET** /api/v1/artist/{id}/genres | Get Genres From Artist
 [**getGenresFromPlaylistApiV1PlaylistIdGenresGet**](GenreApi.md#getGenresFromPlaylistApiV1PlaylistIdGenresGet) | **GET** /api/v1/playlist/{id}/genres | Get Genres From Playlist
-[**getSongsFromGenreApiV1GenreSongsGet**](GenreApi.md#getSongsFromGenreApiV1GenreSongsGet) | **GET** /api/v1/genre/songs | Get Songs From Genre
+[**getSongsFromGenreApiV1GenreIdSongsGet**](GenreApi.md#getSongsFromGenreApiV1GenreIdSongsGet) | **GET** /api/v1/genre/{id}/songs | Get Songs From Genre
 [**listAllGenresApiV1GenresGet**](GenreApi.md#listAllGenresApiV1GenresGet) | **GET** /api/v1/genres | List All Genres
-[**updateGenreApiV1GenrePatch**](GenreApi.md#updateGenreApiV1GenrePatch) | **PATCH** /api/v1/genre | Update Genre
+[**updateGenreApiV1GenreIdPatch**](GenreApi.md#updateGenreApiV1GenreIdPatch) | **PATCH** /api/v1/genre/{id} | Update Genre
 
 
 # **createGenreApiV1GenrePost**
-> string createGenreApiV1GenrePost(genreCreateRequest)
+> GenreResponse createGenreApiV1GenrePost(genreCreateRequest)
 
 
 ### Example
@@ -49,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+**GenreResponse**
 
 ### Authorization
 
@@ -70,8 +71,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **deleteGenreApiV1GenreDelete**
-> DeletedResponse deleteGenreApiV1GenreDelete()
+# **deleteGenreApiV1GenreIdDelete**
+> DeletedResponse deleteGenreApiV1GenreIdDelete()
 
 
 ### Example
@@ -79,17 +80,17 @@ No authorization required
 
 ```typescript
 import { createConfiguration, GenreApi } from '';
-import type { GenreApiDeleteGenreApiV1GenreDeleteRequest } from '';
+import type { GenreApiDeleteGenreApiV1GenreIdDeleteRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new GenreApi(configuration);
 
-const request: GenreApiDeleteGenreApiV1GenreDeleteRequest = {
+const request: GenreApiDeleteGenreApiV1GenreIdDeleteRequest = {
   
-  name: "name_example",
+  id: 1,
 };
 
-const data = await apiInstance.deleteGenreApiV1GenreDelete(request);
+const data = await apiInstance.deleteGenreApiV1GenreIdDelete(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -98,12 +99,65 @@ console.log('API called successfully. Returned data:', data);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | [**string**] |  | defaults to undefined
+ **id** | [**number**] |  | defaults to undefined
 
 
 ### Return type
 
 **DeletedResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **getGenreApiV1GenreIdGet**
+> GenreResponse getGenreApiV1GenreIdGet()
+
+
+### Example
+
+
+```typescript
+import { createConfiguration, GenreApi } from '';
+import type { GenreApiGetGenreApiV1GenreIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new GenreApi(configuration);
+
+const request: GenreApiGetGenreApiV1GenreIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenreApiV1GenreIdGet(request);
+console.log('API called successfully. Returned data:', data);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**number**] |  | defaults to undefined
+
+
+### Return type
+
+**GenreResponse**
 
 ### Authorization
 
@@ -282,8 +336,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **getSongsFromGenreApiV1GenreSongsGet**
-> Array<number> getSongsFromGenreApiV1GenreSongsGet()
+# **getSongsFromGenreApiV1GenreIdSongsGet**
+> Array<number> getSongsFromGenreApiV1GenreIdSongsGet()
 
 
 ### Example
@@ -291,17 +345,17 @@ No authorization required
 
 ```typescript
 import { createConfiguration, GenreApi } from '';
-import type { GenreApiGetSongsFromGenreApiV1GenreSongsGetRequest } from '';
+import type { GenreApiGetSongsFromGenreApiV1GenreIdSongsGetRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new GenreApi(configuration);
 
-const request: GenreApiGetSongsFromGenreApiV1GenreSongsGetRequest = {
+const request: GenreApiGetSongsFromGenreApiV1GenreIdSongsGetRequest = {
   
-  name: "name_example",
+  id: 1,
 };
 
-const data = await apiInstance.getSongsFromGenreApiV1GenreSongsGet(request);
+const data = await apiInstance.getSongsFromGenreApiV1GenreIdSongsGet(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -310,7 +364,7 @@ console.log('API called successfully. Returned data:', data);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | [**string**] |  | defaults to undefined
+ **id** | [**number**] |  | defaults to undefined
 
 
 ### Return type
@@ -336,7 +390,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **listAllGenresApiV1GenresGet**
-> Array<string> listAllGenresApiV1GenresGet()
+> Array<GenreResponse> listAllGenresApiV1GenresGet()
 
 
 ### Example
@@ -361,7 +415,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**Array<string>**
+**Array<GenreResponse>**
 
 ### Authorization
 
@@ -380,8 +434,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **updateGenreApiV1GenrePatch**
-> string updateGenreApiV1GenrePatch(genreUpdateRequest)
+# **updateGenreApiV1GenreIdPatch**
+> GenreResponse updateGenreApiV1GenreIdPatch(genreUpdateRequest)
 
 
 ### Example
@@ -389,20 +443,21 @@ No authorization required
 
 ```typescript
 import { createConfiguration, GenreApi } from '';
-import type { GenreApiUpdateGenreApiV1GenrePatchRequest } from '';
+import type { GenreApiUpdateGenreApiV1GenreIdPatchRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new GenreApi(configuration);
 
-const request: GenreApiUpdateGenreApiV1GenrePatchRequest = {
+const request: GenreApiUpdateGenreApiV1GenreIdPatchRequest = {
+  
+  id: 1,
   
   genreUpdateRequest: {
-    oldname: "oldname_example",
-    newname: "newname_example",
+    name: "name_example",
   },
 };
 
-const data = await apiInstance.updateGenreApiV1GenrePatch(request);
+const data = await apiInstance.updateGenreApiV1GenreIdPatch(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -412,11 +467,12 @@ console.log('API called successfully. Returned data:', data);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **genreUpdateRequest** | **GenreUpdateRequest**|  |
+ **id** | [**number**] |  | defaults to undefined
 
 
 ### Return type
 
-**string**
+**GenreResponse**
 
 ### Authorization
 

@@ -8,6 +8,7 @@ from app.database.database import get_or_create
 from app.middleware import validate_audio_file, get_db
 from sqlalchemy.orm import Session
 from app.utils import load_song_metadata
+from datetime import datetime, timezone
 from io import BytesIO
 import json
 from app.config import Tags
@@ -25,7 +26,9 @@ def list_all_song(db: Session = Depends(get_db)):
         release=song.release,
         trackno=song.trackno,
         metatags=json.loads(song.metatags),
-        last_updated=song.last_updated,
+        lastUpdated=song.last_updated,
+        lastStreamed=song.last_streamed,
+        streamCount=song.stream_count,
         genre=song.genre.name if song.genre else None,
         artist=song.artist_id,
         album=song.album_id,
@@ -45,7 +48,9 @@ def get_song(id: int = Path(...), db: Session = Depends(get_db)):
         release=song.release,
         trackno=song.trackno,
         metatags=json.loads(song.metatags),
-        last_updated=song.last_updated,
+        lastUpdated=song.last_updated,
+        lastStreamed=song.last_streamed,
+        streamCount=song.stream_count,
         genre=song.genre.name if song.genre else None,
         artist=song.artist_id,
         album=song.album_id,
@@ -59,6 +64,21 @@ def stream_song(id: int = Path(...), db: Session = Depends(get_db)):
     song = db.get(Songs, id)
     if not song:
         raise HTTPException(404)
+    now = datetime.now(timezone.utc)
+    song.stream_count += 1
+    song.last_streamed = now
+    if song.artist:
+        song.artist.stream_count += 1
+        song.last_streamed = now
+    if song.album:
+        song.album.stream_count += 1
+        song.album.last_streamed = now
+    if song.genre:
+        song.genre.stream_count += 1
+        song.genre.last_streamed = now
+    db.add(song)
+    db.flush()
+    db.commit()
     return StreamingResponse(BytesIO(song.buffer), media_type="audio/mpeg")
 
 

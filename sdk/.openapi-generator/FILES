@@ -4,7 +4,6 @@ README.md
 apis/AlbumApi.ts
 apis/ArtistApi.ts
 apis/DatabaseApi.ts
-apis/DefaultApi.ts
 apis/GenreApi.ts
 apis/ImageApi.ts
 apis/PlaylistApi.ts
@@ -17,7 +16,6 @@ configuration.ts
 docs/AlbumApi.md
 docs/ArtistApi.md
 docs/DatabaseApi.md
-docs/DefaultApi.md
 docs/GenreApi.md
 docs/ImageApi.md
 docs/PlaylistApi.md
@@ -36,6 +34,7 @@ models/ArtistResponse.ts
 models/ArtistUpdateRequest.ts
 models/DeletedResponse.ts
 models/GenreCreateRequest.ts
+models/GenreResponse.ts
 models/GenreUpdateRequest.ts
 models/HTTPValidationError.ts
 models/LocationInner.ts

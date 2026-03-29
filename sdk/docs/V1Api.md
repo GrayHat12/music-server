@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**createPlaylistApiV1PlaylistPost**](V1Api.md#createPlaylistApiV1PlaylistPost) | **POST** /api/v1/playlist | Create Playlist
 [**deleteAlbumApiV1AlbumIdDelete**](V1Api.md#deleteAlbumApiV1AlbumIdDelete) | **DELETE** /api/v1/album/{id} | Delete Album
 [**deleteArtistApiV1ArtistIdDelete**](V1Api.md#deleteArtistApiV1ArtistIdDelete) | **DELETE** /api/v1/artist/{id} | Delete Artist
-[**deleteGenreApiV1GenreDelete**](V1Api.md#deleteGenreApiV1GenreDelete) | **DELETE** /api/v1/genre | Delete Genre
+[**deleteGenreApiV1GenreIdDelete**](V1Api.md#deleteGenreApiV1GenreIdDelete) | **DELETE** /api/v1/genre/{id} | Delete Genre
 [**deleteImageApiV1ImageIdDelete**](V1Api.md#deleteImageApiV1ImageIdDelete) | **DELETE** /api/v1/image/{id} | Delete Image
 [**deletePlaylistApiV1PlaylistIdDelete**](V1Api.md#deletePlaylistApiV1PlaylistIdDelete) | **DELETE** /api/v1/playlist/{id} | Delete Playlist
 [**deleteSongApiV1SongIdDelete**](V1Api.md#deleteSongApiV1SongIdDelete) | **DELETE** /api/v1/song/{id} | Delete Song
@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**getFeaturesFromAlbumApiV1AlbumIdFeaturesGet**](V1Api.md#getFeaturesFromAlbumApiV1AlbumIdFeaturesGet) | **GET** /api/v1/album/{id}/features | Get Features From Album
 [**getFeaturesFromArtistApiV1ArtistIdFeaturesGet**](V1Api.md#getFeaturesFromArtistApiV1ArtistIdFeaturesGet) | **GET** /api/v1/artist/{id}/features | Get Features From Artist
 [**getFeaturesFromSongApiV1SongIdFeaturesGet**](V1Api.md#getFeaturesFromSongApiV1SongIdFeaturesGet) | **GET** /api/v1/song/{id}/features | Get Features From Song
+[**getGenreApiV1GenreIdGet**](V1Api.md#getGenreApiV1GenreIdGet) | **GET** /api/v1/genre/{id} | Get Genre
 [**getGenresFromAlbumApiV1AlbumIdGenresGet**](V1Api.md#getGenresFromAlbumApiV1AlbumIdGenresGet) | **GET** /api/v1/album/{id}/genres | Get Genres From Album
 [**getGenresFromArtistApiV1ArtistIdGenresGet**](V1Api.md#getGenresFromArtistApiV1ArtistIdGenresGet) | **GET** /api/v1/artist/{id}/genres | Get Genres From Artist
 [**getGenresFromPlaylistApiV1PlaylistIdGenresGet**](V1Api.md#getGenresFromPlaylistApiV1PlaylistIdGenresGet) | **GET** /api/v1/playlist/{id}/genres | Get Genres From Playlist
@@ -32,7 +33,7 @@ Method | HTTP request | Description
 [**getSongApiV1SongIdGet**](V1Api.md#getSongApiV1SongIdGet) | **GET** /api/v1/song/{id} | Get Song
 [**getSongsFromAlbumApiV1AlbumIdSongsGet**](V1Api.md#getSongsFromAlbumApiV1AlbumIdSongsGet) | **GET** /api/v1/album/{id}/songs | Get Songs From Album
 [**getSongsFromArtistApiV1ArtistIdSongsGet**](V1Api.md#getSongsFromArtistApiV1ArtistIdSongsGet) | **GET** /api/v1/artist/{id}/songs | Get Songs From Artist
-[**getSongsFromGenreApiV1GenreSongsGet**](V1Api.md#getSongsFromGenreApiV1GenreSongsGet) | **GET** /api/v1/genre/songs | Get Songs From Genre
+[**getSongsFromGenreApiV1GenreIdSongsGet**](V1Api.md#getSongsFromGenreApiV1GenreIdSongsGet) | **GET** /api/v1/genre/{id}/songs | Get Songs From Genre
 [**getSongsFromPlaylistApiV1PlaylistIdSongsGet**](V1Api.md#getSongsFromPlaylistApiV1PlaylistIdSongsGet) | **GET** /api/v1/playlist/{id}/songs | Get Songs From Playlist
 [**listAllAlbumsApiV1AlbumsGet**](V1Api.md#listAllAlbumsApiV1AlbumsGet) | **GET** /api/v1/albums | List All Albums
 [**listAllArtistApiV1ArtistsGet**](V1Api.md#listAllArtistApiV1ArtistsGet) | **GET** /api/v1/artists | List All Artist
@@ -43,7 +44,7 @@ Method | HTTP request | Description
 [**streamSongApiV1SongIdStreamGet**](V1Api.md#streamSongApiV1SongIdStreamGet) | **GET** /api/v1/song/{id}/stream | Stream Song
 [**updateAlbumApiV1AlbumIdPatch**](V1Api.md#updateAlbumApiV1AlbumIdPatch) | **PATCH** /api/v1/album/{id} | Update Album
 [**updateArtistApiV1ArtistIdPatch**](V1Api.md#updateArtistApiV1ArtistIdPatch) | **PATCH** /api/v1/artist/{id} | Update Artist
-[**updateGenreApiV1GenrePatch**](V1Api.md#updateGenreApiV1GenrePatch) | **PATCH** /api/v1/genre | Update Genre
+[**updateGenreApiV1GenreIdPatch**](V1Api.md#updateGenreApiV1GenreIdPatch) | **PATCH** /api/v1/genre/{id} | Update Genre
 [**updatePlaylistApiV1PlaylistIdPatch**](V1Api.md#updatePlaylistApiV1PlaylistIdPatch) | **PATCH** /api/v1/playlist/{id} | Update Playlist
 [**updateSongApiV1SongIdPatch**](V1Api.md#updateSongApiV1SongIdPatch) | **PATCH** /api/v1/song/{id} | Update Song
 [**uploadSongApiV1SongPost**](V1Api.md#uploadSongApiV1SongPost) | **POST** /api/v1/song | Upload Song
@@ -219,7 +220,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **createGenreApiV1GenrePost**
-> string createGenreApiV1GenrePost(genreCreateRequest)
+> GenreResponse createGenreApiV1GenrePost(genreCreateRequest)
 
 
 ### Example
@@ -253,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+**GenreResponse**
 
 ### Authorization
 
@@ -440,8 +441,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **deleteGenreApiV1GenreDelete**
-> DeletedResponse deleteGenreApiV1GenreDelete()
+# **deleteGenreApiV1GenreIdDelete**
+> DeletedResponse deleteGenreApiV1GenreIdDelete()
 
 
 ### Example
@@ -449,17 +450,17 @@ No authorization required
 
 ```typescript
 import { createConfiguration, V1Api } from '';
-import type { V1ApiDeleteGenreApiV1GenreDeleteRequest } from '';
+import type { V1ApiDeleteGenreApiV1GenreIdDeleteRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new V1Api(configuration);
 
-const request: V1ApiDeleteGenreApiV1GenreDeleteRequest = {
+const request: V1ApiDeleteGenreApiV1GenreIdDeleteRequest = {
   
-  name: "name_example",
+  id: 1,
 };
 
-const data = await apiInstance.deleteGenreApiV1GenreDelete(request);
+const data = await apiInstance.deleteGenreApiV1GenreIdDelete(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -468,7 +469,7 @@ console.log('API called successfully. Returned data:', data);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | [**string**] |  | defaults to undefined
+ **id** | [**number**] |  | defaults to undefined
 
 
 ### Return type
@@ -1076,6 +1077,59 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **getGenreApiV1GenreIdGet**
+> GenreResponse getGenreApiV1GenreIdGet()
+
+
+### Example
+
+
+```typescript
+import { createConfiguration, V1Api } from '';
+import type { V1ApiGetGenreApiV1GenreIdGetRequest } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new V1Api(configuration);
+
+const request: V1ApiGetGenreApiV1GenreIdGetRequest = {
+  
+  id: 1,
+};
+
+const data = await apiInstance.getGenreApiV1GenreIdGet(request);
+console.log('API called successfully. Returned data:', data);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**number**] |  | defaults to undefined
+
+
+### Return type
+
+**GenreResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **getGenresFromAlbumApiV1AlbumIdGenresGet**
 > Array<string> getGenresFromAlbumApiV1AlbumIdGenresGet()
 
@@ -1553,8 +1607,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **getSongsFromGenreApiV1GenreSongsGet**
-> Array<number> getSongsFromGenreApiV1GenreSongsGet()
+# **getSongsFromGenreApiV1GenreIdSongsGet**
+> Array<number> getSongsFromGenreApiV1GenreIdSongsGet()
 
 
 ### Example
@@ -1562,17 +1616,17 @@ No authorization required
 
 ```typescript
 import { createConfiguration, V1Api } from '';
-import type { V1ApiGetSongsFromGenreApiV1GenreSongsGetRequest } from '';
+import type { V1ApiGetSongsFromGenreApiV1GenreIdSongsGetRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new V1Api(configuration);
 
-const request: V1ApiGetSongsFromGenreApiV1GenreSongsGetRequest = {
+const request: V1ApiGetSongsFromGenreApiV1GenreIdSongsGetRequest = {
   
-  name: "name_example",
+  id: 1,
 };
 
-const data = await apiInstance.getSongsFromGenreApiV1GenreSongsGet(request);
+const data = await apiInstance.getSongsFromGenreApiV1GenreIdSongsGet(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -1581,7 +1635,7 @@ console.log('API called successfully. Returned data:', data);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | [**string**] |  | defaults to undefined
+ **id** | [**number**] |  | defaults to undefined
 
 
 ### Return type
@@ -1750,7 +1804,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **listAllGenresApiV1GenresGet**
-> Array<string> listAllGenresApiV1GenresGet()
+> Array<GenreResponse> listAllGenresApiV1GenresGet()
 
 
 ### Example
@@ -1775,7 +1829,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**Array<string>**
+**Array<GenreResponse>**
 
 ### Authorization
 
@@ -2108,8 +2162,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **updateGenreApiV1GenrePatch**
-> string updateGenreApiV1GenrePatch(genreUpdateRequest)
+# **updateGenreApiV1GenreIdPatch**
+> GenreResponse updateGenreApiV1GenreIdPatch(genreUpdateRequest)
 
 
 ### Example
@@ -2117,20 +2171,21 @@ No authorization required
 
 ```typescript
 import { createConfiguration, V1Api } from '';
-import type { V1ApiUpdateGenreApiV1GenrePatchRequest } from '';
+import type { V1ApiUpdateGenreApiV1GenreIdPatchRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new V1Api(configuration);
 
-const request: V1ApiUpdateGenreApiV1GenrePatchRequest = {
+const request: V1ApiUpdateGenreApiV1GenreIdPatchRequest = {
+  
+  id: 1,
   
   genreUpdateRequest: {
-    oldname: "oldname_example",
-    newname: "newname_example",
+    name: "name_example",
   },
 };
 
-const data = await apiInstance.updateGenreApiV1GenrePatch(request);
+const data = await apiInstance.updateGenreApiV1GenreIdPatch(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -2140,11 +2195,12 @@ console.log('API called successfully. Returned data:', data);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **genreUpdateRequest** | **GenreUpdateRequest**|  |
+ **id** | [**number**] |  | defaults to undefined
 
 
 ### Return type
 
-**string**
+**GenreResponse**
 
 ### Authorization
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import ForeignKey, UniqueConstraint, Text
+from sqlalchemy import ForeignKey, UniqueConstraint, Text, event
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy.ext.associationproxy import association_proxy, AssociationProxy
 from app.database.database import Base
@@ -45,6 +45,10 @@ class Artists(Base):
     last_updated: Mapped[datetime] = mapped_column(
         nullable=False, default=lambda: datetime.now(timezone.utc))
 
+    last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
+    stream_count: Mapped[int] = mapped_column(
+        nullable=False, default=lambda: 0)
+
     image: Mapped[Images | None] = relationship()
 
     albums: Mapped[list[Albums]] = relationship(
@@ -70,6 +74,9 @@ class Genres(Base):
     name: Mapped[str] = mapped_column(nullable=False, unique=True)
     last_updated: Mapped[datetime] = mapped_column(
         nullable=False, default=lambda: datetime.now(timezone.utc))
+    last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
+    stream_count: Mapped[int] = mapped_column(
+        nullable=False, default=lambda: 0)
 
     songs: Mapped[list[Songs]] = relationship(back_populates="genre")
 
@@ -102,6 +109,9 @@ class Albums(Base):
         ForeignKey(Artists.id, ondelete="CASCADE"), nullable=False)
     last_updated: Mapped[datetime] = mapped_column(
         nullable=False, default=lambda: datetime.now(timezone.utc))
+    last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
+    stream_count: Mapped[int] = mapped_column(
+        nullable=False, default=lambda: 0)
 
     image: Mapped[Images | None] = relationship()
 
@@ -110,25 +120,6 @@ class Albums(Base):
 
 
 class Songs(Base):
-    """
-    CREATE TABLE songs (
-        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        genre INTEGER NULL,
-        artist INTEGER NULL,
-        album INTEGER NULL,
-        cover INTEGER NULL,
-        title VARCHAR NOT NULL,
-        release INTEGER NULL,
-        trackno INTEGER NULL,
-        metatags TEXT NOT NULL,
-        buffer BLOB NOT NULL UNIQUE,
-        last_updated INTEGER NOT NULL,
-        FOREIGN KEY(genre) REFERENCES genre(id) ON DELETE SET NULL,
-        FOREIGN KEY(artist) REFERENCES artists(id) ON DELETE SET NULL,
-        FOREIGN KEY(album) REFERENCES albums(id) ON DELETE SET NULL,
-        FOREIGN KEY(cover) REFERENCES images(id) ON DELETE SET NULL
-    )
-    """
     __tablename__ = "songs"
     __table_args__ = (
         UniqueConstraint("trackno", "album_id", name="UQ_track_album"),
@@ -153,6 +144,9 @@ class Songs(Base):
         nullable=False, unique=True, deferred=True)
     last_updated: Mapped[datetime] = mapped_column(
         nullable=False, default=lambda: datetime.now(timezone.utc))
+    last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
+    stream_count: Mapped[int] = mapped_column(
+        nullable=False, default=lambda: 0)
 
     genre: Mapped[Genres | None] = relationship(back_populates="songs")
     artist: Mapped[Artists | None] = relationship(back_populates="songs")
@@ -220,6 +214,9 @@ class Playlists(Base):
         ForeignKey(Images.id, ondelete="SET NULL"), nullable=True)
     last_updated: Mapped[datetime] = mapped_column(
         nullable=False, default=lambda: datetime.now(timezone.utc))
+    last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
+    stream_count: Mapped[int] = mapped_column(
+        nullable=False, default=lambda: 0)
 
     image: Mapped[Images | None] = relationship()
     playlist_refs: Mapped[list[PlaylistRef]] = relationship(

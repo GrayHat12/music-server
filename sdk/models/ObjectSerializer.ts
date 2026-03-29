@@ -6,6 +6,7 @@ export * from '../models/ArtistResponse';
 export * from '../models/ArtistUpdateRequest';
 export * from '../models/DeletedResponse';
 export * from '../models/GenreCreateRequest';
+export * from '../models/GenreResponse';
 export * from '../models/GenreUpdateRequest';
 export * from '../models/HTTPValidationError';
 export * from '../models/LocationInner';
@@ -24,6 +25,7 @@ import { ArtistResponse } from '../models/ArtistResponse';
 import { ArtistUpdateRequest } from '../models/ArtistUpdateRequest';
 import { DeletedResponse } from '../models/DeletedResponse';
 import { GenreCreateRequest } from '../models/GenreCreateRequest';
+import { GenreResponse } from '../models/GenreResponse';
 import { GenreUpdateRequest } from '../models/GenreUpdateRequest';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { LocationInner } from '../models/LocationInner';
@@ -58,6 +60,7 @@ let typeMap: {[index: string]: any} = {
     "ArtistUpdateRequest": ArtistUpdateRequest,
     "DeletedResponse": DeletedResponse,
     "GenreCreateRequest": GenreCreateRequest,
+    "GenreResponse": GenreResponse,
     "GenreUpdateRequest": GenreUpdateRequest,
     "HTTPValidationError": HTTPValidationError,
     "LocationInner": LocationInner,

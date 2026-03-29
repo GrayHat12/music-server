@@ -10,6 +10,7 @@ import { ArtistResponse } from '../models/ArtistResponse';
 import { ArtistUpdateRequest } from '../models/ArtistUpdateRequest';
 import { DeletedResponse } from '../models/DeletedResponse';
 import { GenreCreateRequest } from '../models/GenreCreateRequest';
+import { GenreResponse } from '../models/GenreResponse';
 import { GenreUpdateRequest } from '../models/GenreUpdateRequest';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { LocationInner } from '../models/LocationInner';
@@ -516,79 +517,6 @@ export class PromiseDatabaseApi {
 
 
 
-import { ObservableDefaultApi } from './ObservableAPI';
-
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
-    ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Albums
-     */
-    public albumsUiAlbumsGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.albumsUiAlbumsGetWithHttpInfo(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Albums
-     */
-    public albumsUiAlbumsGet(_options?: PromiseConfigurationOptions): Promise<string> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.albumsUiAlbumsGet(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Artists
-     */
-    public artistsUiArtistsGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.artistsUiArtistsGetWithHttpInfo(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Artists
-     */
-    public artistsUiArtistsGet(_options?: PromiseConfigurationOptions): Promise<string> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.artistsUiArtistsGet(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Playlists
-     */
-    public playlistsUiPlaylistsGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.playlistsUiPlaylistsGetWithHttpInfo(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Playlists
-     */
-    public playlistsUiPlaylistsGet(_options?: PromiseConfigurationOptions): Promise<string> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.playlistsUiPlaylistsGet(observableOptions);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservableGenreApi } from './ObservableAPI';
 
 import { GenreApiRequestFactory, GenreApiResponseProcessor} from "../apis/GenreApi";
@@ -607,7 +535,7 @@ export class PromiseGenreApi {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
+    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest, observableOptions);
         return result.toPromise();
@@ -617,7 +545,7 @@ export class PromiseGenreApi {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<string> {
+    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<GenreResponse> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.createGenreApiV1GenrePost(genreCreateRequest, observableOptions);
         return result.toPromise();
@@ -625,21 +553,41 @@ export class PromiseGenreApi {
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDeleteWithHttpInfo(name: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
+    public deleteGenreApiV1GenreIdDeleteWithHttpInfo(id: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.deleteGenreApiV1GenreDeleteWithHttpInfo(name, observableOptions);
+        const result = this.api.deleteGenreApiV1GenreIdDeleteWithHttpInfo(id, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDelete(name: string, _options?: PromiseConfigurationOptions): Promise<DeletedResponse> {
+    public deleteGenreApiV1GenreIdDelete(id: number, _options?: PromiseConfigurationOptions): Promise<DeletedResponse> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.deleteGenreApiV1GenreDelete(name, observableOptions);
+        const result = this.api.deleteGenreApiV1GenreIdDelete(id, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGetWithHttpInfo(id: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getGenreApiV1GenreIdGetWithHttpInfo(id, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGet(id: number, _options?: PromiseConfigurationOptions): Promise<GenreResponse> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getGenreApiV1GenreIdGet(id, observableOptions);
         return result.toPromise();
     }
 
@@ -705,28 +653,28 @@ export class PromiseGenreApi {
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<number>>> {
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<number>>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name, observableOptions);
+        const result = this.api.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGet(name: string, _options?: PromiseConfigurationOptions): Promise<Array<number>> {
+    public getSongsFromGenreApiV1GenreIdSongsGet(id: number, _options?: PromiseConfigurationOptions): Promise<Array<number>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.getSongsFromGenreApiV1GenreSongsGet(name, observableOptions);
+        const result = this.api.getSongsFromGenreApiV1GenreIdSongsGet(id, observableOptions);
         return result.toPromise();
     }
 
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<string>>> {
+    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<GenreResponse>>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllGenresApiV1GenresGetWithHttpInfo(observableOptions);
         return result.toPromise();
@@ -735,7 +683,7 @@ export class PromiseGenreApi {
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGet(_options?: PromiseConfigurationOptions): Promise<Array<string>> {
+    public listAllGenresApiV1GenresGet(_options?: PromiseConfigurationOptions): Promise<Array<GenreResponse>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllGenresApiV1GenresGet(observableOptions);
         return result.toPromise();
@@ -743,21 +691,23 @@ export class PromiseGenreApi {
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
+    public updateGenreApiV1GenreIdPatchWithHttpInfo(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest, observableOptions);
+        const result = this.api.updateGenreApiV1GenreIdPatchWithHttpInfo(id, genreUpdateRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatch(genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<string> {
+    public updateGenreApiV1GenreIdPatch(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<GenreResponse> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.updateGenreApiV1GenrePatch(genreUpdateRequest, observableOptions);
+        const result = this.api.updateGenreApiV1GenreIdPatch(id, genreUpdateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -1220,21 +1170,21 @@ export class PromiseSongApi {
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<number>>> {
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<number>>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name, observableOptions);
+        const result = this.api.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGet(name: string, _options?: PromiseConfigurationOptions): Promise<Array<number>> {
+    public getSongsFromGenreApiV1GenreIdSongsGet(id: number, _options?: PromiseConfigurationOptions): Promise<Array<number>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.getSongsFromGenreApiV1GenreSongsGet(name, observableOptions);
+        const result = this.api.getSongsFromGenreApiV1GenreIdSongsGet(id, observableOptions);
         return result.toPromise();
     }
 
@@ -1421,7 +1371,7 @@ export class PromiseV1Api {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
+    public createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.createGenreApiV1GenrePostWithHttpInfo(genreCreateRequest, observableOptions);
         return result.toPromise();
@@ -1431,7 +1381,7 @@ export class PromiseV1Api {
      * Create Genre
      * @param genreCreateRequest
      */
-    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<string> {
+    public createGenreApiV1GenrePost(genreCreateRequest: GenreCreateRequest, _options?: PromiseConfigurationOptions): Promise<GenreResponse> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.createGenreApiV1GenrePost(genreCreateRequest, observableOptions);
         return result.toPromise();
@@ -1499,21 +1449,21 @@ export class PromiseV1Api {
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDeleteWithHttpInfo(name: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
+    public deleteGenreApiV1GenreIdDeleteWithHttpInfo(id: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.deleteGenreApiV1GenreDeleteWithHttpInfo(name, observableOptions);
+        const result = this.api.deleteGenreApiV1GenreIdDeleteWithHttpInfo(id, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Delete Genre
-     * @param name
+     * @param id
      */
-    public deleteGenreApiV1GenreDelete(name: string, _options?: PromiseConfigurationOptions): Promise<DeletedResponse> {
+    public deleteGenreApiV1GenreIdDelete(id: number, _options?: PromiseConfigurationOptions): Promise<DeletedResponse> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.deleteGenreApiV1GenreDelete(name, observableOptions);
+        const result = this.api.deleteGenreApiV1GenreIdDelete(id, observableOptions);
         return result.toPromise();
     }
 
@@ -1738,6 +1688,26 @@ export class PromiseV1Api {
     }
 
     /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGetWithHttpInfo(id: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getGenreApiV1GenreIdGetWithHttpInfo(id, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get Genre
+     * @param id
+     */
+    public getGenreApiV1GenreIdGet(id: number, _options?: PromiseConfigurationOptions): Promise<GenreResponse> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getGenreApiV1GenreIdGet(id, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
      * Get Genres From Album
      * @param id
      */
@@ -1919,21 +1889,21 @@ export class PromiseV1Api {
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<number>>> {
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<number>>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(name, observableOptions);
+        const result = this.api.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(id, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get Songs From Genre
-     * @param name
+     * @param id
      */
-    public getSongsFromGenreApiV1GenreSongsGet(name: string, _options?: PromiseConfigurationOptions): Promise<Array<number>> {
+    public getSongsFromGenreApiV1GenreIdSongsGet(id: number, _options?: PromiseConfigurationOptions): Promise<Array<number>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.getSongsFromGenreApiV1GenreSongsGet(name, observableOptions);
+        const result = this.api.getSongsFromGenreApiV1GenreIdSongsGet(id, observableOptions);
         return result.toPromise();
     }
 
@@ -1996,7 +1966,7 @@ export class PromiseV1Api {
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<string>>> {
+    public listAllGenresApiV1GenresGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<GenreResponse>>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllGenresApiV1GenresGetWithHttpInfo(observableOptions);
         return result.toPromise();
@@ -2005,7 +1975,7 @@ export class PromiseV1Api {
     /**
      * List All Genres
      */
-    public listAllGenresApiV1GenresGet(_options?: PromiseConfigurationOptions): Promise<Array<string>> {
+    public listAllGenresApiV1GenresGet(_options?: PromiseConfigurationOptions): Promise<Array<GenreResponse>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllGenresApiV1GenresGet(observableOptions);
         return result.toPromise();
@@ -2133,21 +2103,23 @@ export class PromiseV1Api {
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
+    public updateGenreApiV1GenreIdPatchWithHttpInfo(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.updateGenreApiV1GenrePatchWithHttpInfo(genreUpdateRequest, observableOptions);
+        const result = this.api.updateGenreApiV1GenreIdPatchWithHttpInfo(id, genreUpdateRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Update Genre
+     * @param id
      * @param genreUpdateRequest
      */
-    public updateGenreApiV1GenrePatch(genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<string> {
+    public updateGenreApiV1GenreIdPatch(id: number, genreUpdateRequest: GenreUpdateRequest, _options?: PromiseConfigurationOptions): Promise<GenreResponse> {
         const observableOptions = wrapOptions(_options);
-        const result = this.api.updateGenreApiV1GenrePatch(genreUpdateRequest, observableOptions);
+        const result = this.api.updateGenreApiV1GenreIdPatch(id, genreUpdateRequest, observableOptions);
         return result.toPromise();
     }
 

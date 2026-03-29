@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**getSongApiV1SongIdGet**](SongApi.md#getSongApiV1SongIdGet) | **GET** /api/v1/song/{id} | Get Song
 [**getSongsFromAlbumApiV1AlbumIdSongsGet**](SongApi.md#getSongsFromAlbumApiV1AlbumIdSongsGet) | **GET** /api/v1/album/{id}/songs | Get Songs From Album
 [**getSongsFromArtistApiV1ArtistIdSongsGet**](SongApi.md#getSongsFromArtistApiV1ArtistIdSongsGet) | **GET** /api/v1/artist/{id}/songs | Get Songs From Artist
-[**getSongsFromGenreApiV1GenreSongsGet**](SongApi.md#getSongsFromGenreApiV1GenreSongsGet) | **GET** /api/v1/genre/songs | Get Songs From Genre
+[**getSongsFromGenreApiV1GenreIdSongsGet**](SongApi.md#getSongsFromGenreApiV1GenreIdSongsGet) | **GET** /api/v1/genre/{id}/songs | Get Songs From Genre
 [**getSongsFromPlaylistApiV1PlaylistIdSongsGet**](SongApi.md#getSongsFromPlaylistApiV1PlaylistIdSongsGet) | **GET** /api/v1/playlist/{id}/songs | Get Songs From Playlist
 [**listAllSongApiV1SongsGet**](SongApi.md#listAllSongApiV1SongsGet) | **GET** /api/v1/songs | List All Song
 [**streamSongApiV1SongIdStreamGet**](SongApi.md#streamSongApiV1SongIdStreamGet) | **GET** /api/v1/song/{id}/stream | Stream Song
@@ -390,8 +390,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **getSongsFromGenreApiV1GenreSongsGet**
-> Array<number> getSongsFromGenreApiV1GenreSongsGet()
+# **getSongsFromGenreApiV1GenreIdSongsGet**
+> Array<number> getSongsFromGenreApiV1GenreIdSongsGet()
 
 
 ### Example
@@ -399,17 +399,17 @@ No authorization required
 
 ```typescript
 import { createConfiguration, SongApi } from '';
-import type { SongApiGetSongsFromGenreApiV1GenreSongsGetRequest } from '';
+import type { SongApiGetSongsFromGenreApiV1GenreIdSongsGetRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new SongApi(configuration);
 
-const request: SongApiGetSongsFromGenreApiV1GenreSongsGetRequest = {
+const request: SongApiGetSongsFromGenreApiV1GenreIdSongsGetRequest = {
   
-  name: "name_example",
+  id: 1,
 };
 
-const data = await apiInstance.getSongsFromGenreApiV1GenreSongsGet(request);
+const data = await apiInstance.getSongsFromGenreApiV1GenreIdSongsGet(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -418,7 +418,7 @@ console.log('API called successfully. Returned data:', data);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | [**string**] |  | defaults to undefined
+ **id** | [**number**] |  | defaults to undefined
 
 
 ### Return type

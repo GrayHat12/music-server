@@ -38,8 +38,7 @@ class GenreCreateRequest(BaseModel):
 
 
 class GenreUpdateRequest(BaseModel):
-    oldname: str = Field(...)
-    newname: str = Field(...)
+    name: str = Field(...)
 
 
 class SongUpdateRequest(BaseModel):

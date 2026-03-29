@@ -19,7 +19,9 @@ def list_all_artist(db: Session = Depends(get_db)):
         id=artist.id,
         name=artist.name,
         image=artist.image_id,
-        last_updated=artist.last_updated
+        lastUpdated=artist.last_updated,
+        streamCount=artist.stream_count,
+        lastStreamed=artist.last_streamed
     ) for artist in artists]
 
 
@@ -32,7 +34,9 @@ def get_artist(id: int = Path(...), db: Session = Depends(get_db)):
         id=artist.id,
         name=artist.name,
         image=artist.image_id,
-        last_updated=artist.last_updated
+        lastUpdated=artist.last_updated,
+        streamCount=artist.stream_count,
+        lastStreamed=artist.last_streamed
     )
 
 

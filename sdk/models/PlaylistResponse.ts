@@ -17,6 +17,8 @@ export class PlaylistResponse {
     'name': string;
     'image'?: number | null;
     'lastUpdated': Date;
+    'streamCount': number;
+    'lastStreamed'?: Date | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -43,7 +45,19 @@ export class PlaylistResponse {
         },
         {
             "name": "lastUpdated",
-            "baseName": "last_updated",
+            "baseName": "lastUpdated",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "streamCount",
+            "baseName": "streamCount",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "lastStreamed",
+            "baseName": "lastStreamed",
             "type": "Date",
             "format": "date-time"
         }    ];

@@ -237,28 +237,24 @@ export class SongApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get Songs From Genre
-     * @param name 
+     * @param id 
      */
-    public async getSongsFromGenreApiV1GenreSongsGet(name: string, _options?: Configuration): Promise<RequestContext> {
+    public async getSongsFromGenreApiV1GenreIdSongsGet(id: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'name' is not null or undefined
-        if (name === null || name === undefined) {
-            throw new RequiredError("SongApi", "getSongsFromGenreApiV1GenreSongsGet", "name");
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SongApi", "getSongsFromGenreApiV1GenreIdSongsGet", "id");
         }
 
 
         // Path Params
-        const localVarPath = '/api/v1/genre/songs';
+        const localVarPath = '/api/v1/genre/{id}/songs'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (name !== undefined) {
-            requestContext.setQueryParam("name", ObjectSerializer.serialize(name, "string", ""));
-        }
 
 
         
@@ -719,10 +715,10 @@ export class SongApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getSongsFromGenreApiV1GenreSongsGet
+     * @params response Response returned by the server for a request to getSongsFromGenreApiV1GenreIdSongsGet
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Array<number> >> {
+     public async getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Array<number> >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Array<number> = ObjectSerializer.deserialize(

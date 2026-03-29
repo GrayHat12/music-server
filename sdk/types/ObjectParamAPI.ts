@@ -10,6 +10,7 @@ import { ArtistResponse } from '../models/ArtistResponse';
 import { ArtistUpdateRequest } from '../models/ArtistUpdateRequest';
 import { DeletedResponse } from '../models/DeletedResponse';
 import { GenreCreateRequest } from '../models/GenreCreateRequest';
+import { GenreResponse } from '../models/GenreResponse';
 import { GenreUpdateRequest } from '../models/GenreUpdateRequest';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { LocationInner } from '../models/LocationInner';
@@ -624,75 +625,6 @@ export class ObjectDatabaseApi {
 
 }
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-
-export interface DefaultApiAlbumsUiAlbumsGetRequest {
-}
-
-export interface DefaultApiArtistsUiArtistsGetRequest {
-}
-
-export interface DefaultApiPlaylistsUiPlaylistsGetRequest {
-}
-
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
-
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Albums
-     * @param param the request object
-     */
-    public albumsUiAlbumsGetWithHttpInfo(param: DefaultApiAlbumsUiAlbumsGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
-        return this.api.albumsUiAlbumsGetWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Albums
-     * @param param the request object
-     */
-    public albumsUiAlbumsGet(param: DefaultApiAlbumsUiAlbumsGetRequest = {}, options?: ConfigurationOptions): Promise<string> {
-        return this.api.albumsUiAlbumsGet( options).toPromise();
-    }
-
-    /**
-     * Artists
-     * @param param the request object
-     */
-    public artistsUiArtistsGetWithHttpInfo(param: DefaultApiArtistsUiArtistsGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
-        return this.api.artistsUiArtistsGetWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Artists
-     * @param param the request object
-     */
-    public artistsUiArtistsGet(param: DefaultApiArtistsUiArtistsGetRequest = {}, options?: ConfigurationOptions): Promise<string> {
-        return this.api.artistsUiArtistsGet( options).toPromise();
-    }
-
-    /**
-     * Playlists
-     * @param param the request object
-     */
-    public playlistsUiPlaylistsGetWithHttpInfo(param: DefaultApiPlaylistsUiPlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
-        return this.api.playlistsUiPlaylistsGetWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Playlists
-     * @param param the request object
-     */
-    public playlistsUiPlaylistsGet(param: DefaultApiPlaylistsUiPlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<string> {
-        return this.api.playlistsUiPlaylistsGet( options).toPromise();
-    }
-
-}
-
 import { ObservableGenreApi } from "./ObservableAPI";
 import { GenreApiRequestFactory, GenreApiResponseProcessor} from "../apis/GenreApi";
 
@@ -705,14 +637,24 @@ export interface GenreApiCreateGenreApiV1GenrePostRequest {
     genreCreateRequest: GenreCreateRequest
 }
 
-export interface GenreApiDeleteGenreApiV1GenreDeleteRequest {
+export interface GenreApiDeleteGenreApiV1GenreIdDeleteRequest {
     /**
      * 
      * Defaults to: undefined
-     * @type string
-     * @memberof GenreApideleteGenreApiV1GenreDelete
+     * @type number
+     * @memberof GenreApideleteGenreApiV1GenreIdDelete
      */
-    name: string
+    id: number
+}
+
+export interface GenreApiGetGenreApiV1GenreIdGetRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof GenreApigetGenreApiV1GenreIdGet
+     */
+    id: number
 }
 
 export interface GenreApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest {
@@ -745,24 +687,31 @@ export interface GenreApiGetGenresFromPlaylistApiV1PlaylistIdGenresGetRequest {
     id: number
 }
 
-export interface GenreApiGetSongsFromGenreApiV1GenreSongsGetRequest {
+export interface GenreApiGetSongsFromGenreApiV1GenreIdSongsGetRequest {
     /**
      * 
      * Defaults to: undefined
-     * @type string
-     * @memberof GenreApigetSongsFromGenreApiV1GenreSongsGet
+     * @type number
+     * @memberof GenreApigetSongsFromGenreApiV1GenreIdSongsGet
      */
-    name: string
+    id: number
 }
 
 export interface GenreApiListAllGenresApiV1GenresGetRequest {
 }
 
-export interface GenreApiUpdateGenreApiV1GenrePatchRequest {
+export interface GenreApiUpdateGenreApiV1GenreIdPatchRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof GenreApiupdateGenreApiV1GenreIdPatch
+     */
+    id: number
     /**
      * 
      * @type GenreUpdateRequest
-     * @memberof GenreApiupdateGenreApiV1GenrePatch
+     * @memberof GenreApiupdateGenreApiV1GenreIdPatch
      */
     genreUpdateRequest: GenreUpdateRequest
 }
@@ -778,7 +727,7 @@ export class ObjectGenreApi {
      * Create Genre
      * @param param the request object
      */
-    public createGenreApiV1GenrePostWithHttpInfo(param: GenreApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
+    public createGenreApiV1GenrePostWithHttpInfo(param: GenreApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
         return this.api.createGenreApiV1GenrePostWithHttpInfo(param.genreCreateRequest,  options).toPromise();
     }
 
@@ -786,7 +735,7 @@ export class ObjectGenreApi {
      * Create Genre
      * @param param the request object
      */
-    public createGenreApiV1GenrePost(param: GenreApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<string> {
+    public createGenreApiV1GenrePost(param: GenreApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<GenreResponse> {
         return this.api.createGenreApiV1GenrePost(param.genreCreateRequest,  options).toPromise();
     }
 
@@ -794,16 +743,32 @@ export class ObjectGenreApi {
      * Delete Genre
      * @param param the request object
      */
-    public deleteGenreApiV1GenreDeleteWithHttpInfo(param: GenreApiDeleteGenreApiV1GenreDeleteRequest, options?: ConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
-        return this.api.deleteGenreApiV1GenreDeleteWithHttpInfo(param.name,  options).toPromise();
+    public deleteGenreApiV1GenreIdDeleteWithHttpInfo(param: GenreApiDeleteGenreApiV1GenreIdDeleteRequest, options?: ConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
+        return this.api.deleteGenreApiV1GenreIdDeleteWithHttpInfo(param.id,  options).toPromise();
     }
 
     /**
      * Delete Genre
      * @param param the request object
      */
-    public deleteGenreApiV1GenreDelete(param: GenreApiDeleteGenreApiV1GenreDeleteRequest, options?: ConfigurationOptions): Promise<DeletedResponse> {
-        return this.api.deleteGenreApiV1GenreDelete(param.name,  options).toPromise();
+    public deleteGenreApiV1GenreIdDelete(param: GenreApiDeleteGenreApiV1GenreIdDeleteRequest, options?: ConfigurationOptions): Promise<DeletedResponse> {
+        return this.api.deleteGenreApiV1GenreIdDelete(param.id,  options).toPromise();
+    }
+
+    /**
+     * Get Genre
+     * @param param the request object
+     */
+    public getGenreApiV1GenreIdGetWithHttpInfo(param: GenreApiGetGenreApiV1GenreIdGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
+        return this.api.getGenreApiV1GenreIdGetWithHttpInfo(param.id,  options).toPromise();
+    }
+
+    /**
+     * Get Genre
+     * @param param the request object
+     */
+    public getGenreApiV1GenreIdGet(param: GenreApiGetGenreApiV1GenreIdGetRequest, options?: ConfigurationOptions): Promise<GenreResponse> {
+        return this.api.getGenreApiV1GenreIdGet(param.id,  options).toPromise();
     }
 
     /**
@@ -858,23 +823,23 @@ export class ObjectGenreApi {
      * Get Songs From Genre
      * @param param the request object
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(param: GenreApiGetSongsFromGenreApiV1GenreSongsGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<number>>> {
-        return this.api.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(param.name,  options).toPromise();
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(param: GenreApiGetSongsFromGenreApiV1GenreIdSongsGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<number>>> {
+        return this.api.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(param.id,  options).toPromise();
     }
 
     /**
      * Get Songs From Genre
      * @param param the request object
      */
-    public getSongsFromGenreApiV1GenreSongsGet(param: GenreApiGetSongsFromGenreApiV1GenreSongsGetRequest, options?: ConfigurationOptions): Promise<Array<number>> {
-        return this.api.getSongsFromGenreApiV1GenreSongsGet(param.name,  options).toPromise();
+    public getSongsFromGenreApiV1GenreIdSongsGet(param: GenreApiGetSongsFromGenreApiV1GenreIdSongsGetRequest, options?: ConfigurationOptions): Promise<Array<number>> {
+        return this.api.getSongsFromGenreApiV1GenreIdSongsGet(param.id,  options).toPromise();
     }
 
     /**
      * List All Genres
      * @param param the request object
      */
-    public listAllGenresApiV1GenresGetWithHttpInfo(param: GenreApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<Array<string>>> {
+    public listAllGenresApiV1GenresGetWithHttpInfo(param: GenreApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<Array<GenreResponse>>> {
         return this.api.listAllGenresApiV1GenresGetWithHttpInfo( options).toPromise();
     }
 
@@ -882,7 +847,7 @@ export class ObjectGenreApi {
      * List All Genres
      * @param param the request object
      */
-    public listAllGenresApiV1GenresGet(param: GenreApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<Array<string>> {
+    public listAllGenresApiV1GenresGet(param: GenreApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<Array<GenreResponse>> {
         return this.api.listAllGenresApiV1GenresGet( options).toPromise();
     }
 
@@ -890,16 +855,16 @@ export class ObjectGenreApi {
      * Update Genre
      * @param param the request object
      */
-    public updateGenreApiV1GenrePatchWithHttpInfo(param: GenreApiUpdateGenreApiV1GenrePatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
-        return this.api.updateGenreApiV1GenrePatchWithHttpInfo(param.genreUpdateRequest,  options).toPromise();
+    public updateGenreApiV1GenreIdPatchWithHttpInfo(param: GenreApiUpdateGenreApiV1GenreIdPatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
+        return this.api.updateGenreApiV1GenreIdPatchWithHttpInfo(param.id, param.genreUpdateRequest,  options).toPromise();
     }
 
     /**
      * Update Genre
      * @param param the request object
      */
-    public updateGenreApiV1GenrePatch(param: GenreApiUpdateGenreApiV1GenrePatchRequest, options?: ConfigurationOptions): Promise<string> {
-        return this.api.updateGenreApiV1GenrePatch(param.genreUpdateRequest,  options).toPromise();
+    public updateGenreApiV1GenreIdPatch(param: GenreApiUpdateGenreApiV1GenreIdPatchRequest, options?: ConfigurationOptions): Promise<GenreResponse> {
+        return this.api.updateGenreApiV1GenreIdPatch(param.id, param.genreUpdateRequest,  options).toPromise();
     }
 
 }
@@ -1337,14 +1302,14 @@ export interface SongApiGetSongsFromArtistApiV1ArtistIdSongsGetRequest {
     id: number
 }
 
-export interface SongApiGetSongsFromGenreApiV1GenreSongsGetRequest {
+export interface SongApiGetSongsFromGenreApiV1GenreIdSongsGetRequest {
     /**
      * 
      * Defaults to: undefined
-     * @type string
-     * @memberof SongApigetSongsFromGenreApiV1GenreSongsGet
+     * @type number
+     * @memberof SongApigetSongsFromGenreApiV1GenreIdSongsGet
      */
-    name: string
+    id: number
 }
 
 export interface SongApiGetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest {
@@ -1519,16 +1484,16 @@ export class ObjectSongApi {
      * Get Songs From Genre
      * @param param the request object
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(param: SongApiGetSongsFromGenreApiV1GenreSongsGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<number>>> {
-        return this.api.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(param.name,  options).toPromise();
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(param: SongApiGetSongsFromGenreApiV1GenreIdSongsGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<number>>> {
+        return this.api.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(param.id,  options).toPromise();
     }
 
     /**
      * Get Songs From Genre
      * @param param the request object
      */
-    public getSongsFromGenreApiV1GenreSongsGet(param: SongApiGetSongsFromGenreApiV1GenreSongsGetRequest, options?: ConfigurationOptions): Promise<Array<number>> {
-        return this.api.getSongsFromGenreApiV1GenreSongsGet(param.name,  options).toPromise();
+    public getSongsFromGenreApiV1GenreIdSongsGet(param: SongApiGetSongsFromGenreApiV1GenreIdSongsGetRequest, options?: ConfigurationOptions): Promise<Array<number>> {
+        return this.api.getSongsFromGenreApiV1GenreIdSongsGet(param.id,  options).toPromise();
     }
 
     /**
@@ -1682,14 +1647,14 @@ export interface V1ApiDeleteArtistApiV1ArtistIdDeleteRequest {
     id: number
 }
 
-export interface V1ApiDeleteGenreApiV1GenreDeleteRequest {
+export interface V1ApiDeleteGenreApiV1GenreIdDeleteRequest {
     /**
      * 
      * Defaults to: undefined
-     * @type string
-     * @memberof V1ApideleteGenreApiV1GenreDelete
+     * @type number
+     * @memberof V1ApideleteGenreApiV1GenreIdDelete
      */
-    name: string
+    id: number
 }
 
 export interface V1ApiDeleteImageApiV1ImageIdDeleteRequest {
@@ -1802,6 +1767,16 @@ export interface V1ApiGetFeaturesFromSongApiV1SongIdFeaturesGetRequest {
     id: number
 }
 
+export interface V1ApiGetGenreApiV1GenreIdGetRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof V1ApigetGenreApiV1GenreIdGet
+     */
+    id: number
+}
+
 export interface V1ApiGetGenresFromAlbumApiV1AlbumIdGenresGetRequest {
     /**
      * 
@@ -1892,14 +1867,14 @@ export interface V1ApiGetSongsFromArtistApiV1ArtistIdSongsGetRequest {
     id: number
 }
 
-export interface V1ApiGetSongsFromGenreApiV1GenreSongsGetRequest {
+export interface V1ApiGetSongsFromGenreApiV1GenreIdSongsGetRequest {
     /**
      * 
      * Defaults to: undefined
-     * @type string
-     * @memberof V1ApigetSongsFromGenreApiV1GenreSongsGet
+     * @type number
+     * @memberof V1ApigetSongsFromGenreApiV1GenreIdSongsGet
      */
-    name: string
+    id: number
 }
 
 export interface V1ApiGetSongsFromPlaylistApiV1PlaylistIdSongsGetRequest {
@@ -1979,11 +1954,18 @@ export interface V1ApiUpdateArtistApiV1ArtistIdPatchRequest {
     artistUpdateRequest: ArtistUpdateRequest
 }
 
-export interface V1ApiUpdateGenreApiV1GenrePatchRequest {
+export interface V1ApiUpdateGenreApiV1GenreIdPatchRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof V1ApiupdateGenreApiV1GenreIdPatch
+     */
+    id: number
     /**
      * 
      * @type GenreUpdateRequest
-     * @memberof V1ApiupdateGenreApiV1GenrePatch
+     * @memberof V1ApiupdateGenreApiV1GenreIdPatch
      */
     genreUpdateRequest: GenreUpdateRequest
 }
@@ -2089,7 +2071,7 @@ export class ObjectV1Api {
      * Create Genre
      * @param param the request object
      */
-    public createGenreApiV1GenrePostWithHttpInfo(param: V1ApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
+    public createGenreApiV1GenrePostWithHttpInfo(param: V1ApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
         return this.api.createGenreApiV1GenrePostWithHttpInfo(param.genreCreateRequest,  options).toPromise();
     }
 
@@ -2097,7 +2079,7 @@ export class ObjectV1Api {
      * Create Genre
      * @param param the request object
      */
-    public createGenreApiV1GenrePost(param: V1ApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<string> {
+    public createGenreApiV1GenrePost(param: V1ApiCreateGenreApiV1GenrePostRequest, options?: ConfigurationOptions): Promise<GenreResponse> {
         return this.api.createGenreApiV1GenrePost(param.genreCreateRequest,  options).toPromise();
     }
 
@@ -2153,16 +2135,16 @@ export class ObjectV1Api {
      * Delete Genre
      * @param param the request object
      */
-    public deleteGenreApiV1GenreDeleteWithHttpInfo(param: V1ApiDeleteGenreApiV1GenreDeleteRequest, options?: ConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
-        return this.api.deleteGenreApiV1GenreDeleteWithHttpInfo(param.name,  options).toPromise();
+    public deleteGenreApiV1GenreIdDeleteWithHttpInfo(param: V1ApiDeleteGenreApiV1GenreIdDeleteRequest, options?: ConfigurationOptions): Promise<HttpInfo<DeletedResponse>> {
+        return this.api.deleteGenreApiV1GenreIdDeleteWithHttpInfo(param.id,  options).toPromise();
     }
 
     /**
      * Delete Genre
      * @param param the request object
      */
-    public deleteGenreApiV1GenreDelete(param: V1ApiDeleteGenreApiV1GenreDeleteRequest, options?: ConfigurationOptions): Promise<DeletedResponse> {
-        return this.api.deleteGenreApiV1GenreDelete(param.name,  options).toPromise();
+    public deleteGenreApiV1GenreIdDelete(param: V1ApiDeleteGenreApiV1GenreIdDeleteRequest, options?: ConfigurationOptions): Promise<DeletedResponse> {
+        return this.api.deleteGenreApiV1GenreIdDelete(param.id,  options).toPromise();
     }
 
     /**
@@ -2342,6 +2324,22 @@ export class ObjectV1Api {
     }
 
     /**
+     * Get Genre
+     * @param param the request object
+     */
+    public getGenreApiV1GenreIdGetWithHttpInfo(param: V1ApiGetGenreApiV1GenreIdGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
+        return this.api.getGenreApiV1GenreIdGetWithHttpInfo(param.id,  options).toPromise();
+    }
+
+    /**
+     * Get Genre
+     * @param param the request object
+     */
+    public getGenreApiV1GenreIdGet(param: V1ApiGetGenreApiV1GenreIdGetRequest, options?: ConfigurationOptions): Promise<GenreResponse> {
+        return this.api.getGenreApiV1GenreIdGet(param.id,  options).toPromise();
+    }
+
+    /**
      * Get Genres From Album
      * @param param the request object
      */
@@ -2489,16 +2487,16 @@ export class ObjectV1Api {
      * Get Songs From Genre
      * @param param the request object
      */
-    public getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(param: V1ApiGetSongsFromGenreApiV1GenreSongsGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<number>>> {
-        return this.api.getSongsFromGenreApiV1GenreSongsGetWithHttpInfo(param.name,  options).toPromise();
+    public getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(param: V1ApiGetSongsFromGenreApiV1GenreIdSongsGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<number>>> {
+        return this.api.getSongsFromGenreApiV1GenreIdSongsGetWithHttpInfo(param.id,  options).toPromise();
     }
 
     /**
      * Get Songs From Genre
      * @param param the request object
      */
-    public getSongsFromGenreApiV1GenreSongsGet(param: V1ApiGetSongsFromGenreApiV1GenreSongsGetRequest, options?: ConfigurationOptions): Promise<Array<number>> {
-        return this.api.getSongsFromGenreApiV1GenreSongsGet(param.name,  options).toPromise();
+    public getSongsFromGenreApiV1GenreIdSongsGet(param: V1ApiGetSongsFromGenreApiV1GenreIdSongsGetRequest, options?: ConfigurationOptions): Promise<Array<number>> {
+        return this.api.getSongsFromGenreApiV1GenreIdSongsGet(param.id,  options).toPromise();
     }
 
     /**
@@ -2553,7 +2551,7 @@ export class ObjectV1Api {
      * List All Genres
      * @param param the request object
      */
-    public listAllGenresApiV1GenresGetWithHttpInfo(param: V1ApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<Array<string>>> {
+    public listAllGenresApiV1GenresGetWithHttpInfo(param: V1ApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<Array<GenreResponse>>> {
         return this.api.listAllGenresApiV1GenresGetWithHttpInfo( options).toPromise();
     }
 
@@ -2561,7 +2559,7 @@ export class ObjectV1Api {
      * List All Genres
      * @param param the request object
      */
-    public listAllGenresApiV1GenresGet(param: V1ApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<Array<string>> {
+    public listAllGenresApiV1GenresGet(param: V1ApiListAllGenresApiV1GenresGetRequest = {}, options?: ConfigurationOptions): Promise<Array<GenreResponse>> {
         return this.api.listAllGenresApiV1GenresGet( options).toPromise();
     }
 
@@ -2665,16 +2663,16 @@ export class ObjectV1Api {
      * Update Genre
      * @param param the request object
      */
-    public updateGenreApiV1GenrePatchWithHttpInfo(param: V1ApiUpdateGenreApiV1GenrePatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
-        return this.api.updateGenreApiV1GenrePatchWithHttpInfo(param.genreUpdateRequest,  options).toPromise();
+    public updateGenreApiV1GenreIdPatchWithHttpInfo(param: V1ApiUpdateGenreApiV1GenreIdPatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<GenreResponse>> {
+        return this.api.updateGenreApiV1GenreIdPatchWithHttpInfo(param.id, param.genreUpdateRequest,  options).toPromise();
     }
 
     /**
      * Update Genre
      * @param param the request object
      */
-    public updateGenreApiV1GenrePatch(param: V1ApiUpdateGenreApiV1GenrePatchRequest, options?: ConfigurationOptions): Promise<string> {
-        return this.api.updateGenreApiV1GenrePatch(param.genreUpdateRequest,  options).toPromise();
+    public updateGenreApiV1GenreIdPatch(param: V1ApiUpdateGenreApiV1GenreIdPatchRequest, options?: ConfigurationOptions): Promise<GenreResponse> {
+        return this.api.updateGenreApiV1GenreIdPatch(param.id, param.genreUpdateRequest,  options).toPromise();
     }
 
     /**

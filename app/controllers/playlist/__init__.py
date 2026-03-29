@@ -19,7 +19,9 @@ def list_all_playlists(db: Session = Depends(get_db)):
         id=playlist.id,
         name=playlist.name,
         image=playlist.image_id,
-        last_updated=playlist.last_updated,
+        lastUpdated=playlist.last_updated,
+        lastStreamed=playlist.last_streamed,
+        streamCount=playlist.stream_count
         # songs=[song.id for song in playlist.songs]
     ) for playlist in playlists]
 
@@ -33,7 +35,9 @@ def get_playlist(id: int = Path(...), db: Session = Depends(get_db)):
         id=playlist.id,
         name=playlist.name,
         image=playlist.image_id,
-        last_updated=playlist.last_updated,
+        lastUpdated=playlist.last_updated,
+        lastStreamed=playlist.last_streamed,
+        streamCount=playlist.stream_count
         # songs=[song.id for song in playlist.songs]
     )
 
