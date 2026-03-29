@@ -15,16 +15,7 @@ router = APIRouter(prefix="/album", tags=[Tags.album])
 @router.get("s", response_model=list[AlbumResponse])
 def list_all_albums(db: Session = Depends(get_db)):
     albums = db.query(Albums).all()
-    return [AlbumResponse(
-        id=album.id,
-        name=album.name,
-        image=album.image_id or album.artist.image_id,
-        lastUpdated=album.last_updated,
-        artist=album.artist_id,
-        streamCount=album.stream_count,
-        lastStreamed=album.last_streamed,
-        favorite=album.favorite
-    ) for album in albums]
+    return [AlbumResponse.from_album(album) for album in albums]
 
 
 @router.get("/{id}", response_model=AlbumResponse)
@@ -32,16 +23,7 @@ def get_album(id: int = Path(...), db: Session = Depends(get_db)):
     album = db.get(Albums, id)
     if not album:
         raise HTTPException(404)
-    return AlbumResponse(
-        id=album.id,
-        name=album.name,
-        image=album.image_id or album.artist.image_id,
-        lastUpdated=album.last_updated,
-        artist=album.artist_id,
-        streamCount=album.stream_count,
-        lastStreamed=album.last_streamed,
-        favorite=album.favorite
-    )
+    return AlbumResponse.from_album(album)
 
 
 @router.post("", response_model=AlbumResponse, responses={409: {"model": AlbumResponse, "description": "Conflict! Album already exists."}})
@@ -54,13 +36,13 @@ def create_album(album: AlbumCreateRequest, db: Session = Depends(get_db)):
         Albums.artist_id == artist.id, Albums.name == album.name).first()
     if album_exists:
         raise HTTPException(409, jsonable_encoder(
-            get_album(album_exists.id, db)))
+            AlbumResponse.from_album(album_exists)))
     album_obj = get_or_create(
         db, Albums, name=album.name, artist_id=artist.id, image_id=album.image)
     db.add(album_obj)
     db.flush()
     db.commit()
-    return get_album(album_obj.id, db)
+    return AlbumResponse.from_album(album_obj)
 
 
 @router.patch("/{id}", response_model=AlbumResponse)
@@ -80,7 +62,7 @@ def update_album(update: AlbumUpdateRequest, id: int = Path(...), db: Session = 
     db.add(album)
     db.flush()
     db.commit()
-    return get_album(album.id, db)
+    return AlbumResponse.from_album(album)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
@@ -109,7 +91,7 @@ def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session =
     album.favorite = favorite
     db.add(album)
     db.commit()
-    return get_album(id, db)
+    return AlbumResponse.from_album(album)
 
 
 @router.get("/{id}/genres", response_model=list[str], tags=[Tags.genre])

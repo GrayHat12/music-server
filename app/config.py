@@ -11,15 +11,11 @@ class Tags(StrEnum):
     image = "Image"
     v1 = "V1"
     db = "Database"
+    search = "Search"
 
 
 def get_metadata_tags():
     return [
-        {
-            "name": tag,
-            "description": f"{tag.value} related endpoints"
-        } for tag in Tags if tag not in [Tags.v1, Tags.db]
-    ] + [
         {
             "name": Tags.v1,
             "description": f"{Tags.v1.value} endpoints"
@@ -28,4 +24,9 @@ def get_metadata_tags():
             "name": Tags.db,
             "description": f"{Tags.db.value} management"
         }
+    ] + [
+        {
+            "name": tag,
+            "description": f"{tag.value} related endpoints"
+        } for tag in Tags if tag not in [Tags.v1, Tags.db]
     ]

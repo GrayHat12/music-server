@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from enum import IntFlag, auto
 
 
 class ArtistCreateRequest(BaseModel):
@@ -50,3 +51,14 @@ class SongUpdateRequest(BaseModel):
     release: int | None = Field(default_factory=lambda: None)
     trackno: int | None = Field(default_factory=lambda: None, ge=1)
     metatags: str | None = Field(default_factory=lambda: None)
+
+
+class SearchMode(IntFlag):
+    artist = auto()
+    album = auto()
+    genre = auto()
+    playlist = auto()
+    song = auto()
+    system_playlist = auto()
+
+    general = artist | album | genre | playlist | song | system_playlist

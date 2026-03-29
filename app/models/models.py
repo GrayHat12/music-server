@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from sqlalchemy import ForeignKey, UniqueConstraint, Text
-from sqlalchemy.orm import relationship, Mapped, mapped_column
+from sqlalchemy.orm import relationship, Mapped, mapped_column, Session
 from sqlalchemy.ext.associationproxy import association_proxy, AssociationProxy
 from app.database.database import Base
 from datetime import datetime, timezone
@@ -59,6 +59,12 @@ class Artists(Base):
     features: Mapped[list[Features]] = relationship(
         back_populates="artist", cascade="all, delete-orphan")
 
+    @staticmethod
+    def search(session: Session, search_term: str, limit: int = 10):
+        return session.query(Artists).where(
+            Artists.name.icontains(search_term)
+        ).limit(limit).all()
+
 
 class Genres(Base):
     """
@@ -83,6 +89,12 @@ class Genres(Base):
         nullable=False, default=lambda: False)
 
     songs: Mapped[list[Songs]] = relationship(back_populates="genre")
+
+    @staticmethod
+    def search(session: Session, search_term: str, limit: int = 10):
+        return session.query(Genres).where(
+            Genres.name.icontains(search_term)
+        ).limit(limit).all()
 
 
 class Albums(Base):
@@ -123,6 +135,12 @@ class Albums(Base):
 
     artist: Mapped[Artists] = relationship(back_populates="albums")
     songs: Mapped[list[Songs]] = relationship(back_populates="album")
+
+    @staticmethod
+    def search(session: Session, search_term: str, limit: int = 10):
+        return session.query(Albums).where(
+            Albums.name.icontains(search_term)
+        ).limit(limit).all()
 
 
 class Songs(Base):
@@ -171,6 +189,12 @@ class Songs(Base):
         attr="playlist",
         creator=lambda pl: PlaylistRef(playlist=pl)
     )
+
+    @staticmethod
+    def search(session: Session, search_term: str, limit: int = 10):
+        return session.query(Songs).where(
+            Songs.name.icontains(search_term)
+        ).limit(limit).all()
 
 
 class Features(Base):
@@ -237,6 +261,12 @@ class Playlists(Base):
         attr="song",
         creator=lambda s: PlaylistRef(song=s)
     )
+
+    @staticmethod
+    def search(session: Session, search_term: str, limit: int = 10):
+        return session.query(Playlists).where(
+            Playlists.name.icontains(search_term)
+        ).limit(limit).all()
 
 
 class PlaylistRef(Base):

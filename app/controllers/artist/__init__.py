@@ -15,15 +15,7 @@ router = APIRouter(prefix="/artist", tags=[Tags.artist])
 @router.get("s", response_model=list[ArtistResponse])
 def list_all_artist(db: Session = Depends(get_db)):
     artists = db.query(Artists).all()
-    return [ArtistResponse(
-        id=artist.id,
-        name=artist.name,
-        image=artist.image_id,
-        lastUpdated=artist.last_updated,
-        streamCount=artist.stream_count,
-        lastStreamed=artist.last_streamed,
-        favorite=artist.favorite
-    ) for artist in artists]
+    return [ArtistResponse.from_artist(artist) for artist in artists]
 
 
 @router.get("/{id}", response_model=ArtistResponse)
@@ -31,15 +23,7 @@ def get_artist(id: int = Path(...), db: Session = Depends(get_db)):
     artist = db.get(Artists, id)
     if not artist:
         raise HTTPException(404)
-    return ArtistResponse(
-        id=artist.id,
-        name=artist.name,
-        image=artist.image_id,
-        lastUpdated=artist.last_updated,
-        streamCount=artist.stream_count,
-        lastStreamed=artist.last_streamed,
-        favorite=artist.favorite
-    )
+    return ArtistResponse.from_artist(artist)
 
 
 @router.post("", response_model=ArtistResponse, responses={409: {"model": ArtistResponse, "description": "Conflict! Artist already exists."}})
@@ -48,14 +32,14 @@ def create_artist(artist: ArtistCreateRequest, db: Session = Depends(get_db)):
         Artists.name == artist.name).first()
     if artist_exists is not None:
         raise HTTPException(409, jsonable_encoder(
-            get_artist(artist_exists.id, db)))
+            ArtistResponse.from_artist(artist_exists)))
 
     artist_obj = get_or_create(
         db, Artists, name=artist.name, image_id=artist.image)
     db.add(artist_obj)
     db.flush()
     db.commit()
-    return get_artist(artist_obj.id, db)
+    return ArtistResponse.from_artist(artist_obj)
 
 
 @router.patch("/{id}", response_model=ArtistResponse)
@@ -75,7 +59,7 @@ def update_artist(update: ArtistUpdateRequest, id: int = Path(...), db: Session 
     db.add(artist)
     db.flush()
     db.commit()
-    return get_artist(artist.id, db)
+    return ArtistResponse.from_artist(artist)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
@@ -96,7 +80,7 @@ def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session =
     artist.favorite = favorite
     db.add(artist)
     db.commit()
-    return get_artist(id, db)
+    return ArtistResponse.from_artist(artist)
 
 
 @router.get("/{id}/songs", response_model=list[int], tags=[Tags.song])

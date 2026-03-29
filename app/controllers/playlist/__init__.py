@@ -33,16 +33,7 @@ SystemPlaylists = {
 @router.get("s", response_model=list[PlaylistResponse])
 def list_all_playlists(db: Session = Depends(get_db)):
     playlists = db.query(Playlists).all()
-    return [PlaylistResponse(
-        id=playlist.id,
-        name=playlist.name,
-        image=playlist.image_id,
-        lastUpdated=playlist.last_updated,
-        lastStreamed=playlist.last_streamed,
-        streamCount=playlist.stream_count,
-        favorite=playlist.favorite
-        # songs=[song.id for song in playlist.songs]
-    ) for playlist in playlists]
+    return [PlaylistResponse.from_playlist(playlist) for playlist in playlists]
 
 
 @router.get("/{id}", response_model=PlaylistResponse)
@@ -50,16 +41,7 @@ def get_playlist(id: int = Path(...), db: Session = Depends(get_db)):
     playlist = db.get(Playlists, id)
     if not playlist:
         raise HTTPException(404)
-    return PlaylistResponse(
-        id=playlist.id,
-        name=playlist.name,
-        image=playlist.image_id,
-        lastUpdated=playlist.last_updated,
-        lastStreamed=playlist.last_streamed,
-        streamCount=playlist.stream_count,
-        favorite=playlist.favorite
-        # songs=[song.id for song in playlist.songs]
-    )
+    return PlaylistResponse.from_playlist(playlist)
 
 
 @router.get("s/system", response_model=list[SystemPlaylistResponse])
@@ -81,7 +63,7 @@ def create_playlist(create: PlaylistCreateRequest, db: Session = Depends(get_db)
         Playlists.name == create.name).first()
     if playlist_exists is not None:
         raise HTTPException(409, jsonable_encoder(
-            get_playlist(playlist_exists.id, db)))
+            PlaylistResponse.from_playlist(playlist_exists)))
 
     if isinstance(create.image, int):
         image_exists = db.get(Images, create.image)
@@ -93,7 +75,7 @@ def create_playlist(create: PlaylistCreateRequest, db: Session = Depends(get_db)
     db.add(playlist_obj)
     db.flush()
     db.commit()
-    return get_playlist(playlist_obj.id, db)
+    return PlaylistResponse.from_playlist(playlist_obj)
 
 
 @router.patch("/{id}", response_model=PlaylistResponse)
@@ -113,7 +95,7 @@ def update_playlist(update: PlaylistUpdateRequest, id: int = Path(...), db: Sess
     db.add(playlist)
     db.flush()
     db.commit()
-    return get_playlist(playlist.id, db)
+    return PlaylistResponse.from_playlist(playlist)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
@@ -134,7 +116,7 @@ def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session =
     playlist.favorite = favorite
     db.add(playlist)
     db.commit()
-    return get_playlist(id, db)
+    return PlaylistResponse.from_playlist(playlist)
 
 
 @router.get("/{id}/songs", response_model=list[int], tags=[Tags.song])

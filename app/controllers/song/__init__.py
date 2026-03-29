@@ -21,22 +21,7 @@ router = APIRouter(prefix="/song", tags=[Tags.song])
 @router.get("s", response_model=list[SongResponse])
 def list_all_song(db: Session = Depends(get_db)):
     songs = db.query(Songs).all()
-    return [SongResponse(
-        id=song.id,
-        title=song.title,
-        release=song.release,
-        trackno=song.trackno,
-        # metatags=json.loads(song.metatags),
-        lastUpdated=song.last_updated,
-        lastStreamed=song.last_streamed,
-        streamCount=song.stream_count,
-        genre=song.genre.name if song.genre else None,
-        artist=song.artist_id,
-        album=song.album_id,
-        favorite=song.favorite,
-        cover=song.cover_id or (song.album.image_id if song.album else (
-            song.artist.image_id if song.artist else None)) or (song.artist.image_id if song.artist else None)
-    ) for song in songs]
+    return [SongResponse.from_song(song) for song in songs]
 
 
 @router.get("/{id}", response_model=SongResponse)
@@ -44,22 +29,7 @@ def get_song(id: int = Path(...), db: Session = Depends(get_db)):
     song = db.get(Songs, id)
     if not song:
         raise HTTPException(404)
-    return SongResponse(
-        id=song.id,
-        title=song.title,
-        release=song.release,
-        trackno=song.trackno,
-        # metatags=json.loads(song.metatags),
-        lastUpdated=song.last_updated,
-        lastStreamed=song.last_streamed,
-        streamCount=song.stream_count,
-        genre=song.genre.name if song.genre else None,
-        artist=song.artist_id,
-        album=song.album_id,
-        cover=song.cover_id or (song.album.image_id if song.album else (
-            song.artist.image_id if song.artist else None)) or (song.artist.image_id if song.artist else None),
-        favorite=song.favorite
-    )
+    return SongResponse.from_song(song)
 
 
 @router.get("/{id}/meta", response_model=dict[str, Any])
@@ -106,7 +76,7 @@ async def upload_song(file: UploadFile = Depends(validate_audio_file), db: Sessi
         Songs.buffer == data["buffer"]).first()
     if song_exists is not None:
         raise HTTPException(409, jsonable_encoder(
-            get_song(song_exists.id, db)))
+            SongResponse.from_song(song_exists)))
 
     image_obj = None
     if data["art_buffer"]:
@@ -145,7 +115,7 @@ async def upload_song(file: UploadFile = Depends(validate_audio_file), db: Sessi
         db.add(Features(artist=feat_artist, song=new_song))
 
     db.commit()
-    return get_song(new_song.id, db)
+    return SongResponse.from_song(new_song)
 
 
 @router.patch("/{id}", response_model=SongResponse)
@@ -193,7 +163,7 @@ def update_song(update: SongUpdateRequest, id: int = Path(...), db: Session = De
     db.add(song)
     db.flush()
     db.commit()
-    return get_song(song.id, db)
+    return SongResponse.from_song(song)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
