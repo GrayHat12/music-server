@@ -1849,7 +1849,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **listAllPlaylistsApiV1PlaylistsGet**
-> PlaylistResponse listAllPlaylistsApiV1PlaylistsGet()
+> Array<PlaylistResponse> listAllPlaylistsApiV1PlaylistsGet()
 
 
 ### Example
@@ -1874,7 +1874,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**PlaylistResponse**
+**Array<PlaylistResponse>**
 
 ### Authorization
 

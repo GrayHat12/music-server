@@ -1199,7 +1199,7 @@ export class ObjectPlaylistApi {
      * List All Playlists
      * @param param the request object
      */
-    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(param: PlaylistApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<PlaylistResponse>> {
+    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(param: PlaylistApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<Array<PlaylistResponse>>> {
         return this.api.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo( options).toPromise();
     }
 
@@ -1207,7 +1207,7 @@ export class ObjectPlaylistApi {
      * List All Playlists
      * @param param the request object
      */
-    public listAllPlaylistsApiV1PlaylistsGet(param: PlaylistApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<PlaylistResponse> {
+    public listAllPlaylistsApiV1PlaylistsGet(param: PlaylistApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<Array<PlaylistResponse>> {
         return this.api.listAllPlaylistsApiV1PlaylistsGet( options).toPromise();
     }
 
@@ -2567,7 +2567,7 @@ export class ObjectV1Api {
      * List All Playlists
      * @param param the request object
      */
-    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(param: V1ApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<PlaylistResponse>> {
+    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(param: V1ApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<Array<PlaylistResponse>>> {
         return this.api.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo( options).toPromise();
     }
 
@@ -2575,7 +2575,7 @@ export class ObjectV1Api {
      * List All Playlists
      * @param param the request object
      */
-    public listAllPlaylistsApiV1PlaylistsGet(param: V1ApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<PlaylistResponse> {
+    public listAllPlaylistsApiV1PlaylistsGet(param: V1ApiListAllPlaylistsApiV1PlaylistsGetRequest = {}, options?: ConfigurationOptions): Promise<Array<PlaylistResponse>> {
         return this.api.listAllPlaylistsApiV1PlaylistsGet( options).toPromise();
     }
 

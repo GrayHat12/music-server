@@ -655,22 +655,22 @@ export class PlaylistApiResponseProcessor {
      * @params response Response returned by the server for a request to listAllPlaylistsApiV1PlaylistsGet
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PlaylistResponse >> {
+     public async listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Array<PlaylistResponse> >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PlaylistResponse = ObjectSerializer.deserialize(
+            const body: Array<PlaylistResponse> = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlaylistResponse", ""
-            ) as PlaylistResponse;
+                "Array<PlaylistResponse>", ""
+            ) as Array<PlaylistResponse>;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PlaylistResponse = ObjectSerializer.deserialize(
+            const body: Array<PlaylistResponse> = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlaylistResponse", ""
-            ) as PlaylistResponse;
+                "Array<PlaylistResponse>", ""
+            ) as Array<PlaylistResponse>;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

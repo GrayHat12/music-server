@@ -1475,7 +1475,7 @@ export class ObservablePlaylistApi {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<PlaylistResponse>> {
+    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<Array<PlaylistResponse>>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
         const requestContextPromise = this.requestFactory.listAllPlaylistsApiV1PlaylistsGet(_config);
@@ -1498,8 +1498,8 @@ export class ObservablePlaylistApi {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGet(_options?: ConfigurationOptions): Observable<PlaylistResponse> {
-        return this.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<PlaylistResponse>) => apiResponse.data));
+    public listAllPlaylistsApiV1PlaylistsGet(_options?: ConfigurationOptions): Observable<Array<PlaylistResponse>> {
+        return this.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Array<PlaylistResponse>>) => apiResponse.data));
     }
 
     /**
@@ -3073,7 +3073,7 @@ export class ObservableV1Api {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<PlaylistResponse>> {
+    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<Array<PlaylistResponse>>> {
         const _config = mergeConfiguration(this.configuration, _options);
 
         const requestContextPromise = this.requestFactory.listAllPlaylistsApiV1PlaylistsGet(_config);
@@ -3096,8 +3096,8 @@ export class ObservableV1Api {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGet(_options?: ConfigurationOptions): Observable<PlaylistResponse> {
-        return this.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<PlaylistResponse>) => apiResponse.data));
+    public listAllPlaylistsApiV1PlaylistsGet(_options?: ConfigurationOptions): Observable<Array<PlaylistResponse>> {
+        return this.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Array<PlaylistResponse>>) => apiResponse.data));
     }
 
     /**

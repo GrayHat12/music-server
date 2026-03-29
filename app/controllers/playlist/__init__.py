@@ -12,7 +12,7 @@ router = APIRouter(prefix="/playlist", tags=[Tags.playlist])
 # db = SessionLocal()
 
 
-@router.get("s", response_model=PlaylistResponse)
+@router.get("s", response_model=list[PlaylistResponse])
 def list_all_playlists(db: Session = Depends(get_db)):
     playlists = db.query(Playlists).all()
     return [PlaylistResponse(

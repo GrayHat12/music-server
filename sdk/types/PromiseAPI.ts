@@ -972,7 +972,7 @@ export class PromisePlaylistApi {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<PlaylistResponse>> {
+    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<PlaylistResponse>>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(observableOptions);
         return result.toPromise();
@@ -981,7 +981,7 @@ export class PromisePlaylistApi {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGet(_options?: PromiseConfigurationOptions): Promise<PlaylistResponse> {
+    public listAllPlaylistsApiV1PlaylistsGet(_options?: PromiseConfigurationOptions): Promise<Array<PlaylistResponse>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllPlaylistsApiV1PlaylistsGet(observableOptions);
         return result.toPromise();
@@ -1984,7 +1984,7 @@ export class PromiseV1Api {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<PlaylistResponse>> {
+    public listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<PlaylistResponse>>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllPlaylistsApiV1PlaylistsGetWithHttpInfo(observableOptions);
         return result.toPromise();
@@ -1993,7 +1993,7 @@ export class PromiseV1Api {
     /**
      * List All Playlists
      */
-    public listAllPlaylistsApiV1PlaylistsGet(_options?: PromiseConfigurationOptions): Promise<PlaylistResponse> {
+    public listAllPlaylistsApiV1PlaylistsGet(_options?: PromiseConfigurationOptions): Promise<Array<PlaylistResponse>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.listAllPlaylistsApiV1PlaylistsGet(observableOptions);
         return result.toPromise();
