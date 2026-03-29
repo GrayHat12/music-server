@@ -1,7 +1,7 @@
 from app.models.models import Albums, Artists, Images
 from app.models.response_schema import AlbumResponse, DeletedResponse
 from app.models.request_schema import AlbumCreateRequest, AlbumUpdateRequest
-from fastapi import HTTPException, APIRouter, Path, Depends
+from fastapi import HTTPException, APIRouter, Path, Depends, Query
 from fastapi.encoders import jsonable_encoder
 from app.database.database import get_or_create
 from app.config import Tags
@@ -22,7 +22,8 @@ def list_all_albums(db: Session = Depends(get_db)):
         lastUpdated=album.last_updated,
         artist=album.artist_id,
         streamCount=album.stream_count,
-        lastStreamed=album.last_streamed
+        lastStreamed=album.last_streamed,
+        favorite=album.favorite
     ) for album in albums]
 
 
@@ -38,7 +39,8 @@ def get_album(id: int = Path(...), db: Session = Depends(get_db)):
         lastUpdated=album.last_updated,
         artist=album.artist_id,
         streamCount=album.stream_count,
-        lastStreamed=album.last_streamed
+        lastStreamed=album.last_streamed,
+        favorite=album.favorite
     )
 
 
@@ -51,13 +53,14 @@ def create_album(album: AlbumCreateRequest, db: Session = Depends(get_db)):
     album_exists = db.query(Albums).filter(
         Albums.artist_id == artist.id, Albums.name == album.name).first()
     if album_exists:
-        raise HTTPException(409, jsonable_encoder(get_album(album_exists.id)))
+        raise HTTPException(409, jsonable_encoder(
+            get_album(album_exists.id, db)))
     album_obj = get_or_create(
         db, Albums, name=album.name, artist_id=artist.id, image_id=album.image)
     db.add(album_obj)
     db.flush()
     db.commit()
-    return get_album(album_obj.id)
+    return get_album(album_obj.id, db)
 
 
 @router.patch("/{id}", response_model=AlbumResponse)
@@ -77,7 +80,7 @@ def update_album(update: AlbumUpdateRequest, id: int = Path(...), db: Session = 
     db.add(album)
     db.flush()
     db.commit()
-    return get_album(album.id)
+    return get_album(album.id, db)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
@@ -96,6 +99,17 @@ def get_songs_from_album(id: int = Path(...), db: Session = Depends(get_db)):
     if not album:
         raise HTTPException(404)
     return [song.id for song in album.songs]
+
+
+@router.put("/{id}/favorite", response_model=AlbumResponse)
+def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session = Depends(get_db)):
+    album = db.get(Albums, id)
+    if not album:
+        raise HTTPException(404)
+    album.favorite = favorite
+    db.add(album)
+    db.commit()
+    return get_album(id, db)
 
 
 @router.get("/{id}/genres", response_model=list[str], tags=[Tags.genre])

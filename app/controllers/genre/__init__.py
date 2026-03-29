@@ -20,7 +20,8 @@ def list_all_genres(db: Session = Depends(get_db)):
         name=genre.name,
         lastUpdated=genre.last_updated,
         streamCount=genre.stream_count,
-        lastStreamed=genre.last_streamed
+        lastStreamed=genre.last_streamed,
+        favorite=genre.favorite
     ) for genre in genres]
 
 
@@ -34,7 +35,8 @@ def get_genre(id: int = Path(...), db: Session = Depends(get_db)):
         name=genre.name,
         lastUpdated=genre.last_updated,
         streamCount=genre.stream_count,
-        lastStreamed=genre.last_streamed
+        lastStreamed=genre.last_streamed,
+        favorite=genre.favorite
     )
 
 
@@ -47,7 +49,7 @@ def create_genre(create: GenreCreateRequest, db: Session = Depends(get_db)):
     db.add(genre_obj)
     db.flush()
     db.commit()
-    return get_genre(genre_obj.id)
+    return get_genre(genre_obj.id, db)
 
 
 @router.patch("/{id}", response_model=GenreResponse, responses={409: {"model": str, "description": "Conflict! Genre with same name already exists."}})
@@ -62,7 +64,7 @@ def update_genre(update: GenreUpdateRequest, id: int = Path(...), db: Session = 
     db.add(genre)
     db.flush()
     db.commit()
-    return get_genre(genre.id)
+    return get_genre(genre.id, db)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
@@ -73,6 +75,17 @@ def delete_genre(id: int = Path(...), db: Session = Depends(get_db)):
     db.delete(genre)
     db.commit()
     return DeletedResponse()
+
+
+@router.put("/{id}/favorite", response_model=GenreResponse)
+def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session = Depends(get_db)):
+    genre = db.get(Genres, id)
+    if not genre:
+        raise HTTPException(404)
+    genre.favorite = favorite
+    db.add(genre)
+    db.commit()
+    return get_genre(id, db)
 
 
 @router.get("/{id}/songs", response_model=list[int], tags=[Tags.song])

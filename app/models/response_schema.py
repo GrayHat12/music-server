@@ -15,6 +15,7 @@ class ArtistResponse(BaseModel):
     stream_count: int = Field(..., alias="streamCount")
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
+    favorite: bool = Field(...)
 
 
 class AlbumResponse(BaseModel):
@@ -26,6 +27,7 @@ class AlbumResponse(BaseModel):
     stream_count: int = Field(..., alias="streamCount")
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
+    favorite: bool = Field(...)
 
 
 class SongResponse(BaseModel):
@@ -33,7 +35,7 @@ class SongResponse(BaseModel):
     title: str = Field(...)
     release: int | None = Field(default_factory=lambda: None)
     trackno: int | None = Field(default_factory=lambda: None)
-    metatags: dict[str, Any] = Field(...)
+    # metatags: dict[str, Any] = Field(...)
     last_updated: datetime = Field(..., alias="lastUpdated")
     genre: str | None = Field(default_factory=lambda: None)
     artist: int | None = Field(default_factory=lambda: None)
@@ -42,17 +44,26 @@ class SongResponse(BaseModel):
     stream_count: int = Field(..., alias="streamCount")
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
+    favorite: bool = Field(...)
 
 
 class PlaylistResponse(BaseModel):
     id: int = Field(...)
     name: str = Field(...)
+    is_system: bool = Field(default_factory=lambda: False, alias="isSystem")
     image: int | None = Field(default_factory=lambda: None)
     last_updated: datetime = Field(..., alias="lastUpdated")
     stream_count: int = Field(..., alias="streamCount")
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
-    # songs: list[int] = Field(default_factory=lambda: [])
+    favorite: bool = Field(...)
+
+
+class SystemPlaylistResponse(BaseModel):
+    id: str = Field(...)
+    is_system: bool = Field(default_factory=lambda: True, alias="isSystem")
+    name: str = Field(...)
+    image: str = Field(...)
 
 
 class GenreResponse(BaseModel):
@@ -62,3 +73,4 @@ class GenreResponse(BaseModel):
     stream_count: int = Field(..., alias="streamCount")
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
+    favorite: bool = Field(...)

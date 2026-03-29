@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from app.database.database import one_time_dispose
 # from app.graphql.schema import graphql_app
@@ -23,6 +24,8 @@ app = FastAPI(
     lifespan=lifespan,
     openapi_tags=get_metadata_tags()
 )
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,

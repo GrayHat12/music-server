@@ -1,7 +1,7 @@
 from app.models.models import Images, Artists, Songs, Genres, Albums, Features
 from app.models.response_schema import SongResponse, DeletedResponse
 from app.models.request_schema import SongUpdateRequest
-from fastapi import HTTPException, APIRouter, UploadFile, Depends, Path
+from fastapi import HTTPException, APIRouter, UploadFile, Depends, Path, Query
 from fastapi.responses import StreamingResponse
 from fastapi.encoders import jsonable_encoder
 from app.database.database import get_or_create
@@ -11,6 +11,7 @@ from app.utils import load_song_metadata
 from datetime import datetime, timezone
 from io import BytesIO
 import json
+from typing import Any
 from app.config import Tags
 
 router = APIRouter(prefix="/song", tags=[Tags.song])
@@ -25,13 +26,14 @@ def list_all_song(db: Session = Depends(get_db)):
         title=song.title,
         release=song.release,
         trackno=song.trackno,
-        metatags=json.loads(song.metatags),
+        # metatags=json.loads(song.metatags),
         lastUpdated=song.last_updated,
         lastStreamed=song.last_streamed,
         streamCount=song.stream_count,
         genre=song.genre.name if song.genre else None,
         artist=song.artist_id,
         album=song.album_id,
+        favorite=song.favorite,
         cover=song.cover_id or (song.album.image_id if song.album else (
             song.artist.image_id if song.artist else None)) or (song.artist.image_id if song.artist else None)
     ) for song in songs]
@@ -47,7 +49,7 @@ def get_song(id: int = Path(...), db: Session = Depends(get_db)):
         title=song.title,
         release=song.release,
         trackno=song.trackno,
-        metatags=json.loads(song.metatags),
+        # metatags=json.loads(song.metatags),
         lastUpdated=song.last_updated,
         lastStreamed=song.last_streamed,
         streamCount=song.stream_count,
@@ -55,8 +57,17 @@ def get_song(id: int = Path(...), db: Session = Depends(get_db)):
         artist=song.artist_id,
         album=song.album_id,
         cover=song.cover_id or (song.album.image_id if song.album else (
-            song.artist.image_id if song.artist else None)) or (song.artist.image_id if song.artist else None)
+            song.artist.image_id if song.artist else None)) or (song.artist.image_id if song.artist else None),
+        favorite=song.favorite
     )
+
+
+@router.get("/{id}/meta", response_model=dict[str, Any])
+def get_song_metadata(id: int = Path(...), db: Session = Depends(get_db)):
+    song = db.get(Songs, id)
+    if not song:
+        raise HTTPException(404)
+    return json.loads(song.metatags)
 
 
 @router.get("/{id}/stream", response_class=StreamingResponse)
@@ -94,7 +105,8 @@ async def upload_song(file: UploadFile = Depends(validate_audio_file), db: Sessi
     song_exists = db.query(Songs).filter(
         Songs.buffer == data["buffer"]).first()
     if song_exists is not None:
-        raise HTTPException(409, jsonable_encoder(get_song(song_exists.id)))
+        raise HTTPException(409, jsonable_encoder(
+            get_song(song_exists.id, db)))
 
     image_obj = None
     if data["art_buffer"]:
@@ -133,7 +145,7 @@ async def upload_song(file: UploadFile = Depends(validate_audio_file), db: Sessi
         db.add(Features(artist=feat_artist, song=new_song))
 
     db.commit()
-    return get_song(new_song.id)
+    return get_song(new_song.id, db)
 
 
 @router.patch("/{id}", response_model=SongResponse)
@@ -181,7 +193,7 @@ def update_song(update: SongUpdateRequest, id: int = Path(...), db: Session = De
     db.add(song)
     db.flush()
     db.commit()
-    return get_song(song.id)
+    return get_song(song.id, db)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
@@ -192,6 +204,17 @@ def delete_song(id: int = Path(...), db: Session = Depends(get_db)):
     db.delete(song)
     db.commit()
     return DeletedResponse()
+
+
+@router.put("/{id}/favorite", response_model=SongResponse)
+def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session = Depends(get_db)):
+    song = db.get(Songs, id)
+    if not song:
+        raise HTTPException(404)
+    song.favorite = favorite
+    db.add(song)
+    db.commit()
+    return get_song(id, db)
 
 
 @router.get("/{id}/features", response_model=list[int], tags=[Tags.artist])

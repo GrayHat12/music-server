@@ -1,7 +1,7 @@
 from app.models.models import Images, Artists
 from app.models.response_schema import ArtistResponse, DeletedResponse
 from app.models.request_schema import ArtistCreateRequest, ArtistUpdateRequest
-from fastapi import HTTPException, APIRouter, Path, Depends
+from fastapi import HTTPException, APIRouter, Path, Depends, Query
 from fastapi.encoders import jsonable_encoder
 from app.database.database import get_or_create
 from app.middleware import get_db
@@ -21,7 +21,8 @@ def list_all_artist(db: Session = Depends(get_db)):
         image=artist.image_id,
         lastUpdated=artist.last_updated,
         streamCount=artist.stream_count,
-        lastStreamed=artist.last_streamed
+        lastStreamed=artist.last_streamed,
+        favorite=artist.favorite
     ) for artist in artists]
 
 
@@ -36,7 +37,8 @@ def get_artist(id: int = Path(...), db: Session = Depends(get_db)):
         image=artist.image_id,
         lastUpdated=artist.last_updated,
         streamCount=artist.stream_count,
-        lastStreamed=artist.last_streamed
+        lastStreamed=artist.last_streamed,
+        favorite=artist.favorite
     )
 
 
@@ -46,14 +48,14 @@ def create_artist(artist: ArtistCreateRequest, db: Session = Depends(get_db)):
         Artists.name == artist.name).first()
     if artist_exists is not None:
         raise HTTPException(409, jsonable_encoder(
-            get_artist(artist_exists.id)))
+            get_artist(artist_exists.id, db)))
 
     artist_obj = get_or_create(
         db, Artists, name=artist.name, image_id=artist.image)
     db.add(artist_obj)
     db.flush()
     db.commit()
-    return get_artist(artist_obj.id)
+    return get_artist(artist_obj.id, db)
 
 
 @router.patch("/{id}", response_model=ArtistResponse)
@@ -73,7 +75,7 @@ def update_artist(update: ArtistUpdateRequest, id: int = Path(...), db: Session 
     db.add(artist)
     db.flush()
     db.commit()
-    return get_artist(artist.id)
+    return get_artist(artist.id, db)
 
 
 @router.delete("/{id}", response_model=DeletedResponse)
@@ -84,6 +86,17 @@ def delete_artist(id: int = Path(...), db: Session = Depends(get_db)):
     db.delete(artist)
     db.commit()
     return DeletedResponse()
+
+
+@router.put("/{id}/favorite", response_model=ArtistResponse)
+def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session = Depends(get_db)):
+    artist = db.get(Artists, id)
+    if not artist:
+        raise HTTPException(404)
+    artist.favorite = favorite
+    db.add(artist)
+    db.commit()
+    return get_artist(id, db)
 
 
 @router.get("/{id}/songs", response_model=list[int], tags=[Tags.song])

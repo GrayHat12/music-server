@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import ForeignKey, UniqueConstraint, Text, event
+from sqlalchemy import ForeignKey, UniqueConstraint, Text
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy.ext.associationproxy import association_proxy, AssociationProxy
 from app.database.database import Base
@@ -44,6 +44,8 @@ class Artists(Base):
         ForeignKey(Images.id, ondelete="SET NULL"), nullable=True)
     last_updated: Mapped[datetime] = mapped_column(
         nullable=False, default=lambda: datetime.now(timezone.utc))
+    favorite: Mapped[bool] = mapped_column(
+        nullable=False, default=lambda: False)
 
     last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
     stream_count: Mapped[int] = mapped_column(
@@ -77,6 +79,8 @@ class Genres(Base):
     last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
     stream_count: Mapped[int] = mapped_column(
         nullable=False, default=lambda: 0)
+    favorite: Mapped[bool] = mapped_column(
+        nullable=False, default=lambda: False)
 
     songs: Mapped[list[Songs]] = relationship(back_populates="genre")
 
@@ -112,6 +116,8 @@ class Albums(Base):
     last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
     stream_count: Mapped[int] = mapped_column(
         nullable=False, default=lambda: 0)
+    favorite: Mapped[bool] = mapped_column(
+        nullable=False, default=lambda: False)
 
     image: Mapped[Images | None] = relationship()
 
@@ -135,11 +141,13 @@ class Songs(Base):
         ForeignKey(Albums.id, ondelete="SET NULL"), nullable=True)
     cover_id: Mapped[int | None] = mapped_column(
         ForeignKey(Images.id, ondelete="SET NULL"), nullable=True)
+    favorite: Mapped[bool] = mapped_column(
+        nullable=False, default=lambda: False)
 
     title: Mapped[str] = mapped_column(nullable=False)
     release: Mapped[int | None] = mapped_column(nullable=True)
     trackno: Mapped[int | None] = mapped_column(nullable=True)
-    metatags: Mapped[str] = mapped_column(Text, nullable=False)
+    metatags: Mapped[str] = mapped_column(Text, nullable=False, deferred=True)
     buffer: Mapped[bytes] = mapped_column(
         nullable=False, unique=True, deferred=True)
     last_updated: Mapped[datetime] = mapped_column(
@@ -217,6 +225,8 @@ class Playlists(Base):
     last_streamed: Mapped[datetime | None] = mapped_column(nullable=True)
     stream_count: Mapped[int] = mapped_column(
         nullable=False, default=lambda: 0)
+    favorite: Mapped[bool] = mapped_column(
+        nullable=False, default=lambda: False)
 
     image: Mapped[Images | None] = relationship()
     playlist_refs: Mapped[list[PlaylistRef]] = relationship(
