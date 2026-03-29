@@ -1,1 +1,0 @@
-openapi-generator-cli generate -i $1 -g typescript-fetch -o sdk -c config.json
