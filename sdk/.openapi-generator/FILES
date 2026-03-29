@@ -58,5 +58,4 @@ src/models/SongUpdateRequest.ts
 src/models/ValidationError.ts
 src/models/index.ts
 src/runtime.ts
-tsconfig.esm.json
 tsconfig.json
