@@ -73,7 +73,10 @@ class MutagenEncoder(json.JSONEncoder):
             return o.text[0] if o.text else ""
         if hasattr(o, 'pprint'):
             return o.pprint()
-        return super().default(o)
+        try:
+            return super().default(o)
+        except:
+            return str(o)
 
 
 def load_song_metadata(file_source: io.BytesIO):
@@ -90,7 +93,7 @@ def load_song_metadata(file_source: io.BytesIO):
     if audio is None or audio.tags is None:
         raise ValueError("Unsupported audio format or no tags found")
 
-    tags = dict(audio.tags)
+    tags = dict(audio.tags) if audio.tags is not None else {}
 
     # 2. Helper to extract text across different formats (ID3 vs Vorbis/MP4)
     def get_tag(keys, default=None):
@@ -105,6 +108,8 @@ def load_song_metadata(file_source: io.BytesIO):
                         return val.text
                     if isinstance(val.text, list):
                         return val.text[0]
+                if isinstance(val, (str, bytes)):
+                    return val.decode('utf-8', errors='ignore') if isinstance(val, bytes) else val
                 return str(val)
         return default
 
@@ -142,6 +147,17 @@ def load_song_metadata(file_source: io.BytesIO):
     except:
         release = None
 
+    duration = getattr(audio.info, "length", None)
+    if not isinstance(duration, (int, float)):
+        duration = None
+
+    for key in dir(audio.info):
+        if key.startswith("_") or key == "length":
+            continue
+        value = getattr(audio.info, key, None)
+        if isinstance(value, (str, int, float, bool)):
+            tags[key] = value
+
     # 4. Return clean, JSON-serializable dictionary
     return {
         "title": get_tag(["title", "TIT2", "\xa9nam"], filename),
@@ -151,7 +167,9 @@ def load_song_metadata(file_source: io.BytesIO):
         "genre": get_tag(["genre", "TCON", "\xa9gen"]),
         "release": release,
         "trackno": trackno,
-        "buffer": buffer,
+        # "buffer": buffer,
+        "audio": audio,
+        "duration": duration,
         "art_buffer": art_buffer,
         # Serialize with our custom encoder to handle mutagen classes
         "metatags": json.dumps(tags, cls=MutagenEncoder)

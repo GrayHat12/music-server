@@ -5,7 +5,7 @@ from PIL import Image
 from app.database.database import get_session_local, get_engine
 
 
-async def validate_audio_file(file: UploadFile = File(...)):
+async def validate_audio_file(file: UploadFile = File(..., json_schema_extra={"type": "string", "format": "binary"})):
     # Define allowed audio MIME types
     ALLOWED_AUDIO_TYPES = {
         'audio/wav',
@@ -21,7 +21,8 @@ async def validate_audio_file(file: UploadFile = File(...)):
         'audio/mp4',
         'audio/AMR',
         'audio/flac',
-        'audio/basic'
+        'audio/basic',
+        'audio/x-m4a'
     }
 
     # Read a small chunk of the file to determine its type
@@ -71,4 +72,5 @@ async def validate_image_file(file: UploadFile = File(...)):
 def get_db():
     if get_engine() is None:
         raise HTTPException(403, {"msg": "DB path not set"})
-    return get_session_local()()
+    with get_session_local()() as db:
+        yield db

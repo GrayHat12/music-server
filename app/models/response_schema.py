@@ -1,10 +1,15 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
+import math
 from app.models.models import Albums, Artists, Songs, Playlists, Genres
 
 
 class DeletedResponse(BaseModel):
     deleted: bool = Field(default_factory=lambda: True)
+
+
+class ImageConflictResponse(BaseModel):
+    id: int = Field(...)
 
 
 class ArtistResponse(BaseModel):
@@ -40,9 +45,16 @@ class AlbumResponse(BaseModel):
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
     favorite: bool = Field(...)
+    release: int | None = Field(default_factory=lambda: None)
+    duration: float = Field(...)
 
     @classmethod
     def from_album(cls, album: Albums):
+        release = min([song.release or math.inf for song in album.songs])
+        if release == math.inf:
+            release = None
+        if isinstance(release, float):
+            release = int(release)
         return cls(
             id=album.id,
             name=album.name,
@@ -51,7 +63,9 @@ class AlbumResponse(BaseModel):
             streamCount=album.stream_count,
             lastStreamed=album.last_streamed,
             favorite=album.favorite,
-            artist=album.artist_id
+            artist=album.artist_id,
+            release=release,
+            duration=sum([song.duration or 0 for song in album.songs])
         )
 
 
@@ -70,6 +84,7 @@ class SongResponse(BaseModel):
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
     favorite: bool = Field(...)
+    duration: float | None = Field(..., description="seconds")
 
     @classmethod
     def from_song(cls, song: Songs):
@@ -87,7 +102,8 @@ class SongResponse(BaseModel):
             album=song.album_id,
             cover=song.cover_id or (song.album.image_id if song.album else (
                 song.artist.image_id if song.artist else None)) or (song.artist.image_id if song.artist else None),
-            favorite=song.favorite
+            favorite=song.favorite,
+            duration=song.duration
         )
 
 
@@ -101,6 +117,7 @@ class PlaylistResponse(BaseModel):
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
     favorite: bool = Field(...)
+    duration: float = Field(...)
 
     @classmethod
     def from_playlist(cls, playlist: Playlists):
@@ -111,7 +128,8 @@ class PlaylistResponse(BaseModel):
             lastUpdated=playlist.last_updated,
             lastStreamed=playlist.last_streamed,
             streamCount=playlist.stream_count,
-            favorite=playlist.favorite
+            favorite=playlist.favorite,
+            duration=sum([song.duration or 0 for song in playlist.songs])
             # songs=[song.id for song in playlist.songs]
         )
 
@@ -120,10 +138,14 @@ class SystemPlaylistResponse(BaseModel):
     id: str = Field(...)
     is_system: bool = Field(default_factory=lambda: True, alias="isSystem")
     name: str = Field(...)
-    image: str = Field(...)
+    image: str | int | None = Field(...)
+    duration: float = Field(...)
+    items: int = Field(...)
 
 
 class GenreResponse(BaseModel):
+    model_config = {"frozen": True}
+
     id: int = Field(...)
     name: str = Field(...)
     last_updated: datetime = Field(..., alias="lastUpdated")
@@ -131,6 +153,7 @@ class GenreResponse(BaseModel):
     last_streamed: datetime | None = Field(
         default_factory=lambda: None, alias="lastStreamed")
     favorite: bool = Field(...)
+    duration: float = Field(...)
 
     @classmethod
     def from_genre(cls, genre: Genres):
@@ -140,8 +163,17 @@ class GenreResponse(BaseModel):
             lastUpdated=genre.last_updated,
             streamCount=genre.stream_count,
             lastStreamed=genre.last_streamed,
-            favorite=genre.favorite
+            favorite=genre.favorite,
+            duration=sum([song.duration or 0 for song in genre.songs])
         )
+
+    def __hash__(self):
+        return hash(self.id)
+
+    def __eq__(self, other):
+        if not isinstance(other, GenreResponse):
+            return False
+        return self.id == other.id
 
 
 class SearchResponse(BaseModel):

@@ -163,6 +163,7 @@ class Songs(Base):
         nullable=False, default=lambda: False)
 
     title: Mapped[str] = mapped_column(nullable=False)
+    duration: Mapped[float | None] = mapped_column(nullable=True)
     release: Mapped[int | None] = mapped_column(nullable=True)
     trackno: Mapped[int | None] = mapped_column(nullable=True)
     metatags: Mapped[str] = mapped_column(Text, nullable=False, deferred=True)

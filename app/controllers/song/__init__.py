@@ -1,7 +1,7 @@
 from app.models.models import Images, Artists, Songs, Genres, Albums, Features
 from app.models.response_schema import SongResponse, DeletedResponse
 from app.models.request_schema import SongUpdateRequest
-from fastapi import HTTPException, APIRouter, UploadFile, Depends, Path, Query
+from fastapi import HTTPException, APIRouter, UploadFile, Depends, Path, Query, File
 from fastapi.responses import StreamingResponse
 from fastapi.encoders import jsonable_encoder
 from app.database.database import get_or_create
@@ -13,6 +13,7 @@ from io import BytesIO
 import json
 from typing import Any
 from app.config import Tags
+import math
 
 router = APIRouter(prefix="/song", tags=[Tags.song])
 # db = SessionLocal()
@@ -21,7 +22,7 @@ router = APIRouter(prefix="/song", tags=[Tags.song])
 @router.get("s", response_model=list[SongResponse])
 def list_all_song(db: Session = Depends(get_db)):
     songs = db.query(Songs).all()
-    return [SongResponse.from_song(song) for song in songs]
+    return [SongResponse.from_song(song) for song in sorted(songs, key=lambda x: x.stream_count if not x.favorite else math.inf, reverse=True)]
 
 
 @router.get("/{id}", response_model=SongResponse)
@@ -101,6 +102,7 @@ async def upload_song(file: UploadFile = Depends(validate_audio_file), db: Sessi
         buffer=data["buffer"],
         metatags=data["metatags"],
         release=data["release"],
+        duration=data["duration"],
         trackno=data["trackno"],
         artist=artist_obj,
         genre=genre_obj,

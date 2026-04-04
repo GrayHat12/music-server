@@ -1,11 +1,12 @@
 from app.models.models import Albums, Artists, Images
-from app.models.response_schema import AlbumResponse, DeletedResponse
+from app.models.response_schema import AlbumResponse, DeletedResponse, GenreResponse
 from app.models.request_schema import AlbumCreateRequest, AlbumUpdateRequest
 from fastapi import HTTPException, APIRouter, Path, Depends, Query
 from fastapi.encoders import jsonable_encoder
 from app.database.database import get_or_create
 from app.config import Tags
 from app.middleware import get_db
+from datetime import datetime
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/album", tags=[Tags.album])
@@ -15,7 +16,8 @@ router = APIRouter(prefix="/album", tags=[Tags.album])
 @router.get("s", response_model=list[AlbumResponse])
 def list_all_albums(db: Session = Depends(get_db)):
     albums = db.query(Albums).all()
-    return [AlbumResponse.from_album(album) for album in albums]
+    very_old_date = datetime.fromtimestamp(0)
+    return [AlbumResponse.from_album(album) for album in sorted(albums, key=lambda x: (x.last_streamed or very_old_date) if not x.favorite else datetime.now(), reverse=True)]
 
 
 @router.get("/{id}", response_model=AlbumResponse)
@@ -94,12 +96,12 @@ def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session =
     return AlbumResponse.from_album(album)
 
 
-@router.get("/{id}/genres", response_model=list[str], tags=[Tags.genre])
+@router.get("/{id}/genres", response_model=list[GenreResponse], tags=[Tags.genre])
 def get_genres_from_album(id: int = Path(...), db: Session = Depends(get_db)):
     album = db.get(Albums, id)
     if not album:
         raise HTTPException(404)
-    return set([song.genre.name for song in album.songs if song.genre])
+    return set([GenreResponse.from_genre(song.genre) for song in album.songs if song.genre])
 
 
 @router.get("/{id}/features", response_model=list[int], tags=[Tags.artist])
