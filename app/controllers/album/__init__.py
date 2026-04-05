@@ -1,12 +1,14 @@
-from app.models.models import Albums, Artists, Images
+from app.models.models import Albums, Artists, Images, Songs
 from app.models.response_schema import AlbumResponse, DeletedResponse, GenreResponse
 from app.models.request_schema import AlbumCreateRequest, AlbumUpdateRequest
 from fastapi import HTTPException, APIRouter, Path, Depends, Query
+from fastapi.responses import StreamingResponse
 from fastapi.encoders import jsonable_encoder
 from app.database.database import get_or_create
 from app.config import Tags
 from app.middleware import get_db
 from datetime import datetime
+from zipstream import ZipStream
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/album", tags=[Tags.album])

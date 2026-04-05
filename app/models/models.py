@@ -197,6 +197,14 @@ class Songs(Base):
             Songs.name.icontains(search_term)
         ).limit(limit).all()
 
+    @property
+    def filename(self):
+        filename_components: list[str] = []
+        if isinstance(self.trackno, int):
+            filename_components.append(f"{self.trackno:02d}")
+        filename_components.append(self.title)
+        return ' '.join(filename_components)
+
 
 class Features(Base):
     """

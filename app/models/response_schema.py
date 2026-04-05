@@ -118,6 +118,7 @@ class PlaylistResponse(BaseModel):
         default_factory=lambda: None, alias="lastStreamed")
     favorite: bool = Field(...)
     duration: float = Field(...)
+    items: int = Field(...)
 
     @classmethod
     def from_playlist(cls, playlist: Playlists):
@@ -129,7 +130,8 @@ class PlaylistResponse(BaseModel):
             lastStreamed=playlist.last_streamed,
             streamCount=playlist.stream_count,
             favorite=playlist.favorite,
-            duration=sum([song.duration or 0 for song in playlist.songs])
+            duration=sum([song.duration or 0 for song in playlist.songs]),
+            items=len(playlist.songs),
             # songs=[song.id for song in playlist.songs]
         )
 

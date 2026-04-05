@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.database.database import get_or_create
 from app.config import Tags
 from io import BytesIO
+import hashlib
 
 router = APIRouter(prefix="/image", tags=[Tags.image])
 # db = SessionLocal()
@@ -17,7 +18,18 @@ def get_image(id: int = Path(...), db: Session = Depends(get_db)):
     image = db.get(Images, id)
     if not image:
         raise HTTPException(404)
-    return StreamingResponse(BytesIO(image.buffer), media_type="image/jpeg")
+
+    etag = hashlib.md5(image.buffer).hexdigest()
+
+    return StreamingResponse(
+        BytesIO(image.buffer),
+        media_type="image/jpeg",
+        headers={
+            'Cache-Control': 'max-age=600, public, stale-while-revalidate=600, stale-if-error=600',
+            "Vary": "Origin",
+            'ETag': etag
+        }
+    )
 
 
 @router.post("", response_model=int)

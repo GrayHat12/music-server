@@ -1,13 +1,13 @@
 from app.models.models import Images, Artists, Songs, Genres, Albums, Features
 from app.models.response_schema import SongResponse, DeletedResponse
 from app.models.request_schema import SongUpdateRequest
-from fastapi import HTTPException, APIRouter, UploadFile, Depends, Path, Query, File
+from fastapi import HTTPException, APIRouter, UploadFile, Depends, Path, Query
 from fastapi.responses import StreamingResponse
 from fastapi.encoders import jsonable_encoder
 from app.database.database import get_or_create
 from app.middleware import validate_audio_file, get_db
 from sqlalchemy.orm import Session
-from app.utils import load_song_metadata
+from app.utils import load_song_metadata, get_media_type
 from datetime import datetime, timezone
 from io import BytesIO
 import json
@@ -16,13 +16,29 @@ from app.config import Tags
 import math
 
 router = APIRouter(prefix="/song", tags=[Tags.song])
-# db = SessionLocal()
 
 
 @router.get("s", response_model=list[SongResponse])
 def list_all_song(db: Session = Depends(get_db)):
     songs = db.query(Songs).all()
     return [SongResponse.from_song(song) for song in sorted(songs, key=lambda x: x.stream_count if not x.favorite else math.inf, reverse=True)]
+
+
+@router.get("/download/{id}", response_class=StreamingResponse)
+def download_song(id: int = Path(...), db: Session = Depends(get_db)):
+    song = db.get(Songs, id)
+    if not song:
+        raise HTTPException(404)
+    buffer = BytesIO(song.buffer)
+    mime, extension = get_media_type(buffer)
+    buffer.seek(0)
+    return StreamingResponse(
+        content=buffer,
+        media_type=mime,
+        headers={
+            "Content-Disposition": f'attachment; filename="{song.filename}.{extension}"'
+        }
+    )
 
 
 @router.get("/{id}", response_model=SongResponse)

@@ -1,9 +1,21 @@
 import io
 import json
 from pathlib import Path
+from typing import cast
 from mutagen._file import File as MutagenFile
 from mutagen.id3._specs import ID3TimeStamp
 from mutagen.id3 import ID3
+from mutagen.mp3 import MP3
+from mutagen.mp4 import MP4
+from mutagen.flac import FLAC
+from mutagen.aac import AAC
+from mutagen.wave import WAVE
+from mutagen.oggopus import OggOpus
+from mutagen.oggvorbis import OggVorbis
+from mutagen.aiff import AIFF
+from mutagen.mp4 import MP4
+from mutagen.m4a import M4A
+import mimetypes
 
 
 def old_load_song_metadata(file_source: io.BytesIO):
@@ -167,10 +179,38 @@ def load_song_metadata(file_source: io.BytesIO):
         "genre": get_tag(["genre", "TCON", "\xa9gen"]),
         "release": release,
         "trackno": trackno,
-        # "buffer": buffer,
-        "audio": audio,
+        "buffer": buffer,
+        # "audio": audio,
         "duration": duration,
         "art_buffer": art_buffer,
         # Serialize with our custom encoder to handle mutagen classes
         "metatags": json.dumps(tags, cls=MutagenEncoder)
     }
+
+
+def get_media_type(file_source: io.BytesIO):
+    if isinstance(file_source, bytes):
+        file_source = io.BytesIO(file_source)
+
+    file_source.seek(0)
+    audio = MutagenFile(file_source)
+
+    if audio and hasattr(audio, "mime") and audio.mime:
+        mime = cast(str, audio.mime[0])
+        extension = mimetypes.guess_extension(mime) or "mp3"
+        extension = extension.lstrip(".")
+        return mime, extension
+
+    MIME_MAP = {
+        MP3: ("audio/mpeg", "mp3"),
+        MP4: ("audio/mp4", "mp4"),
+        M4A: ("audio/x-m4a", "m4a"),
+        FLAC: ("audio/flac", "flac"),
+        AAC: ("audio/aac", "aac"),
+        WAVE: ("audio/wav", "wav"),
+        AIFF: ("audio/x-aiff", "aiff"),
+        OggOpus: ("audio/ogg", "opus"),
+        OggVorbis: ("audio/ogg", "ogg"),
+    }
+
+    return MIME_MAP.get(type(audio), ("application/octet-stream", "mp3"))

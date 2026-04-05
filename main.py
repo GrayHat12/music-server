@@ -32,6 +32,7 @@ app.add_middleware(
     allow_origins=["*"],  # Adjust this to your specific domain in production
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 # app.include_router(graphql_app, prefix="/graphql")

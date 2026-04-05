@@ -1,4 +1,4 @@
-from app.models.models import Images, Artists, Songs, Albums
+from app.models.models import Images, Artists, Features, Songs, Albums
 from app.models.response_schema import ArtistResponse, AlbumResponse, DeletedResponse, GenreResponse, SystemPlaylistResponse
 from app.models.request_schema import ArtistCreateRequest, ArtistUpdateRequest
 from fastapi import HTTPException, APIRouter, Path, Depends, Query
@@ -94,7 +94,7 @@ def set_favorite(id: int = Path(...), favorite: bool = Query(...), db: Session =
 
 
 @router.get("/{id}/songs", response_model=list[int], tags=[Tags.song])
-def get_songs_from_artist(id: int = Path(...), top: int = Query(-1, ge=1), db: Session = Depends(get_db)):
+def get_songs_from_artist(id: int = Path(...), top: int = Query(0, ge=0), db: Session = Depends(get_db)):
     artist = db.get(Artists, id)
     if not artist:
         raise HTTPException(404)
@@ -122,11 +122,12 @@ def get_albums_from_artist(id: int = Path(...), db: Session = Depends(get_db)):
 
 
 @router.get("/{id}/features", response_model=list[int], tags=[Tags.song])
-def get_features_from_artist(id: int = Path(...), db: Session = Depends(get_db)):
+def get_songs_artist_is_featured_on(id: int = Path(...), db: Session = Depends(get_db)):
     artist = db.get(Artists, id)
     if not artist:
         raise HTTPException(404)
-    return set([feature.song.id for songs in artist.songs for feature in songs.features if feature.artist])
+    songs = db.query(Features).where(Features.artist_id == artist.id).all()
+    return set([song.id for song in songs])
 
 
 @router.get("/{dest}/merge/{src}", response_model=ArtistResponse)
@@ -253,7 +254,7 @@ def get_artist_playlist_songs(id: str = Path(..., pattern=r'artist-\d+-\w+'), db
         case "likedsongs":
             return [song.id for song in sorted(artist.songs, key=lambda x: x.stream_count, reverse=True) if song.favorite]
         case "features":
-            return get_features_from_artist(artistid, db)
+            return get_songs_artist_is_featured_on(artistid, db)
         case _: raise HTTPException(404)
 
 
